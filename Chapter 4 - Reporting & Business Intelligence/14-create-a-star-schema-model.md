@@ -1,115 +1,106 @@
----
-lab:
-    title: 'Create and explore a semantic model'
-    module: 'Understand scalability in Power BI'
----
+# Create and Explore a Semantic Model in Microsoft Fabric
 
-# Create and explore a semantic model
+This exercise will guide you through the process of developing a robust data model within Microsoft Fabric, leveraging the sample NY Taxi data stored in a data warehouse. By the end of this lab, you'll be proficient in constructing a custom semantic model, defining crucial relationships between tables, organizing your data model diagram for clarity, and directly exploring your data within the Fabric environment.
 
-In this exercise, you'll use Microsoft Fabric to develop a data model for the sample NY Taxi data in a data warehouse.
+You'll gain practical experience in:
 
-You'll practice:
+  * **Creating a custom semantic model** from an existing Fabric data warehouse.
+  * **Establishing relationships** between tables and **organizing the model diagram** for optimal understanding.
+  * **Exploring your data** within the newly created semantic model directly in the Microsoft Fabric interface.
 
-- Creating a custom semantic model from a Fabric data warehouse.
-- Create relationships and organize the model diagram.
-- Explore the data in your semantic model directly in Fabric.
+This lab is designed to take approximately **30 minutes** to complete.
 
-This lab takes approximately **30** minutes to complete.
+> **Note**: To successfully complete this exercise, you will need access to a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) environment.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+-----
 
-## Create a workspace
+## Create a Workspace
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+Before you can begin working with data and creating semantic models in Microsoft Fabric, the foundational step is to create a dedicated workspace. This workspace will serve as your collaborative environment and must have the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
+1.  Open your web browser and navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric). Once there, proceed to **sign in using your Microsoft Fabric credentials**.
+2.  On the left-hand side of the interface, within the menu bar, locate and select the **Workspaces** icon (which typically resembles 🗇). This will open your workspace management area.
+3.  Initiate the creation of a new workspace. You can choose any name you prefer for this workspace. Critically, ensure you select a **licensing mode that includes Fabric capacity**, such as **Trial**, **Premium**, or **Fabric**, to enable all necessary features for this lab.
+4.  Once your new workspace is created and opens, you should see that it is currently **empty**, ready for you to populate with data and items.
 
-## Create a data warehouse and load sample data
+-----
 
-Now that you have a workspace, it's time to create a data warehouse:
+## Create a Data Warehouse and Load Sample Data
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Warehouse* section, select **Warehouse**. Give it a unique name of your choice.
+With your workspace now successfully established, the next logical step is to create a data warehouse. This data warehouse will be the backbone for storing and managing the data we'll use to build our semantic model.
 
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+1.  On the left-hand menu bar, select **Create**. On the *New* page that appears, under the *Data Warehouse* section, select **Warehouse**. You will be prompted to give your new warehouse a **unique name of your choice**.
 
-    After a minute or so, a new warehouse will be created:
-    
-    ![Screenshot of a new warehouse](./Images/new-data-warehouse2.png)
+    > **Note**: If the **Create** option is not immediately visible or pinned to your sidebar, you may need to first select the ellipsis (**...**) option to reveal more creation choices.
 
-1. In the center of the data warehouse user interface, you'll see a few different ways to load data into your warehouse. Select **Sample data** to load NYC Taxi data into your data warehouse. This will take a couple of minutes.
+    After approximately a minute or so, your new data warehouse will be provisioned and ready:
 
-1. After your sample data has loaded, use the **Explorer** pane on the left to see what tables and views already exist in the sample data warehouse.
+2.  In the central area of the data warehouse user interface, you'll observe various methods for loading data. For this exercise, select **Sample data** to automatically load the convenient **NYC Taxi data** into your newly created data warehouse. This process may take a couple of minutes to complete.
 
-1. Select the **Reporting** tab of the ribbon and choose **New semantic model**. This enables you to create a new semantic model using only specific tables and views from your data warehouse, for use by data teams and the business to build reports.
+3.  Once the sample data has finished loading, utilize the **Explorer** pane located on the left side of the interface. This pane allows you to intuitively browse and examine the tables and views that have been populated within your sample data warehouse.
 
-1. Name the semantic model **Taxi Revenue**, ensure it's in the workspace you just created, and select the following tables:
-   - Date
-   - Trip
-   - Geography
-   - Weather
-     
-   ![Screenshot of the New semantic model interface with four tables selected](./Images/new-semantic-model.png)
-     
-## Create relationships between tables
+4.  With your data loaded, navigate to the **Reporting** tab of the ribbon at the top of the interface. From the options presented, choose **New semantic model**. This action initiates the creation of a tailored semantic model, allowing you to selectively include specific tables and views from your data warehouse, optimizing it for reporting and analysis by data teams and business users.
 
-Now you'll create relationships between the tables to accurrately analyze and visualize your data. If you're familiar with creating relationships in Power BI desktop, this will look familiar.
+5.  Provide a name for your semantic model; we'll call it **Taxi Revenue**. Ensure that it is correctly associated with the workspace you created earlier. Then, carefully select the following tables to be included in your semantic model:
 
-1. Navigate back to your workspace and confirm that you see your new semantic model, Taxi Revenue. Notice that the item type is **Semantic model**, as opposed to the **Semantic model (default)** that is automatically created when you create a data warehouse.
+      * **Date**
+      * **Trip**
+      * **Geography**
+      * **Weather**
 
-     *Note: A default semantic model is created automatically when you create a Warehouse or SQL analytics endpoint in Microsoft Fabric, and it inherits the business logic from the parent Lakehouse or Warehouse. A semantic model that you create yourself, as we've done here, is a custom model that you can design and modify according to your specific needs and preferences. You can create a custom semantic model by using Power BI Desktop, Power BI service, or other tools that connect to Microsoft Fabric.*
+-----
 
-1. Select **Open data model from the ribbon**.
+## Create Relationships Between Tables
 
-    Now, you'll create relationships between the tables. If you're familiar with creating relationships in Power BI desktop, this will look familiar!
+Now that you've selected the tables for your semantic model, the crucial next step is to establish relationships between them. These relationships are fundamental for accurately analyzing and visualizing your data, ensuring that queries across different tables yield meaningful results. If you're familiar with creating relationships in Power BI Desktop, this process will feel very intuitive.
 
-    *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the **Trip** table is our fact table, and our dimensions are **Date**, **Geography**, and **Weather**.*
+1.  Navigate back to your workspace and visually confirm that your new semantic model, named **Taxi Revenue**, is listed. Pay attention to its item type, which should be **Semantic model**, distinct from the **Semantic model (default)** that is automatically generated when you create a data warehouse.
 
-1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column.
+    > *Note: It's important to understand the distinction. A **default semantic model** is automatically created when you establish a Warehouse or SQL analytics endpoint in Microsoft Fabric. It inherently inherits the underlying business logic from its parent Lakehouse or Warehouse. In contrast, the **semantic model that you create yourself**, as we are doing here, is a **custom model**. This custom model grants you full control to design and modify it precisely according to your specific analytical needs and preferences. You have the flexibility to create custom semantic models using various tools, including Power BI Desktop, the Power BI service directly, or other tools capable of connecting to Microsoft Fabric.*
 
-    **Select the DateID column** in the **Date** table and *drag and drop it on top of the DateID column in the Trip table*.
+2.  From the ribbon within your workspace, select **Open data model**. This action will launch the model view, where you can visually define and manage relationships.
 
-    Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
+    Now, you'll proceed to create the necessary relationships between your tables. As mentioned, for those familiar with Power BI Desktop, this interface and process will be quite familiar\!
 
-1. Create two more relationships to the **Trip** fact table as follows:
+    *To frame our approach, let's briefly review the **star schema concept**. We will organize the tables in our model into a central **Fact table** and several surrounding **Dimension tables**. In the context of this specific model, the **Trip** table will serve as our core fact table, containing transactional data. Our dimension tables, providing descriptive attributes, will be **Date**, **Geography**, and **Weather**.*
 
-   - **Geography [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
-   - **Weather [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
+3.  Begin by creating a relationship between the **Date** table and the **Trip** table. This relationship will link trip records to specific dates.
 
-    > **Note**: you need to change the relationship default cardinality to **1:Many** for both relationships.
+      * **Select the `DateID` column** in the **Date** table.
+      * Then, **drag and drop it directly on top of the `DateID` column in the Trip table**.
+      * Crucially, ensure that the established relationship is a **One to many** relationship, flowing from the **Date** table (the "one" side) to the **Trip** table (the "many" side). This signifies that one date can be associated with multiple trips.
 
-1. Drag the tables into position so that the **Trip** fact table is located at the bottom of the diagram, and the remaining tables, which are dimension tables, are located around the fact table.
+4.  Next, create two additional relationships, both connecting to the **Trip** fact table, to enrich your trip data with geographical and weather information:
 
-    ![Screenshot of the star schema diagram](./Images/star-schema-diagram.png)
+      * Connect **Geography [GeographyID]** to **Trip [DropoffGeographyID]**. This should also be a **1:Many** relationship.
+      * Connect **Weather [GeographyID]** to **Trip [DropoffGeographyID]**. Similarly, this must also be a **1:Many** relationship.
 
-    *The creation of the star schema model is now complete. There are many modeling configurations that could now be applied, like adding hierarchies, calculations, and setting properties like column visibility.*
+    > **Note**: For both of these new relationships, you will need to manually **change the relationship's default cardinality to 1:Many** within the relationship properties or dialog box that appears after dragging and dropping the columns.
 
-    > **Tip**: In the Properties pane of the window, toggle *Pin related fields to top of card* to Yes. This will help you (and others reporting off of this model) see which fields are being used in relationships at a glance. You can also interact with the fields in your tables using the properties pane. For example, if you want to confirm data types are set properly, you can select a field and review the format in the properties pane.
+5.  To visually optimize your model for clarity and adherence to the star schema, drag the tables into their appropriate positions on the diagram. Arrange them so that the **Trip** fact table is centrally located at the bottom of the diagram, with the remaining tables—your dimension tables (**Date**, **Geography**, and **Weather**)—positioned intuitively around the fact table.
 
-     ![Screenshot of the properties pane](./Images/properties-pane.png)
+    *Your star schema model is now successfully created. At this point, you have a solid foundation. There are numerous other modeling configurations you could apply to further enhance this model, such as adding hierarchies for drill-down capabilities, creating calculated columns or measures (DAX expressions) for advanced analytics, and setting properties like column visibility for improved user experience in reports.*
 
-## Explore your data
+    > **Tip**: To make your model even more user-friendly, especially for those who will be building reports, open the **Properties pane** of the window. There, you can **toggle *Pin related fields to top of card* to Yes**. This simple adjustment will visually highlight the fields involved in relationships at a glance, making it easier to understand the model's structure. Additionally, the properties pane allows you to interact with the fields in your tables. For instance, if you want to confirm that data types are set correctly for numerical or date fields, you can select a specific field and review its format within the properties pane.
 
-You now have a semantic model built off your warehouse that has relationships established that are necessary for reporting. Let's take a look at the data using the **Explore data** feature.
+-----
 
-1. Navigate back to your workspace and select your **Taxi Revenue semantic model**.
+## Explore Your Data
 
-1. In the window, select **Explore this data** from the ribbon. Here you'll take a look at your data in tabular format. This offers a focused experience to explore your data without creating a full Power BI report.
+With your semantic model now built atop your data warehouse and all necessary relationships thoughtfully established for effective reporting, it's time to delve into your data. You'll use the intuitive **Explore data** feature within Fabric to gain initial insights.
 
-1. Add **YearName** and **MonthName** to the rows, and explore the **average number of passengers**, **average trip amount**, and **average trip duration** in the values field well.
+1.  Navigate back to your workspace and select your **Taxi Revenue semantic model**.
 
-    *When you drag and drop a numeric field into the explore pane, it will default to summarize the number. To change the aggregation from **Summarize** to **Average**, select the field and change the aggregation in the popup window.*
+2.  In the main window for your semantic model, locate and select **Explore this data** from the ribbon. This will launch a focused experience designed specifically for data exploration, allowing you to examine your data in a tabular format without the immediate need to create a full-fledged Power BI report.
 
-    ![Screenshot of the explore data window, with a matrix visual looking at averages over time.](./Images/explore-data-fabric.png)
+3.  In the "Rearrange data" section or equivalent interface, add **YearName** and **MonthName** to the rows area to structure your data by time. Then, in the values field well, explore the **average number of passengers**, **average trip amount**, and **average trip duration**.
 
-1. To look at this data as a visual rather than just a matrix, select **Visual** at the bottom of the window. Select a bar chart to quickly visualize this data.
+    *When you drag and drop a numeric field into the explore pane, it will typically default to summarizing the number (e.g., counting instances). To change the aggregation from **Summarize** to **Average**, simply select the field within the values area and then change the aggregation option in the small popup window that appears.*
 
-   *A bar chart is not the best way to look at this data. Play around with the different visuals and the fields you're looking at in the "Rearrange data" section of the Data pane on the right side of the screen.*
+4.  While a matrix provides a detailed view, to quickly visualize this data more dynamically, select **Visual** at the bottom of the window. Then, choose a **bar chart** from the available visual types.
 
-1. You can now save this Exploration view to your workspace by clicking the **Save** button in the top left corner. You also have the ability to **Share** the view by selecting **Share** in the upper right corner. This will enable you to share the data exploration with colleagues.
+    *It's important to note that a simple bar chart may not always be the optimal way to represent every dataset. Feel free to experiment\! Play around with the different visual types available and adjust the fields you're looking at within the "Rearrange data" section of the Data pane on the right side of the screen. This iterative exploration will help you discover the most effective visualizations for your data.*
 
-1. After you have Saved your exploration, navigate back to your workspace to see your data warehouse, default semantic model, the semantic model you created, and your exploration.
+5.  Once you are satisfied with your exploration view, you can save it to your workspace by clicking the **Save** button located in the top left corner of the window. You also have the convenient option to **Share** this data exploration with colleagues by selecting **Share** in the upper right corner, fostering collaborative insights.
 
-    ![Screenshot of a workspace in Fabric displaying a data warehouse, a default semantic model, a semantic model, and a data exploration.](./Images/semantic-model-workspace.png)
+6.  After you have successfully saved your exploration, navigate back to your workspace. You should now see a comprehensive list of your created items: your data warehouse, the automatically generated default semantic model, the custom semantic model you specifically designed, and your newly saved data exploration view.
