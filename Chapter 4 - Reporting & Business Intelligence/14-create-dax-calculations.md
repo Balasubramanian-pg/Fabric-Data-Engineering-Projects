@@ -1,390 +1,333 @@
----
-lab:
-    title: 'Create DAX calculations in Power BI Desktop'
-    module: 'Create DAX calculations in Power BI Desktop'
----
+# Create DAX Calculations in Power BI Desktop
 
-# Create DAX calculations in Power BI Desktop
+## **Context**
 
-## **Lab story**
+In this comprehensive lab, you'll dive deep into **Data Analysis Expressions (DAX)**, the powerful formula language used in Power BI. You'll gain hands-on experience by creating various DAX calculations, including calculated tables, calculated columns, and essential measures, all designed to enrich your data model and enable insightful analysis.
 
-In this lab you'll create calculated tables, calculated columns, and simple measures using Data Analysis Expressions (DAX).
+In this lab, you'll master how to:
 
-In this lab you learn how to:
+  * **Create calculated tables** to expand your data model.
+  * **Develop calculated columns** to add new attributes to your existing tables.
+  * **Construct measures** to perform dynamic aggregations and calculations on your data.
 
-- Create calculated tables
-- Create calculated columns
-- Create measures
+**This lab is estimated to take approximately 45 minutes to complete.**
 
-**This lab should take approximately 45 minutes.**
+-----
 
-## Get started
+## Get Started
 
-To complete this exercise, first open a web browser and enter the following URL to download the zip folder:
+To begin this exercise, you'll first need to download the starter Power BI Desktop file and extract its contents.
 
-`https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/14/14-create-dax.zip`
+1.  Open your preferred web browser and enter the following URL to download the necessary zip folder:
 
-Extract the folder to the **C:\Users\Student\Downloads\14-create-dax** folder.
+    `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/14/14-create-dax.zip`
 
-Open the **14-Starter-Sales Analysis.pbix** file.
+2.  Once the download is complete, **extract the contents of the zip folder** to the following directory on your computer: **C:\\Users\\Student\\Downloads\\14-create-dax**.
 
-> ***Note**: You can dismiss the sign-in by selecting **Cancel**. Close any other informational windows. Select **Apply Later**, if prompted to apply changes.*
+3.  Navigate to the extracted folder and **open the `14-Starter-Sales Analysis.pbix` file** using Power BI Desktop.
 
-## Create the Salesperson calculated table
+    > ***Note**: You might be prompted to sign in; you can simply dismiss this by selecting **Cancel**. Close any other informational windows that may appear. If prompted to apply changes, select **Apply Later**.*
 
-In this task, you'll create the **Salesperson** calculated table (direct relationship to **Sales**).
+-----
 
-A calculated table is created by first entering the table name, followed by the equals symbol (=), followed by a DAX formula that returns a table. The table name can't already exist in the data model.
+## Create the Salesperson Calculated Table
 
-The formula bar supports entering a valid DAX formula. It includes features like auto-complete, Intellisense and color-coding, enabling you to quickly and accurately enter the formula.
+In this task, you'll create a new table named **Salesperson** using DAX. This calculated table will have a direct relationship to your **Sales** fact table, providing a clean dimension for sales analysis.
 
-1. In Power BI Desktop, in Report view, on the **Modeling** ribbon, from inside the **Calculations** group, select **New Table**.
+A calculated table is defined by first specifying the new table's name, followed by an equals sign (`=`), and then a DAX formula that produces a table. Remember, the chosen table name must not already exist in your data model. The formula bar in Power BI Desktop provides helpful features like auto-complete, Intellisense, and color-coding to make entering your DAX formulas quick and accurate.
 
-     ![Picture 1](Images/create-dax-calculations-in-power-bi-desktop_image9.png)
+1.  In Power BI Desktop, ensure you are in **Report view**. On the **Modeling** ribbon, within the **Calculations** group, select **New Table**.
 
-2. In the formula bar (which opens directly beneath the ribbon when creating or editing calculations), type **Salesperson =**, press **Shift+Enter**, type **'Salesperson (Performance)'**, and then press **Enter**.
+2.  The formula bar will appear directly beneath the ribbon. Type **`Salesperson =`**, then press **Shift+Enter** to move to the next line for better readability. On the new line, type **`'Salesperson (Performance)'`**, and finally, press **Enter** to commit the DAX formula.
 
-	> **Note**: *For your convenience, all DAX definitions in this lab can be copied from the snippets file, located in **14-create-dax\Snippets.txt**.*
+    > **Note**: *For your convenience, all DAX definitions used in this lab can be easily copied from the `Snippets.txt` file, which is located in the `14-create-dax` folder you extracted.*
 
-	 ![Picture 4](Images/create-dax-calculations-in-power-bi-desktop_image10.png)
+    > *This particular DAX table definition effectively creates a **copy of the existing `Salesperson (Performance)` table**. It's important to understand that this operation only copies the data; model properties such as column visibility, data formatting, and other settings are not automatically transferred to the new calculated table.*
 
-	> *This table definition creates a copy of the **Salesperson (Performance)** table. It copies the data only, however model properties like visibility, formatting, etc. aren't copied.*
+3.  In the **Data** pane (typically on the right side), observe the **Salesperson** table. You'll notice that its table icon now includes an **additional calculator symbol** in front of it, clearly denoting that it is a **calculated table**.
 
-1. In the **Data** pane, notice that the table icon has an additional calculator in front of it (denoting a calculated table).
+    > ***Note**: Calculated tables are powerful because they allow you to define new tables dynamically using DAX formulas that return a table. However, it’s crucial to understand that these tables **materialize and store their values within your data model**, which can increase the overall size of the model. They are recomputed whenever any of their formula dependencies are refreshed. For instance, in this data model, if new (future) date values are loaded into the underlying tables, this calculated table will be re-evaluated.*
 
-	![Picture 10](Images/create-dax-calculations-in-power-bi-desktop_image11.png)
+    > *Unlike tables sourced from Power Query, calculated tables **cannot be used to load data from external data sources**. Their primary function is to transform and reshape data that has already been loaded into the data model.*
 
-	> ***Note**: Calculated tables are defined by using a DAX formula that returns a table. It’s important to understand that calculated tables increase the size of the data model because they materialize and store values. They’re recomputed whenever formula dependencies are refreshed, as will be the case for this data model when new (future) date values are loaded into tables.*
-    >
-	> *Unlike Power Query-sourced tables, calculated tables can’t be used to load data from external data sources. They can only transform data based on what has already been loaded into the data model.*
+4.  Switch to **Model view** (by selecting the model icon on the left-hand navigation). Locate the newly created **Salesperson** table. (You might need to adjust your view or use the search functionality to find it if your model diagram is large.)
 
-1. Switch to Model view, and notice that the **Salesperson** table is available (you may need to reset view to find table).
+5.  Now, create a new relationship: **drag the `EmployeeKey` column from the `Salesperson` table** and **drop it onto the `EmployeeKey` column in the `Sales` table**. This establishes the direct link between your new dimension table and the sales facts.
 
-1. Create a relationship from the **Salesperson \| EmployeeKey** column to the **Sales \| EmployeeKey** column.
+6.  Locate the **inactive relationship** (indicated by a dashed line) between the original **`Salesperson (Performance)`** table and the **`Sales`** table. Right-click this inactive relationship and select **Delete**. When prompted to confirm the deletion, select **Yes**. This ensures that only your new, active relationship is used for sales analysis.
 
-1. Right-click the inactive relationship between the **Salesperson (Performance)** and **Sales** tables, and then select **Delete**. When prompted to confirm the deletion, select **Yes**.
+7.  In the **Salesperson** table, multi-select the following columns: **`EmployeeID`**, **`EmployeeKey`**, and **`UPN`**. Then, hide these columns by setting their **Is Hidden** property to **Yes** in the Properties pane. This cleans up the data pane for report authors.
 
-1. In the **Salesperson** table, multi-select the following columns, and then hide them (set the **Is Hidden** property to **Yes**):
+8.  In the model diagram, select the **Salesperson** table.
 
-	- EmployeeID
-	- EmployeeKey
-	- UPN
+9.  In the **Properties** pane (usually on the right), locate the **Description** box. Enter the following description: **`Salesperson related to Sales`**.
 
-1. In the model diagram, select the **Salesperson** table.
+    > *You might recall that descriptions like this are invaluable for report authors, as they appear as helpful tooltips in the **Data** pane when a user hovers their cursor over a table or field, providing immediate context.*
 
-1. In the **Properties** pane, in the **Description** box, enter: **Salesperson related to Sales**
-    
-	> *You may recall that descriptions appear as tooltips in the **Data** pane when the user hovers their cursor over a table or field.*
+10. For the original **`Salesperson (Performance)`** table, set its description to: **`Salesperson related to region(s)`**.
 
-1. For the **Salesperson (Performance)** table, set the description to: **Salesperson related to region(s)**
+*Your data model now offers two distinct perspectives for analyzing salespeople. The newly created **Salesperson** table facilitates direct analysis of sales attributed to individual salespeople. Conversely, the **Salesperson (Performance)** table enables analysis of sales made within the sales region(s) that are assigned to a salesperson, providing regional context.*
 
-*The data model now provides two alternatives when analyzing salespeople. The **Salesperson** table allows analyzing sales made by a salesperson, while the **Salesperson (Performance)** table allows analyzing sales made in the sales region(s) assigned to the salesperson.*
+-----
 
-## Create the Date table
+## Create the Date Table
 
-In this task, you'll create the **Date** table.
+In this task, you'll create a new **Date** table. This table is crucial for time-based analysis and will serve as a robust date dimension in your model.
 
-1. Switch to Table view. On the **Home** ribbon tab, from inside the **Calculations** group, select **New Table**.
+1.  Switch to **Table view** (by selecting the table icon on the left-hand navigation). On the **Home** ribbon tab, within the **Calculations** group, select **New Table**.
 
-	![Picture 5](Images/create-dax-calculations-in-power-bi-desktop_image15.png)
+2.  In the formula bar, enter the following DAX expression:
 
-1. In the formula bar, enter the following DAX:
+    ```dax
+    Date =
+    CALENDARAUTO(6)
+    ```
 
-	```DAX
-	Date =  
-	CALENDARAUTO(6)
-	```
+    > *The `CALENDARAUTO()` function is a convenient DAX function that returns a single-column table populated with date values. Its "auto" behavior means it intelligently scans all date columns present within your data model to determine the earliest and latest date values. Based on this range, it then generates one row for each date within that span. Importantly, it extends this range in either direction to ensure that full calendar years of data are always stored, preventing incomplete years at the boundaries of your data.*
 
-	![Picture 6](Images/create-dax-calculations-in-power-bi-desktop_image16.png)
+    > *This function can accept a single, optional argument: the last month number of a year. If this argument is omitted, the default value is 12, implying that December is considered the last month of the year. In this specific case, we've entered `6`, which means that June is designated as the last month of the fiscal year, aligning with Adventure Works' fiscal calendar.*
 
-	> *The CALENDARAUTO() function returns a single-column table consisting of date values. The “auto” behavior scans all data model date columns to determine the earliest and latest date values stored in the data model. It then creates one row for each date within this range, extending the range in either direction to ensure full years of data is stored.*
-    >
-	> *This function can take a single optional argument that is the last month number of a year. When omitted, the value is 12, meaning that December is the last month of the year. In this case, 6 is entered, meaning that June is the last month of the year.*
+3.  Observe the newly created column of date values. Notice that they are formatted according to US regional settings (i.e., mm/dd/yyyy).
 
-1. Notice the column of date values which are formatted using US regional settings (that is, mm/dd/yyyy).
+4.  In the bottom-left corner of the interface, within the status bar, you'll find the table statistics. These statistics confirm that your new `Date` table contains **1826 rows of data**, which precisely represents five full years of dates.
 
-	![Picture 7](Images/create-dax-calculations-in-power-bi-desktop_image17.png)
+-----
 
-1. At the bottom-left corner, in the status bar, notice the table statistics, confirming that 1826 rows of data have been generated, which represents five full years’ data.
+## Create Calculated Columns
 
-	![Picture 9](Images/create-dax-calculations-in-power-bi-desktop_image18.png)
+In this task, you'll enhance your **Date** table by adding several calculated columns. These new columns will enable more flexible filtering and grouping of your data by different time periods. You'll also create a special calculated column specifically to control the sort order of other columns, ensuring chronological display.
 
-## Create calculated columns
+> **Note**: *For your convenience and to save time, all DAX definitions for calculated columns and measures in this lab can be directly copied from the **`Snippets.txt`** file, which you extracted earlier.*
 
-In this task, you'll add more columns to enable filtering and grouping by different time periods. You'll also create a calculated column to control the sort order of other columns.
+1.  While in **Table view**, on the **Table Tools** contextual ribbon (which appears when the `Date` table is selected), within the **Calculations** group, select **New Column**.
 
-> **Note**: *For your convenience, all DAX definitions in this lab can be copied from the **Snippets.txt** file.*
+    > *A calculated column is defined by first specifying the new column's name, followed by an equals sign (`=`), and then a DAX formula that returns a single-value result for each row. The chosen column name must not already exist within the table.*
 
-1. On the **Table Tools** contextual ribbon, from inside the **Calculations** group, select **New Column**.
+2.  In the formula bar, type (or copy from the snippets file) the following DAX expression, and then press **Enter**:
 
-	> *A calculated column is created by first entering the column name, followed by the equals symbol (=), followed by a DAX formula that returns a single-value result. The column name can't already exist in the table.*
+    ```dax
+    Year =
+    "FY" & YEAR('Date'[Date]) + IF(MONTH('Date'[Date]) > 6, 1)
+    ```
 
-	![Picture 11](Images/create-dax-calculations-in-power-bi-desktop_image19.png)
+    > *This formula intelligently derives the fiscal year. It uses the year value from the date but adds one to the year if the month falls after June. This accurately reflects how fiscal years are calculated at Adventure Works.*
 
-1. In the formula bar, type the following (or copy from the snippets file), and then press **Enter**:
-	> *The formula uses the date’s year value but adds one to the year value when the month is after June. It’s how fiscal years at Adventure Works are calculated.*
+3.  Using the definitions provided in the **snippets file**, create the following two additional calculated columns for your **Date** table:
 
-   ```DAX
-   Year =
-   "FY" & YEAR('Date'[Date]) + IF(MONTH('Date'[Date]) > 6, 1)
-   ```
+      * **`Quarter`**
+      * **`Month`**
 
+4.  Verify that these new columns (`Year`, `Quarter`, and `Month`) have been successfully added to your **Date** table in Table view.
 
+5.  To validate the functionality of your new calculated columns, switch to **Report view** (by selecting the report icon on the left-hand navigation).
 
-1. Use the snippets file definitions to create the following two calculated columns for the **Date** table:
+6.  To create a clean canvas for your validation, select the **plus icon** next to **Page 1** to add a new report page.
 
-	- Quarter
-	- Month
+7.  To add a matrix visual to this new report page, go to the **Visualizations** pane (typically on the right side) and select the **matrix visual type**.
 
-1. Verify the new columns have been added.
+    > *Tip: You can hover your cursor over each icon in the Visualizations pane to reveal a tooltip describing the type of visual.*
 
-	![Picture 14](Images/create-dax-calculations-in-power-bi-desktop_image21.png)
+8.  In the **Data** pane, from within the **Date** table, **drag the `Year` field** into the **Rows** well/area of your matrix visual.
 
-1. To validate the calculations, switch to Report view.
+9.  Now, **drag the `Month` field** from the **Date** table into the **Rows** well/area, positioning it directly beneath the `Year` field. This creates a hierarchy in your matrix.
 
-1. To create a new report page, select the plus icon next to Page 1.
+10. At the top-right corner of the matrix visual (or sometimes at the bottom, depending on your visual's placement), select the **forked-double arrow icon** (which represents "Expand all down one level"). This action will expand all the years to show their corresponding months.
 
-	![Picture 15](Images/create-dax-calculations-in-power-bi-desktop_image22.png)
+11. Observe the matrix. You'll notice that while the years expand to show months, the **months are currently sorted alphabetically** (e.g., April, August, December) rather than chronologically (e.g., January, February, March).
 
-1. To add a matrix visual to the new report page, in the **Visualizations** pane, select the matrix visual type.
+    > *By default, text values in Power BI sort alphabetically, numbers sort from smallest to largest, and dates sort from earliest to latest. To achieve chronological month sorting, we need a specific strategy.*
 
-	> *Tip: You can hover the cursor over each icon to reveal a tooltip describing the visual type.*
+12. To customize the sort order of the **Month** field, switch back to **Table view**.
 
-	![Picture 51](Images/create-dax-calculations-in-power-bi-desktop_image23.png)
+13. Add another calculated column to the **Date** table, using the following DAX expression:
 
-1. In the **Data** pane, from inside the **Date** table, drag the **Year** field into the **Rows** well/area.
+    ```dax
+    MonthKey =
+    (YEAR('Date'[Date]) * 100) + MONTH('Date'[Date])
+    ```
 
-	![Picture 17](Images/create-dax-calculations-in-power-bi-desktop_image24.png)
+    > *This formula cleverly computes a unique numeric value for each year/month combination. For example, July 2017 would become 201707, ensuring a consistent chronological sort order.*
 
-1. Drag the **Month** field into the **Rows** well/area, directly beneath the **Year** field.
+14. In Table view, verify that the new **MonthKey** column indeed contains these numeric values (e.g., 201707 for July 2017, 201708 for August 2017, etc.).
 
-1. At the top-right of the matrix visual (or bottom, depending on the location of the visual), select the forked-double arrow icon (which will expand all years down one level).
+15. Switch back to **Report view**. In the **Data** pane, select the **Month** field within the **Date** table.
 
-	![Picture 19](Images/create-dax-calculations-in-power-bi-desktop_image26.png)
+16. On the **Column Tools** contextual ribbon (which appears when `Month` is selected), within the **Sort** group, select **Sort by Column**, and then choose **MonthKey** from the dropdown list.
 
-1. Notice that the years expand to months, and that the months are sorted alphabetically rather than chronologically.
+17. In the matrix visual, observe the months once again. You'll now notice that they are correctly **sorted chronologically**, thanks to the `MonthKey` column.
 
-	![Picture 20](Images/create-dax-calculations-in-power-bi-desktop_image27.png)
+-----
 
-	> *By default, text values sort alphabetically, numbers sort from smallest to largest, and dates sort from earliest to latest.*
+## Complete the Date Table
 
-1. To customize the **Month** field sort order, switch to Table view.
+In this task, you'll finalize the design of your **Date** table. This involves hiding the `MonthKey` column (as it's only for sorting, not display), creating a useful hierarchy for time-based navigation, and then establishing the necessary relationships to your **Sales** and **Targets** tables.
 
-1. Add the **MonthKey** column to the **Date** table.
+1.  Switch to **Model view**. In the **Date** table, **hide the `MonthKey` column** by setting its **Is Hidden** property to **Yes**. This keeps your Data pane clean for report authors.
 
-	```DAX
-	MonthKey =
-	(YEAR('Date'[Date]) * 100) + MONTH('Date'[Date])
-	```
+2.  On the **Data** pane (right side), select the **Date** table. Right-click on the **Year** column, and then select **Create hierarchy**.
 
-	> *This formula computes a numeric value for each year/month combination.*
+3.  The new hierarchy will initially have a default name. **Right-click on this newly created hierarchy** and select **Rename**. Rename it to **`Fiscal`**.
 
-1. In Table view, verify that the new column contains numeric values (for example, 201707 for July 2017, etc.).
+4.  Add the remaining two time-based fields to your new **Fiscal** hierarchy. Select **`Quarter`** and **`Month`** in the **Data** pane, right-click, select **Add to hierarchy**, and then choose **Fiscal**.
 
-	![Picture 21](Images/create-dax-calculations-in-power-bi-desktop_image28.png)
+5.  Now, create the following two essential model relationships to connect your `Date` dimension to your fact tables:
 
-1. Switch back to Report view. In the **Data** pane and select **Month**.
+      * **`Date | Date`** to **`Sales | OrderDate`**
+      * **`Date | Date`** to **`Targets | TargetMonth`**
 
-1. On the **Column Tools** contextual ribbon, from inside the **Sort** group, select **Sort by Column**, and then select **MonthKey**.
+    > *The labs use a shorthand notation to reference a field. It will look like this: **`Sales | Unit Price`**. In this example, **`Sales`** is the table name, and **`Unit Price`** is the field name.*
 
-	![Picture 22](Images/create-dax-calculations-in-power-bi-desktop_image29.png)
+6.  To improve model clarity and guide report authors to use your date dimension, **hide the following two columns**:
 
-1. In the matrix visual, notice that the months are now chronologically sorted.
+      * **`Sales | OrderDate`**
+      * **`Targets | TargetMonth`**
 
-	![Picture 23](Images/create-dax-calculations-in-power-bi-desktop_image30.png)
+-----
 
-## Complete the Date table
+## Mark the Date Table
 
-In this task, you'll complete the design of the **Date** table by hiding a column and creating a hierarchy. You'll then create relationships to the **Sales** and **Targets** tables.
+In this task, you'll officially **mark the Date table as a date table** within Power BI. This crucial step enables powerful built-in date intelligence features, like automatic time hierarchies and time-based filtering.
 
-1. Switch to Model view. In the **Date** table, hide the **MonthKey** column (set **Is Hidden** to **Yes**).
+1.  Switch to **Report view**. In the **Data** pane, ensure you select the **Date table itself** (not just the `Date` field within it).
 
-1. On the **Data** right side pane, select the **Date** table, right select on the **Year** column, and select **create hierarchy**.
+2.  On the **Table Tools** contextual ribbon (which appears when the `Date` table is selected), within the **Calendars** group, select **Mark as Date Table**.
 
-1. Rename newly created hierarchy to **Fiscal** by right select and **Rename**.
+3.  In the **Mark as a Date Table** window that appears, slide the **Mark as a Date Table** property to **Yes**. Then, in the **Choose a date column** dropdown list, select **Date**. Finally, select **Save**.
 
-1. Add the follow two remaining fields to the Fiscal hierarchy by selecting them in the **Data** pane, right clicking, selecting **Add to hierarchy** -> **Fiscal**.
+4.  **Save the Power BI Desktop file** to preserve all your changes.
 
-	- Quarter
-	- Month
+> *By marking this table as a date table, Power BI Desktop now intelligently understands that this table defines date (time) logic for your model. This specific design approach for a date table is particularly well-suited when you don’t have an existing date dimension table directly available in your data source. However, if you are working with a data warehouse that already contains a comprehensive date dimension table, it would generally be more appropriate to load date data from that existing dimension rather than "redefining" date logic within your Power BI data model.*
 
-	![Picture 24](Images/create-dax-calculations-in-power-bi-desktop_image31.png)
+-----
 
-1. Create the following two model relationships:
+## Create Simple Measures
 
-	- **Date \| Date** to **Sales \| OrderDate**
-	- **Date \| Date** to **Targets \| TargetMonth**
+In this task, you'll create fundamental measures. These "simple measures" primarily focus on aggregating values from a single column or counting rows within a specific table, forming the basis for quantitative analysis.
 
+1.  In **Report view**, navigate to **Page 2**. In the **Data** pane, **drag the `Sales | Unit Price` field** into the existing matrix visual.
 
-	> *The labs use a shorthand notation to reference a field. It will look like this: **Sales \| Unit Price**. In this example, **Sales** is the table name and **Unit Price** is the field name.*
+2.  In the visual fields pane (typically located beneath the **Visualizations** pane), within the **Values** field well/area, observe that **Unit Price** is currently listed as **Average of Unit Price**. Select the **down-arrow** next to `Unit Price`, and then review the available menu options for aggregation.
 
-1. Hide the following two columns:
+    > *By default, Power BI allows report authors to decide how visible numeric columns will be summarized (or if they will be summarized at all) directly at report design time. While flexible, this can sometimes lead to inappropriate or inconsistent reporting, especially for sensitive metrics like prices (e.g., summing prices often makes no business sense). Many data modelers prefer to eliminate this ambiguity. They choose to **hide these raw numeric columns** and, instead, explicitly **expose aggregation logic defined within measures**. This is precisely the approach you'll now adopt in this lab to ensure robust and appropriate reporting.*
 
-	- Sales \| OrderDate
-	- Targets \| TargetMonth
+3.  To create your first measure, in the **Data** pane, **right-click the `Sales` table**, and then select **New Measure**.
 
-## Mark the Date table
+4.  In the formula bar, add the following DAX measure definition:
 
-In this task, you'll mark the **Date** table as a date table.
+    ```dax
+    Avg Price =
+    AVERAGE(Sales[Unit Price])
+    ```
 
-1. Switch to Report view. In the **Data** pane, select the **Date** table (not the **Date** field).
+5.  Add the newly created **`Avg Price`** measure to the matrix visual. Notice that it produces the **same result** as the `Unit Price` column did, but likely with slightly different formatting.
 
-1. On the **Table Tools** contextual ribbon, from inside the **Calendars** group, select **Mark as Date Table**.
+6.  In the **Values** well of the matrix visual, open the context menu for the **`Avg Price`** field (by clicking its down-arrow). Observe that it is **not possible to change the aggregation technique** for a measure, as its aggregation is hard-coded within its DAX definition.
 
-1. In the **Mark as a Date Table** window, slide the **Mark as a Date Table** property to **Yes** and in the **Choose a date column** dropdown list, select **Date**. Select **Save**.
+    > *This demonstrates a key characteristic of measures: their aggregation behavior is explicitly defined within the DAX formula and cannot be modified by report authors.*
 
-	![Mark as date table](Images/create-dax-calculations-in-power-bi-desktop_date-table.png)
+7.  Using the definitions provided in the **snippets file**, create the following five additional measures for the **Sales** table:
 
-1. Save the Power BI Desktop file.
+      * **`Median Price`**
+      * **`Min Price`**
+      * **`Max Price`**
+      * **`Orders`**
+      * **`Order Lines`**
 
-> *Power BI Desktop now understands that this table defines date (time). This design approach for a date table is suitable when you don’t have a date table in your data source. If you have a data warehouse, it would be appropriate to load date data from its date dimension table rather than “redefining” date logic in your data model.*
+    > *The `DISTINCTCOUNT()` function utilized in the **`Orders`** measure is designed to count only unique instances of order numbers, effectively ignoring any duplicates. Conversely, the `COUNTROWS()` function, employed in the **`Order Lines`** measure, simply counts the total number of rows within a specified table. In this context, the number of distinct orders is derived by counting the unique values in the **`SalesOrderNumber`** column, while the number of order lines corresponds directly to the total number of rows in the `Sales` table, where each row represents a line item of an order.*
 
-## Create simple measures
+8.  Switch to **Model view**. Now, **multi-select the four price measures**: **`Avg Price`**, **`Max Price`**, **`Median Price`**, and **`Min Price`**.
 
-In this task, you'll create simple measures. Simple measures aggregate values in a single column or count rows of a table.
+9.  For this multi-selection of measures, configure the following requirements in the Properties pane:
 
-1. In Report view, on **Page 2**, in the **Data** pane, drag the **Sales \| Unit Price** field into the matrix visual.
+      * **Set the format to two decimal places** for all selected price measures.
+      * **Assign them to a display folder named `Pricing`**. This will group them logically in the Data pane for easier navigation.
 
-	![Picture 27](Images/create-dax-calculations-in-power-bi-desktop_image35.png)
+10. **Hide the `Unit Price` column** in the `Sales` table.
 
-1. In the visual fields pane (located beneath the **Visualizations** pane), in the **Values** field well/area, notice that **Unit Price** is listed as the **Average of Unit Price**. Select the down-arrow for **Unit Price**, and then notice the available menu options.
+    > *The `Unit Price` column is now no longer directly available to report authors in the Data pane. Instead, they are directed to use the well-defined pricing measures you've added to the model. This thoughtful design approach ensures that report authors will not inappropriately aggregate prices, for instance, by simply summing them, which typically leads to misleading analysis.*
 
-	![Picture 30](Images/create-dax-calculations-in-power-bi-desktop_image37.png)
+11. **Multi-select the `Order Lines` and `Orders` measures**. Then, configure the following requirements for these measures:
 
-	> *Visible numeric columns allow report authors at report design time to decide how column values will summarize (or not). It can result in inappropriate reporting. Some data modelers don’t like leaving things to chance, however, and choose to hide these columns and instead expose aggregation logic defined in measures. It’s the approach you'll now take in this lab.*
+      * **Set the format to use the thousands separator** (e.g., 1,000 instead of 1000).
+      * **Assign them to a display folder named `Counts`**.
 
-1. To create a measure, in the **Data** pane, right-click the **Sales** table, and then select **New Measure**.
+12. Switch back to **Report view**. In the **Values** well/area of the matrix visual, locate the **`Unit Price`** field (if it's still there from previous steps) and select **X** to remove it.
 
-1. In the formula bar, add the following measure definition:
+13. To give your visual more space, **increase the size of the matrix visual** to fill the full page width and height.
 
-	```DAX
-	Avg Price =  
-	AVERAGE(Sales[Unit Price])
-	```
+14. Add the following five newly created measures to the matrix visual:
 
-1. Add the **Avg Price** measure to the matrix visual, and notice that it produces the same result as the **Unit Price** column (but with different formatting).
+      * **`Median Price`**
+      * **`Min Price`**
+      * **`Max Price`**
+      * **`Orders`**
+      * **`Order Lines`**
 
-1. In the **Values** well, open the context menu for the **Avg Price** field, and notice that it isn't possible to change the aggregation technique.
+15. Carefully verify that the results displayed in the matrix visual appear sensible and are correctly formatted according to your specifications.
 
-	![Picture 32](Images/create-dax-calculations-in-power-bi-desktop_image39.png)
+-----
 
-	> *It’s not possible to modify the aggregation behavior of a measure.*
+## Create Additional Measures
 
-1. Use the snippets file definitions to create the following five measures for the **Sales** table:
+In this task, you'll create more sophisticated measures that leverage more complex DAX formulas. These measures will provide deeper insights into your sales targets and performance.
 
-	- Median Price
-	- Min Price
-	- Max Price
-	- Orders
-	- Order Lines
+1.  In **Report view**, select **Page 1** and carefully review the table visual displayed there, specifically noting the total value for the **Target** column.
 
-	> *The DISTINCTCOUNT() function used in the **Orders** measure will count orders only once (ignoring duplicates). The COUNTROWS() function used in the **Order Lines** measure operates over a table.*
-    >
-	> *In this case, the number of orders is calculated by counting the distinct **SalesOrderNumber** column values, while the number of order lines is simply the number of table rows (each row is a line of an order).*
+2.  Select the table visual. In the **Visualizations** pane, remove the **Target** field from the visual.
 
-1. Switch to Model view, and then multi-select the four price measures: **Avg Price**, **Max Price**, **Median Price**, and **Min Price**.
+3.  To prepare for a more controlled measure, **rename the `Targets | Target` column** to **`Targets | TargetAmount`**.
 
-11. For the multi-selection of measures, configure the following requirements:
+    > *Tip: There are several convenient ways to rename a column in Report view: In the **Data** pane, you can right-click the column and then select **Rename**. Alternatively, you can double-click the column, or simply press **F2** when the column is selected.*
 
-	- Set the format to two decimal places
+4.  Create the following new measure on the **Targets** table:
 
-	- Assign to a display folder named **Pricing**
+    ```dax
+    Target =
+    IF(
+        HASONEVALUE('Salesperson (Performance)'[Salesperson]),
+        SUM(Targets[TargetAmount])
+    )
+    ```
 
-	![Picture 33](Images/create-dax-calculations-in-power-bi-desktop_image40.png)
+    > *The `HASONEVALUE()` function is a powerful DAX function that evaluates whether a single, distinct value in the **`Salesperson`** column is currently filtered in the report context. When this condition is `TRUE` (meaning only one salesperson is selected or in context), the expression proceeds to return the sum of target amounts specifically for that salesperson. Conversely, if the condition is `FALSE` (meaning multiple salespeople are in context or no specific salesperson is filtered), the measure returns `BLANK`, preventing misleading aggregated totals.*
 
-12. Hide the **Unit Price** column.
+5.  **Format the `Target` measure for zero decimal places**.
 
-	> *The **Unit Price** column is now not available to report authors. They must use the pricing measures you’ve added to the model. This design approach ensures that report authors won’t inappropriately aggregate prices, for example, by summing them.*
+    > *Tip: You can quickly access formatting options by selecting the measure and then using the **Measure Tools** contextual ribbon that appears.*
 
-13. Multi-select the **Order Lines** and **Orders** measures, and then configure the following requirements:
+6.  **Hide the `TargetAmount` column**.
 
-	- Set the format use the thousands separator
+    > *Tip: You can right-click the column in the **Data** pane and then select **Hide** to remove it from the view of report authors.*
 
-	- Assign to a display folder named **Counts**
+7.  Add the newly created **`Target`** measure to the table visual.
 
-	![Picture 36](Images/create-dax-calculations-in-power-bi-desktop_image41.png)
+8.  Observe the table visual. You'll notice that the **Total for the `Target` column is now `BLANK`**, which is the intended behavior due to the `HASONEVALUE()` logic, preventing an inappropriate sum across multiple salespeople.
 
-14. In Report view, in the **Values** well/area of the matrix visual, for the **Unit Price** field, select **X** to remove it.
+9.  Using the definitions from the **snippets file**, create the following two additional measures for the **Targets** table:
 
-15. Increase the size of the matrix visual to fill the page width and height.
+      * **`Variance`**
+      * **`Variance Margin`**
 
-16. Add the following five measures to the matrix visual:
+10. **Format the `Variance` measure for zero decimal places**.
 
-	- Median Price
-	- Min Price
-	- Max Price
-	- Orders
-	- Order Lines
+11. **Format the `Variance Margin` measure as a percentage with two decimal places**.
 
-17. Verify that the results look sensible and are correctly formatted.
+12. Add both the **`Variance`** and **`Variance Margin`** measures to the table visual.
 
-	![Picture 39](Images/create-dax-calculations-in-power-bi-desktop_image43.png)
+13. **Resize the table visual** as needed to ensure all columns and rows are clearly visible without truncation.
 
-## Create additional measures
+    > *At this point, it might appear that all salespeople are falling short of their targets. However, remember that the table visual is not yet filtered by a specific time period, so these are overall variances.*
 
-In this task, you'll create more measures that use more complex formulas.
+14. At the top-right corner of the **Data** pane, **collapse and then expand** the pane.
 
-1. In Report view, select **Page 1** and review the table visual, noticing the total for the **Target** column.
+    > *Collapsing and reopening the pane effectively refreshes its content and organization.*
 
-	![Picture 41](Images/create-dax-calculations-in-power-bi-desktop_image45.png)
+15. Notice that the **Targets** table now appears prominently at the top of the list in the Data pane.
 
-1. Select the table visual, and then in the **Visualizations** pane, remove the **Target** field.
+    *Tables that contain **only visible measures** (and no visible columns) are automatically prioritized and listed at the top of the Data pane, making them easily discoverable for report authors.*
 
-1. Rename the **Targets \| Target** column as **Targets \| TargetAmount**.
+-----
 
-	> *Tip: There are several ways to rename the column in Report view: In the **Data** pane, you can right-click the column, and then select **Rename**—or, double-click the column, or press **F2**.*
+## Lab Complete
 
-1. Create the following measure on the **Targets** table:
-
-	```DAX
-	Target =
-	IF(
-	HASONEVALUE('Salesperson (Performance)'[Salesperson]),
-	SUM(Targets[TargetAmount])
-	)
-	```
-
-	> *The HASONEVALUE() function tests whether a single value in the **Salesperson** column is filtered. When true, the expression returns the sum of target amounts (for just that salesperson). When false, BLANK is returned.*
-
-1. Format the **Target** measure for zero decimal places.
-
-	> *Tip: You can use the **Measure Tools** contextual ribbon.*
-
-1. Hide the **TargetAmount** column.
-
-	> *Tip: You can right-click the column in the **Data** pane, and then select **Hide**.*
-
-1. Add the **Target** measure to the table visual.
-
-1. Notice that the **Target** column total is now BLANK.
-
-	![Picture 43](Images/create-dax-calculations-in-power-bi-desktop_image47.png)
-
-1. Use the snippets file definitions to create the following two measures for the **Targets** table:
-
-	- Variance
-	- Variance Margin
-
-1. Format the **Variance** measure for zero decimal places.
-
-1. Format the **Variance Margin** measure as percentage with two decimal places.
-
-1. Add the **Variance** and **Variance Margin** measures to the table visual.
-
-1. Resize the table visual so all columns and rows can be seen.
-
-	![Picture 44](Images/create-dax-calculations-in-power-bi-desktop_image48.png)
-
-	> *While it appears all salespeople aren't meeting target, remember that the table visual isn’t yet filtered by a specific time period.*
-
-1. At the top-right corner of the **Data** pane, collapse and then expand open the pane.
-
-	> *Collapsing and reopening the pane resets the content.*
-
-1. Notice that the **Targets** table now appears at the top of the list.
-
-	![Picture 46](Images/create-dax-calculations-in-power-bi-desktop_image50.png)
-
-	*Tables that comprise only visible measures are automatically listed at the top of the list.*
-
-## Lab complete
+Congratulations\! You have successfully completed this lab, mastering the creation of calculated tables, calculated columns, and various types of measures using DAX in Power BI Desktop. You now have a more robust and insightful data model ready for advanced analysis and reporting.
