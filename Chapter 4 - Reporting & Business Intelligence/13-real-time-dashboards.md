@@ -1,122 +1,98 @@
-# Lab 1: Get started with Real-Time Dashboards in Microsoft Fabric
+# Get Started with Real-Time Dashboards in Microsoft Fabric
 
 ## Estimated Duration: 60 minutes
 
-Real-time dashboards in Microsoft Fabric enable you to visualize and explore streaming data using the Kusto Query Language (KQL).  In this exercise, you'll explore how to create and use a real-time dashboard based on a real-time data source.
+**Real-time dashboards in Microsoft Fabric** provide a powerful way to visualize and interact with live streaming data using the Kusto Query Language (KQL). In this hands-on exercise, you'll embark on a journey to create and effectively utilize a dynamic real-time dashboard, all powered by a continuously updating data source.
 
-## Create an eventhouse
+-----
 
-Now that you have a workspace, you can start creating the Fabric items you'll need for your real-time intelligence solution. we'll start by creating an eventhouse.
+## Create an Eventhouse
 
-1. In the workspace, select **+ New item (1)**. In the *New item* pane, select **Eventhouse (2)**.
+With your workspace now ready, the next step is to begin building the essential Fabric items required for your real-time intelligence solution. We'll start by creating an **Eventhouse**, which serves as the core repository for your streaming data.
 
-   ![Screenshot of alert settings.](./Images/md83.png)
+1.  Within your active workspace, locate and select **+ New item (1)**. A *New item* pane will appear; from this pane, choose **Eventhouse (2)**.
 
-1. Enter **BicycleEventhouse (1)** in the name field and select **Create (2)**
+2.  In the naming field, enter **BicycleEventhouse (1)** as the name for your new Eventhouse, then select **Create (2)** to finalize its creation.
 
-    ![Screenshot of alert settings.](./Images/md84.png)
+3.  As your Eventhouse is being provisioned, you might encounter various tips or prompts. Close these as they appear until you are presented with your newly created, empty Eventhouse.
 
-1. Close any tips or prompts that are displayed until you see your new empty eventhouse.
+4.  On the left-hand pane, take a moment to observe that your new **Eventhouse automatically contains a KQL database** with the exact same name as your Eventhouse.
 
-1. In the pane on the left, note that your eventhouse contains a KQL database with the same name as the eventhouse.
+5.  Select this **KQL database** to explore its contents.
 
-1. Select the KQL database to view it.
+    > **Note**: At this point, your database will be empty, containing no tables. In the subsequent sections of this exercise, you will leverage an **eventstream** to efficiently load real-time data from a continuous source directly into a table within this database.
 
-    ![Screenshot of alert settings.](./Images/md85.png)
+-----
 
-    >**Note**: Currently there are no tables in the database. In the rest of this exercise you'll use an eventstream to load data from a real-time source into a table.
+## Create an Eventstream
 
-## Create an eventstream
+As noted, your newly created database is currently devoid of tables. To populate it with dynamic, real-time information, we'll employ an **eventstream**. This eventstream will act as the conduit, loading data from a live source directly into a table within your Eventhouse.
 
-Currently there are no tables in the database. We'll use an eventstream to load data from a real-time source into a table.
+1.  From the main page of your **KQL database (1)**, locate and select **Get data (2)**.
 
-1. In the main page of your **KQL database (1)**, select **Get data (2)**.
+2.  In the prompt for the data source, choose **Eventstream (3)**, then select **New eventstream (4)**. Provide the name `Bicycle-data` (5) for your Eventstream, and finally, click **Create (6)**.
 
-2. For the data source, select **Eventstream (3)** > **New eventstream (4)**. Name the Eventstream `Bicycle-data` (5) and click on **Create (6)**.
+    > **Note**: Your new eventstream will be created within your workspace in just a few moments. Once the creation process is complete, you'll be automatically redirected to the primary editor, which is where you'll begin integrating various data sources into your eventstream.
 
-   >**Note**: The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
+-----
 
-    ![Screenshot of alert settings.](./Images/md86.png)
+## Add a Source to the Eventstream
 
-    ![Screenshot of alert settings.](./Images/md87.png)
+Now that your eventstream is established, the next crucial step is to define its input source. For this lab, we'll utilize convenient sample data provided within Fabric.
 
-    ![Screenshot of a new eventstream.](./Images/md88.png)
+1.  On the **Eventstream canvas**, which is your visual workspace for building eventstreams, select **Use sample data**.
 
-## Add a source
+2.  A new pane will appear for configuring the sample data source. Name this source `Bicycles` (1). From the available sample datasets, choose **Bicycles (2)**, and then click **Add (3)** to integrate this data into your eventstream.
 
-1. In the Eventstream canvas, select **Use sample data**.
+    > **Note**: Once you add the sample data, your stream will be automatically mapped, and you'll be seamlessly returned to the **eventstream canvas**. Here, you can review the flow of data.
 
-2. Name the source `Bicycles` (1), and select the **Bicycles (2)** sample data and select **Add (3)**
+-----
 
-    ![Screenshot of a new eventstream.](./Images/md89.png)
+## Add a Destination for the Eventstream
 
-   >**Note**: Your stream will be mapped and you will be automatically displayed on the **eventstream canvas**.
+With a source configured, the eventstream now needs a destination where the processed data will be stored. We'll direct this real-time data into your Eventhouse.
 
-   ![Review the eventstream canvas](./Images/md90.png)
+1.  On the Eventstream canvas, locate and select the **Transform events or add destination (1)** tile. A search bar will appear; in it, search for and select **Eventhouse (2)**.
 
-## Add a destination
+2.  In the subsequent **Eventhouse** pane, meticulously configure the following setup options to define how your data will be ingested:
 
-1. Select the **Transform events or add destination (1)** tile and search for **Eventhouse (2)**.
+      * **Data ingestion mode**: Select **Event processing before ingestion (1)**.
+      * **Destination name**: Enter `bikes-table` (2).
+      * **Workspace**: Confirm that your current workspace, identified as `fabric-<inject key="DeploymentID" enableCopy="false"/>` (3), is selected.
+      * **Eventhouse**: Choose **BicycleEventhouse (4)** from the dropdown.
+      * **KQL database**: Select **BicycleEventhouse (5)**.
+      * **Destination table**: Choose the option to **Create a new table** and name it `bikes`.
+      * **Input data format**: Specify **JSON (9)**, as our sample data is in this format.
 
-   ![Review the eventstream canvas](./Images/md91.png)
+3.  After configuring all the settings in the **Eventhouse** pane, select **Save (10)** to apply your destination settings.
 
-1. In the **Eventhouse** pane, configure the following setup options.
+4.  On the main toolbar of the eventstream editor, select **Publish**. This action will deploy your eventstream configuration, allowing data to begin flowing.
 
-   - **Data ingestion mode:**: Event processing before ingestion (1)
-   - **Destination name:** `bikes-table` (2)
-   - **Workspace:** fabric-<inject key="DeploymentID" enableCopy="false"/> (3)
-   - **Eventhouse**: BicycleEventhouse (4)
-   - **KQL database:** BicycleEventhouse (5)
-   - **Destination table:** Create a new table named `bikes` 
-   - **Input data format:** JSON (9)
+5.  Allow approximately a minute or so for the data destination to become fully active and start receiving data. Afterward, select the **bikes-table** node within the design canvas. Below it, in the **Data preview** pane, you should now see the latest data that has been successfully ingested into your table.
 
-   ![Eventstream destination settings.](./Images/md93.png)
+6.  The eventstream is designed to run perpetually, meaning new data will continuously arrive. Wait a few more minutes, then use the **Refresh** button in the **Data preview** pane to observe any newly added data in the table.
 
-   ![Eventstream destination settings.](./Images/md94.png)
+-----
 
-   ![Eventstream destination settings.](./Images/md92.png)
+## Create a Real-Time Dashboard
 
-1. In the **Eventhouse** pane, select **Save (10)**
+With your eventstream actively loading real-time data into the `bikes` table within your Eventhouse, the stage is set to visualize this dynamic information. You'll now create a **real-time dashboard** to bring your data to life.
 
-1. On the toolbar, select **Publish**.
+1.  In the left-hand menu bar, select **+ create** to initiate the creation of a new Fabric item. From the options, choose **Real-Time Dashboard** and name it `bikes-dashboard`.
 
-   ![Eventstream destination settings.](./Images/md95.png)
+    > **Note**: An empty, new dashboard will be immediately created and displayed.
 
-1. Wait a minute or so for the data destination to become active. Then select the **bikes-table** node in the design canvas and view the **Data preview** pane underneath to see the latest data that has been ingested:
+2.  On the dashboard's toolbar, select **New data source (1)**. From the subsequent options, choose **Eventhouse/KQL Database (2)** as your data source type. Then, select **BicycleEventhouse (3)**, and click **Connect (4)**.
 
-   ![Eventstream destination settings.](./Images/md96.png)
+3.  Configure your new data source with the following settings before clicking **Add (4)**:
 
-1. Wait a few minutes and then use the **Refresh** button to refresh the **Data preview** pane. The stream is running perpetually, so new data may have been added to the table.
+      * **Display name**: Enter `Bike Rental Data` (1).
+      * **Database**: Confirm that **BicycleEventhouse (2)** is selected.
+      * **Passthrough identity**: Ensure this option is **Selected**.
 
-## Create a real-time dashboard
+4.  Once the data source is added, close the **Data sources** pane. Now, on the blank dashboard design canvas, select **Add tile** to begin adding visualizations.
 
-Now that you have a stream of real-time data being loaded into a table in the eventhouse, you can visualize it with a real-time dashboard.
-
-1. In the menu bar on the left, select **+ create** to create a new **Real-Time Dashboard** named `bikes-dashboard`.
-
-    ![A screenshot of a new dashboard.](./Images/md2-39.png)
-
-    ![A screenshot of a new dashboard.](./Images/md2-40.png)
-
-   >**Note**: A new empty dashboard is created.
-
-1. In the toolbar, select **New data source (1)** and select **Eventhouse/KQL Database (2)** data source. Then select **BicycleEventhouse (3)** and click on **Connect (4)**
-
-    ![A screenshot of a new dashboard.](./Images/md2-41.png)
-
-    ![A screenshot of a new dashboard.](./Images/md2-42.png)
-
- 1. Create a new data source with the following settings and click on **Add (4)**
-
-    - **Display name**: `Bike Rental Data` (1)
-    - **Database**: *BicycleEventhose (2)*.
-    - **Passthrough identity**: *Selected*
-
-    ![A screenshot of a new dashboard.](./Images/md2-43.png)
-
-1. Close the **Data sources** pane, and then on the dashboard design canvas, select **Add tile**.
-
-1. In the query editor, ensure that the **Bike Rental Data (2)** source is selected and enter the following KQL code:
+5.  In the query editor that appears, first ensure that the **Bike Rental Data (2)** source is actively selected. Then, enter the following KQL code into the editor:
 
     ```kql
     bikes
@@ -126,34 +102,25 @@ Now that you have a stream of real-time data being loaded into a table in the ev
         | order by Neighbourhood asc
     ```
 
-1. **Run (3)** the query, which shows the number of bikes and empty bike docks observed in each neighbourhood in the last 30 minutes.
+6.  To execute the query and see its results, select **Run (3)**. This query is designed to display the latest number of bikes and empty bike docks observed in each neighborhood over the past 30 minutes.
 
-1. **Apply changes (5)** to see the data shown in a table in the tile on the dashboard.
+7.  Once the query results are visible, select **Apply changes (5)** to render the data directly into a table within the new tile on your dashboard.
 
-   ![A screenshot of a dashboard with a tile containing a table.](./Images/md2-44.png)
+8.  With the data displayed in the tile, select the **Edit** icon (which resembles a pencil). In the **Visual Formatting** pane that opens on the right, configure the following properties to transform your table into a more engaging visual:
 
-   ![A screenshot of a dashboard with a tile containing a table.](./Images/md2-45.png)
+      * **Tile name**: Set this to `Bikes and Docks`.
+      * **Visual type**: Change this to **Bar chart**.
+      * **Visual format**: Choose **Stacked bar chart**.
+      * **Y columns**: Select `No_Bikes` and `No_Empty_Docks`.
+      * **X column**: Select `Neighbourhood`.
+      * **Series columns**: Choose `infer`.
+      * **Legend location**: Set this to **Bottom**.
 
-1. On the tile, select the **Edit** icon (which looks like a pencil). Then in the **Visual Formatting** pane, set the following properties:
-    - **Tile name**: Bikes and Docks
-    - **Visual type**: Bar chart
-    - **Visual format**: Stacked bar chart
-    - **Y columns**: No_Bikes, No-Empty_Docks
-    - **X column**: Neighbourhood
-    - **Series columns**: infer
-    - **Legend location**: Bottom
+9.  **Apply the changes** you've made to the visual formatting. Then, **resize the tile** on the dashboard canvas to occupy the full height of the left side, providing ample space for the bar chart.
 
-    ![A screenshot of a dashboard with a tile containing a table.](./Images/md2-46.png)
+10. On the dashboard toolbar, select **New tile** to add another visualization.
 
-    ![A screenshot of a dashboard with a tile containing a table.](./Images/md2-47.png)
-
-1. Apply the changes and then resize the tile to take up the full height of the left side of the dashboard.
-
-    ![A screenshot of a dashboard with a tile containing a table.](./Images/md2-48.png)
-
-1. In the toolbar, select **New tile**
-
-1. In the query editor, ensure that the **Bike Rental Data** source is selected and enter the following KQL code:
+11. In the query editor for this new tile, ensure that the **Bike Rental Data** source is still selected. Enter the following KQL code:
 
     ```kql
     bikes
@@ -163,44 +130,46 @@ Now that you have a stream of real-time data being loaded into a table in the ev
         | order by Neighbourhood asc
     ```
 
-1. Run the query, which shows the location and number of bikes observed in each neighbourhood in the last 30 minutes.
+12. **Run the query**. This query will show the geographical location and the count of bikes observed in each neighborhood over the last 30 minutes.
 
-1. Apply the changes to see the data shown in a table in the tile on the dashboard.
+13. **Apply the changes** to display the data as a table within this new tile.
 
-1. On the tile, select the **Edit** icon (which looks like a pencil). Then in the **Visual Formatting** pane, set the following properties:
-    - **Tile name**: Bike Locations
-    - **Visual type**: Map
-    - **Define location by**: Latitude and longitude
-    - **Latitude column**: Latitude
-    - **Longitude column**: Longitude
-    - **Label column**: Neighbourhood
-    - **Size**: Show
-    - **Size column**: No_Bikes
+14. Select the **Edit** icon (pencil) on the new tile. In the **Visual Formatting** pane, adjust the properties as follows to create a map visualization:
 
-1. Apply the changes, and then resize the map tile to fill the right side of the available space on the dashboard:
+      * **Tile name**: Set this to `Bike Locations`.
+      * **Visual type**: Change this to **Map**.
+      * **Define location by**: Choose **Latitude and longitude**.
+      * **Latitude column**: Select `Latitude`.
+      * **Longitude column**: Select `Longitude`.
+      * **Label column**: Select `Neighbourhood`.
+      * **Size**: Select **Show**.
+      * **Size column**: Select `No_Bikes`.
 
-   ![A screenshot of a dashboard with a chart and a map.](./Images/md2-49.png)
+15. **Apply the changes**, then **resize the map tile** to fill the remaining available space on the right side of your dashboard, creating a comprehensive view.
 
-## Create a base query
+-----
 
-Your dashboard contains two visuals that are based on similar queries. To avoid duplication and make your dashboard more maintainable, you can consolidate the common data into a single *base query*.
+## Create a Base Query
 
-1. On the dashboard toolbar, select **Base queries**. Then select **+Add**.
+You may have noticed that both visuals on your dashboard currently rely on similar underlying queries. To promote efficiency, reduce redundancy, and significantly enhance the maintainability of your dashboard, you can consolidate the common data retrieval logic into a single, reusable **base query**.
 
-1. In the base query editor, set the **Variable name** to `base_bike_data` (1) and ensure that the **Bike Rental Data (2)** source is selected. Then enter the following query (3):
+1.  On the dashboard toolbar, navigate to the **Manage** tab, then select **Base queries**.
+
+2.  In the **Base queries** pane, select **+ Add** to create a new base query.
+
+3.  In the base query editor that opens, set the **Variable name** to `base_bike_data` (1). Confirm that the **Bike Rental Data (2)** source is selected. Then, meticulously enter the following KQL query into the editor (3):
 
     ```kql
     bikes
         | where ingestion_time() between (ago(30min) .. now())
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
     ```
-1. **Run (4)** the query and verify that it returns all of the columns needed for both visuals in the dashboard (and some others).
 
-   ![A screenshot of a base query.](./Images/md2-50.png)
+4.  To verify the output, **Run (4)** the query. Confirm that it successfully returns all the necessary columns required for both your bar chart and map visuals on the dashboard, plus any other relevant columns.
 
-1. Select **Done** and then close the **Base queries** pane.
+5.  Select **Done** to save your new base query, then close the **Base queries** pane.
 
-1. Edit the **Bikes and Docks** bar chart visual, and change the query to the following code:
+6.  Now, **edit the Bikes and Docks bar chart visual** (using the pencil icon). Modify its query to utilize the new base query, as shown in the following code:
 
     ```kql
     base_bike_data
@@ -208,9 +177,9 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     | order by Neighbourhood asc
     ```
 
-1. Apply the changes and verify that the bar chart still displays data for all neighborhoods.
+7.  **Apply the changes** and verify that the bar chart continues to correctly display data for all neighborhoods, now driven by the base query.
 
-1. Edit the **Bike Locations** map visual, and change the query to the following code:
+8.  Similarly, **edit the Bike Locations map visual**. Change its query to leverage the base query:
 
     ```kql
     base_bike_data
@@ -218,25 +187,39 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     | order by Neighbourhood asc
     ```
 
-1. Apply the changes and verify that the map still displays data for all neighborhoods.
+9.  **Apply the changes** and confirm that the map still accurately displays data for all neighborhoods, effectively utilizing the centralized base query.
 
-## Add a parameter
+-----
 
-Your dashboard currently shows the latest bike, dock, and location data for all neighborhoods. Now lets add a parameter so you can select a specific neighborhood.
+## Add a Parameter
 
-1. On the dashboard toolbar, on the **Manage** tab, select **Parameters**.
-1. Note any existing parameters that have been automatically created (for example a *Time range* parameter). Then **Delete** them.
-1. Select **+ Add**.
-1. Add a parameter with the following settings:
-    - **Label**: `Neighbourhood`
-    - **Parameter type**: Multiple selection
-    - **Description**: `Choose neighbourhoods`
-    - **Variable name**: `selected_neighbourhoods`
-    - **Data type**: string
-    - **Show on pages**: Select all
-    - **Source**: Query
-    - **Data source**: Bike Rental Data
-    - **Edit query**:
+Your dashboard currently presents the latest bike, dock, and location data for all neighborhoods. To enhance interactivity and provide more targeted insights, you'll now introduce a **parameter**, allowing users to select and filter data for specific neighborhoods.
+
+1.  On the dashboard toolbar, navigate to the **Manage** tab, and then select **Parameters**.
+
+2.  Take note of any parameters that might have been automatically generated (such as a *Time range* parameter). For the purpose of this exercise, **Delete** any existing parameters to start fresh.
+
+3.  Select **+ Add** to create a new parameter.
+
+4.  Configure the new parameter with the following detailed settings:
+
+      * **Label**: `Neighbourhood`
+
+      * **Parameter type**: Choose **Multiple selection**.
+
+      * **Description**: Provide a helpful description, such as `Choose neighbourhoods`.
+
+      * **Variable name**: Set this to `selected_neighbourhoods`.
+
+      * **Data type**: Select `string`.
+
+      * **Show on pages**: Choose **Select all**.
+
+      * **Source**: Select **Query**.
+
+      * **Data source**: Choose **Bike Rental Data**.
+
+      * **Edit query**: Enter the following KQL query:
 
         ```kql
         bikes
@@ -244,42 +227,50 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
         | order by Neighbourhood asc
         ```
 
-    - **Value column**: Neighbourhood
-    - **Label column**: Match value selection
-    - **Add "Select all" value**: *Selected*
-    - **"Select all" sends empty string**: *Selected*
-    - **Auto-reset to default value**: Selected
-    - **Default value**: Select all
+      * **Value column**: Select `Neighbourhood`.
 
-1. Select **Done** to create the parameter.
+      * **Label column**: Choose **Match value selection**.
 
-    Now that you've added a parameter, you need to modify the base query to filter the data based on the chosen neighborhoods.
+      * **Add "Select all" value**: Ensure this is **Selected**.
 
-1. In the toolbar, select **Base queries**. Then select the **base_bike_data** query and edit it to add an **and** condition to the **where** clause to filter based on the selected parameter values, as shown in the following code:
+      * **"Select all" sends empty string**: Ensure this is **Selected**.
+
+      * **Auto-reset to default value**: Select this option.
+
+      * **Default value**: Choose **Select all**.
+
+5.  Finally, select **Done** to create and save your new parameter.
+
+    Now that you've added a parameter, you must modify your base query to dynamically filter the data based on the neighborhoods chosen by the user.
+
+6.  On the toolbar, select **Base queries**. Then, select and **edit the `base_bike_data` query**. You'll add an `and` condition to the `where` clause to filter the data using the selected parameter values, as illustrated in the following KQL code:
 
     ```kql
     bikes
         | where ingestion_time() between (ago(30min) .. now())
-          and (isempty(['selected_neighbourhoods']) or Neighbourhood  in (['selected_neighbourhoods']))
+          and (isempty(['selected_neighbourhoods']) or Neighbourhood in (['selected_neighbourhoods']))
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
     ```
 
-1. Select **Done** to save the base query.
+7.  Select **Done** to save the updated base query.
 
-1. In the dashboard, use the **Neighbourhood** parameter to filter the data based on the neighborhoods you select.
+8.  On the dashboard, you can now interact with the new **Neighbourhood** parameter control. Use it to filter the data displayed on your visuals based on the specific neighborhoods you select.
 
-   ![A screenshot of a dashboard with parameters selected.](./Images/md2-51.png)
+9.  To clear any selected parameter filters and return to displaying all data, simply select the **Reset** button.
 
-1. Select **Reset** to remove the selected parameter filters.
+-----
 
-## Add a page
+## Add a Page
 
-Your dashboard currently consists of a single page. You can add more pages to provide more data.
+Currently, your dashboard is composed of a single page. To provide a more comprehensive and organized view of your data, you have the flexibility to add additional pages, each potentially dedicated to different aspects or levels of detail.
 
-1. On the left side of the dashboard, expand the **Pages** pane; and select **+ Add page**.
-1. Name the new page **Page 2**. Then select it.
-1. On the new page, select **+ Add tile**
-1. In the query editor for the new tile, enter the following query:
+1.  On the left side of the dashboard interface, expand the **Pages** pane. Once expanded, select **+ Add page**.
+
+2.  Name this new page **Page 2**. Then, ensure you select it to make it your active page.
+
+3.  On the newly created page, select **+ Add tile** to introduce another visualization.
+
+4.  In the query editor for this new tile, enter the following KQL query:
 
     ```kql
     base_bike_data
@@ -287,34 +278,40 @@ Your dashboard currently consists of a single page. You can add more pages to pr
     | order by latest_observation desc
     ```
 
-1. Apply the changes. Then resize the tile to fill the height of the dashboard.
+5.  **Apply the changes** to display the query results. Then, resize the tile to efficiently fill the height of the dashboard, optimizing its visual presence.
 
-   ![img](./Images/md2-52.png)
+-----
 
-## Configure auto refresh
+## Configure Auto Refresh
 
-Users can manually refresh the dashboard, but it may be useful to have it automatically refresh the data at a set interval.
+While users can manually refresh the dashboard to see the latest data, it is often more beneficial and user-friendly to have the dashboard automatically update its information at a predefined interval. This ensures a continuously current view of your real-time data.
 
-1. On the dashboard toolbar, on the **Manage** tabe, select **Auto refresh**.
+1.  On the dashboard toolbar, navigate to the **Manage** tab, and then select **Auto refresh**.
 
-1. In the **Auto refresh** pane, configure the following settings:
+2.  In the **Auto refresh** pane that appears, configure the following settings to enable and define your refresh behavior:
 
-    - **Enabled**: *Selected*
-    - **Minimum time interval**: Allow all refresh intervals
-    - **Default refresh rate**: 30 minutes
+      * **Enabled**: Ensure this option is **Selected**.
+      * **Minimum time interval**: Choose **Allow all refresh intervals**.
+      * **Default refresh rate**: Set this to `30 minutes`.
 
-1. Apply the auto refresh settings.
+3.  Finally, **Apply the auto refresh settings** to activate this feature for your dashboard.
 
-## Save and share the dashboard
+-----
 
-Now you have a useful dashboard, you can save it and share it with other users.
+## Save and Share the Dashboard
 
-1. On the dashboard toolbar, select **Save**.
+You've successfully created a highly useful and interactive real-time dashboard. The final steps involve saving your work and then sharing it with other users who can benefit from these live insights.
 
-1. When the dashboard is saved, select **Share**.
+1.  On the dashboard toolbar, locate and select **Save**. This action will persist all your configurations and visualizations.
 
-1. On the **Share** dialog box, select **Copy link** and copy the link to the dashboard to the clipboard.
+2.  Once the dashboard has been successfully saved, select **Share**.
 
-1. Open a new browser tab and paste the copied link to navigate to the shared dashboard. Sign in again with your credentials if prompted.
+3.  In the **Share** dialog box, select **Copy link**. This will copy the direct URL to your dashboard onto your clipboard.
 
-1. Explore the dashboard, using it to see the latest information about bikes and empty bike docks across the city.
+4.  Open a new browser tab and paste the copied link into the address bar to navigate directly to the shared dashboard. If prompted, sign in again with your Microsoft Fabric credentials.
+
+5.  Spend some time exploring the dashboard. Interact with the parameters you created, switch between pages, and observe how it provides the latest information about bikes and empty bike docks across the city, all in real time.
+
+-----
+
+Would you like to continue building on this foundation by integrating more complex data transformations, or perhaps explore advanced security features for your real-time dashboards?
