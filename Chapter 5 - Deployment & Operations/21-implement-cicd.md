@@ -1,6 +1,10 @@
 # Implement Deployment Pipelines in Microsoft Fabric
 
-Deployment pipelines in Microsoft Fabric are incredibly powerful tools designed to **streamline and automate the process of propagating content changes** across various environments. Imagine a structured workflow where your valuable content, whether it's reports, datasets, or lakehouses, can seamlessly move from a **development environment**, where initial creation and iteration occur, to a **testing environment**, where rigorous quality assurance takes place, and finally to a **production environment**, where it becomes accessible to end-users. This systematic approach ensures that all changes are thoroughly developed, meticulously tested, and validated before they ever impact your users. In this comprehensive lab, you'll gain hands-on experience by creating a new deployment pipeline, meticulously assigning specific workspaces to its distinct stages, crafting some initial content within your development workspace, and then strategically deploying this content through the defined pipeline stages—Development, Test, and Production.
+Deployment pipelines in Microsoft Fabric are incredibly powerful tools designed to **streamline and automate the process of propagating content changes** across various environments. 
+
+Imagine a structured workflow where your valuable content, whether it's reports, datasets, or lakehouses, can seamlessly move from a **development environment**, where initial creation and iteration occur, to a **testing environment**, where rigorous quality assurance takes place, and finally to a **production environment**, where it becomes accessible to end-users. 
+
+>[!Tip]This systematic approach ensures that all changes are thoroughly developed, meticulously tested, and validated before they ever impact your users. In this comprehensive lab, you'll gain hands-on experience by creating a new deployment pipeline, meticulously assigning specific workspaces to its distinct stages, crafting some initial content within your development workspace, and then strategically deploying this content through the defined pipeline stages—Development, Test, and Production.
 
 > **Note**: To successfully complete every step of this exercise, it is crucial that you possess the necessary permissions. Specifically, you need to be a **member of the Fabric workspace admin role**. For detailed instructions on how to assign these vital roles within your Microsoft Fabric environment, please refer to the official documentation on [Roles in workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces).
 
@@ -18,7 +22,7 @@ To begin our journey into deployment pipelines, the foundational step is to esta
 4.  Repeat the preceding steps (1 and 2) to create two additional workspaces. Name these subsequent workspaces **Test** and **Production**, respectively.
 5.  After creating all three workspaces, select the **Workspaces** icon on the left menu bar once more. This will allow you to visually confirm that your three new workspaces—**Development**, **Test**, and **Production**—are now listed and accessible.
 
-> **Note**: In some instances, you might be prompted to enter a **unique name** for your workspaces, especially if generic names are already in use within your tenant. If this occurs, a simple solution is to append one or more random numbers to the end of the default names. For example, you could name them "Development123," "Test456," or "Production789" to ensure uniqueness.
+>[!Abstract] **Note**: In some instances, you might be prompted to enter a **unique name** for your workspaces, especially if generic names are already in use within your tenant. If this occurs, a simple solution is to append one or more random numbers to the end of the default names. For example, you could name them "Development123," "Test456," or "Production789" to ensure uniqueness.
 
 -----
 
