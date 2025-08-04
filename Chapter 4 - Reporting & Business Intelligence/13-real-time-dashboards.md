@@ -313,5 +313,3 @@ You've successfully created a highly useful and interactive real-time dashboard.
 5.  Spend some time exploring the dashboard. Interact with the parameters you created, switch between pages, and observe how it provides the latest information about bikes and empty bike docks across the city, all in real time.
 
 -----
-
-Would you like to continue building on this foundation by integrating more complex data transformations, or perhaps explore advanced security features for your real-time dashboards?
