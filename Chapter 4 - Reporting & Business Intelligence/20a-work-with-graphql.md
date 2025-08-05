@@ -1,98 +1,70 @@
----
-lab:
-    title: 'Work with API for GraphQL in Microsoft Fabric'
-    module: 'Get started with GraphQL in Microsoft Fabric'
----
+# Lab: Work with API for GraphQL in Microsoft Fabric
 
-# Work with API for GraphQL in Microsoft Fabric
+## Introduction  
+This hands-on lab will guide you through using Microsoft Fabric's API for GraphQL to efficiently query data from multiple sources. GraphQL provides a flexible query language that enables clients to request exactly the data they need in a single API call.
 
-Microsoft Fabric API for GraphQL is a data access layer that enables quick and efficient querying of multiple data sources with a widely adopted and familiar API technology. The API allows you to abstract the specifics of backend data sources so you can concentrate on your application's logic, and provide all the data a client needs in a single call. GraphQL uses a simple query language and easily manipulated result sets, which minimizes the time it takes for applications to access your data in Fabric.
+**Estimated Duration**: 30 minutes  
+**Prerequisites**: Microsoft Fabric trial account
 
-This lab will take approximately **30** minutes to complete.
+## Exercise 1: Set Up Your Environment
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+### Task 1: Create a Workspace
+1. Sign in to [Microsoft Fabric](https://app.fabric.microsoft.com)
+2. Select **New workspace** from the left navigation
+3. Name your workspace (e.g., "GraphQL-Lab")
+4. Choose a licensing mode with Fabric capacity (Trial, Premium, or Fabric)
+5. Verify your new empty workspace appears
 
-## Create a workspace
+### Task 2: Create and Populate a SQL Database
+1. In your workspace, select **Create** → **SQL database**
+2. Name the database "AdventureWorksLT" and create it
+3. Load sample data using the **Sample data** option
+4. Confirm the database appears with populated tables
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+## Exercise 2: Explore SQL Data
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
-1. In the menu bar on the left, select **New workspace**.
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
-
-    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
-
-## Create a SQL database with sample data
-
-Now that you have a workspace, it's time to create a SQL database.
-
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Databases* section, select **SQL database**.
-
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
-
-1. Enter **AdventureWorksLT** as the database name, and select **Create**.
-1. Once you have created your database, you can load sample data into your database from **Sample data** card.
-
-    After a minute or so, your database will be populated with sample data for your scenario.
-
-    ![Screenshot of a new database loaded with sample data.](./Images/sql-database-sample.png)
-
-## Query a SQL database
-
-The SQL query editor provides support for IntelliSense, code completion, syntax highlighting, client-side parsing, and validation. You can run Data Definition Language (DDL), Data Manipulation Language (DML) and Data Control Language (DCL) statements.
-
-1. In the **AdventureWorksLT** database page, navigate to **Home**, and select **New query**.
-1. In the new blank query pane, enter and run the following T-SQL code.
-
-    ```sql
-    SELECT 
-        p.Name AS ProductName,
-        pc.Name AS CategoryName,
-        p.ListPrice
-    FROM 
-        SalesLT.Product p
-    INNER JOIN 
-        SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
-    ORDER BY 
+### Task 1: Execute SQL Queries
+1. Open your AdventureWorksLT database
+2. Select **New query**
+3. Run the following query:
+```sql
+SELECT 
+    p.Name AS ProductName,
+    pc.Name AS CategoryName,
+    p.ListPrice
+FROM 
+    SalesLT.Product p
+INNER JOIN 
+    SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
+ORDER BY 
     p.ListPrice DESC;
-    ```
-    
-    This query joins the `Product` and `ProductCategory` tables to display the product names, their categories, and their list prices, sorted by price in descending order.
+```
+4. Review the results showing products with their categories and prices
+5. Close all query tabs
 
-1. Close all query tabs.
+## Exercise 3: Configure GraphQL API
 
-## Create an API for GraphQL
+### Task 1: Create GraphQL Endpoint
+1. In your workspace, select **New item** → **API for GraphQL**
+2. Name your API (e.g., "ProductsAPI") and create it
+3. Select **Select data source**
+4. Choose SSO authentication option
+5. Connect to your AdventureWorksLT database
+6. Select the `SalesLT.Product` table and load it
+7. Note the API endpoint URL (optional)
 
-First, you will set up a GraphQL endpoint to expose the sales order data. This endpoint will allow you to query sales orders based on various parameters, such as date, customer, and product.
+### Task 2: Secure the API
+1. In Schema Explorer, expand **Mutations**
+2. For each mutation operation:
+   - Select the **...** menu
+   - Choose **Disable**
+3. Confirm all mutations are now disabled
 
-1. On Fabric portal, navigate to your workspace, and select **+ New item**.
-1. Navigate to the **Develop data** section, and select **API for GraphQL**.
-1. Provide a name, and select **Create**.
-1. On the main page of your API for GraphQL, select **Select data source**.
-1. If prompted to choose a connectivity option, select **Connect to Fabric data sources with single sign-on(SSO) authentication**.
-1. On the **Choose the data you want to connect** page, select the `AdventureWorksLT` database previously created.
-1. Select **Connect**.
-1. On the **Choose data** page, select the `SalesLT.Product` table. 
-1. Preview the data and select **Load**.
-1. Select **Copy endpoint** and note the public URL link. We don't need this, but this is where you'd go to copy your API address.
+## Exercise 4: Query Data with GraphQL
 
-## Disable mutations
-
-Now that our API is created, we only want to expose the sales data for reading operations in this scenario.
-
-1. On the **Schema explorer** of your API for GraphQL, expand **Mutations**.
-1. Select on the **...** (ellipsis) next to each mutation and select **Disable**.
-
-This will prevent any modifications or updates to the data through the API. This means that the data will be read-only, and users will only be able to view or query the data, but not make any changes to it.
-
-## Query data using GraphQL
-
-Now, let's query the data using GraphQL to find all the products whose names begin with *"HL Road Frame."*
-
-1. In the GraphQL query editor, enter and run the following query.
-
-```json
+### Task 1: Execute GraphQL Query
+1. In the GraphQL query editor, enter:
+```graphql
 query {
   products(filter: { Name: { startsWith: "HL Road Frame" } }) {
     items {
@@ -106,18 +78,18 @@ query {
   }
 }
 ```
+2. Execute the query
+3. Review the returned product data matching your filter
 
-In this query, products is the main type, and it includes fields for `ProductModelID`, `Name`, `ListPrice`, `Color`, `Size`, and `ModifiedDate`. This query will return a list of products whose names begin with *"HL Road Frame."*.
+## Cleanup
+1. Navigate to workspace settings
+2. Select **Remove this workspace** to delete all resources
 
-> **Further Information**: See [What is Microsoft Fabric API for GraphQL?](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview) in the Microsoft Fabric documentation to learn more about other components available in the platform.
+## Conclusion
+You've successfully:
+- Created a Fabric workspace with sample data
+- Established a GraphQL API endpoint
+- Configured secure read-only access
+- Executed targeted GraphQL queries
 
-In this exercise, you've created, queried, and exposed data from a SQL database using GraphQL in Microsoft Fabric.
-
-## Clean up resources
-
-If you've finished exploring your database, you can delete the workspace you created for this exercise.
-
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **General** section, select **Remove this workspace**.
-
+For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
