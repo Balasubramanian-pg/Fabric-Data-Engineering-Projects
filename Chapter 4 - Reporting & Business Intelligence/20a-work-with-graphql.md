@@ -373,30 +373,237 @@ This **production-grade GraphQL API** is now ready for client applications!
 ➡️ Learn about **GraphQL subscriptions** for real-time updates.  
 ➡️ Explore **Fabric’s monitoring tools** for API analytics.
 
-## Exercise 4: Query Data with GraphQL
+# **Exercise 4: Advanced GraphQL Querying & Real-World Applications**  
 
-### Task 1: Execute GraphQL Query
-1. In the GraphQL query editor, enter:
+## **Objective**  
+This expanded exercise dives deep into **querying your GraphQL API** with:  
+✔ **Complex query structures** (filtering, sorting, pagination)  
+✔ **Performance optimization techniques**  
+✔ **Error handling & debugging**  
+✔ **Real-world client integration examples** (React, Python)  
+
+---
+
+## **Task 4.1: Mastering GraphQL Query Techniques**  
+
+### **4.1.1 Filtering & Sorting**  
+Run queries with **dynamic filtering** and **multi-field sorting**:  
+
+#### **Filter Products by Price & Category**  
 ```graphql
 query {
-  products(filter: { Name: { startsWith: "HL Road Frame" } }) {
+  products(
+    filter: { 
+      price: { gt: 100, lt: 1000 }
+      category: { categoryName: { eq: "Bikes" } }
+    }
+    sort: { price: DESC, name: ASC }
+  ) {
     items {
-      ProductModelID
-      Name
-      ListPrice
-      Color
-      Size
-      ModifiedDate
+      id
+      name
+      price
+      category {
+        categoryName
+      }
     }
   }
 }
 ```
-2. Execute the query
-3. Review the returned product data matching your filter
+✅ **Key Filters Supported**:  
+- `eq`, `neq`, `gt`, `lt`, `contains`, `startsWith`  
+- **Nested filters** (e.g., `category: { name: { eq: "Bikes" } }`)  
 
-## Cleanup
-1. Navigate to workspace settings
-2. Select **Remove this workspace** to delete all resources
+---
+
+### **4.1.2 Pagination (Cursor-Based & Offset-Based)**  
+#### **Cursor-Based (Recommended for large datasets)**  
+```graphql
+query {
+  products(first: 5, after: "cursor-from-previous-page") {
+    edges {
+      node {
+        id
+        name
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+```
+#### **Offset-Based (Simple but less performant)**  
+```graphql
+query {
+  products(limit: 5, offset: 10) {
+    items {
+      id
+      name
+    }
+    totalCount
+  }
+}
+```
+
+---
+
+### **4.1.3 Nested Queries (Joins in GraphQL)**  
+Fetch **products + categories + models** in one request:  
+```graphql
+query {
+  products(filter: { color: { eq: "Red" } }) {
+    items {
+      name
+      price
+      category {
+        categoryName
+      }
+      model {
+        name
+        description {
+          text
+        }
+      }
+    }
+  }
+}
+```
+⚠ **Performance Tip**: Avoid **over-fetching**—only request needed fields!  
+
+---
+
+## **Task 4.2: Optimizing Query Performance**  
+
+### **4.2.1 Query Cost Analysis**  
+Microsoft Fabric’s **GraphQL Analytics** shows:  
+- **Query execution time**  
+- **Database load**  
+- **Most expensive fields**  
+
+**Optimization Strategies**:  
+1. **Batch Resolvers**: Combine multiple SQL queries into one.  
+2. **Add Indexes** on filtered/sorted fields (`price`, `categoryName`).  
+3. **Use `@defer`** for slow non-critical fields.  
+
+---
+
+### **4.2.2 Caching Strategies**  
+| **Cache Type**       | **Use Case**                          | **Implementation**                     |
+|----------------------|---------------------------------------|----------------------------------------|
+| **Response Cache**   | Static data (e.g., categories)        | Enable in API Settings (TTL: 1 hour)   |
+| **Persisted Queries**| Repeated complex queries              | Store hashed queries server-side       |
+| **Client-Side Cache**| Frontend apps (React/Apollo)          | Use `@client` directives               |
+
+---
+
+## **Task 4.3: Error Handling & Debugging**  
+
+### **4.3.1 Structured Error Responses**  
+GraphQL returns **partial data + errors** (unlike REST):  
+```json
+{
+  "errors": [
+    {
+      "message": "Price filter must be a number",
+      "path": ["products", "filter", "price"],
+      "extensions": { "code": "VALIDATION_ERROR" }
+    }
+  ],
+  "data": {
+    "products": null
+  }
+}
+```
+
+### **4.3.2 Logging & Monitoring**  
+1. **Enable Query Logging** in **Fabric Monitoring**.  
+2. **Set Alerts** for:  
+   - `queryDepth > 10`  
+   - `responseSize > 1MB`  
+
+---
+
+## **Task 4.4: Real-World Client Integrations**  
+
+### **4.4.1 React (Apollo Client)**  
+```javascript
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'YOUR_GRAPHQL_ENDPOINT',
+  cache: new InMemoryCache()
+});
+
+const GET_PRODUCTS = gql`
+  query GetProducts($minPrice: Float!) {
+    products(filter: { price: { gt: $minPrice } }) {
+      items {
+        id
+        name
+        price
+      }
+    }
+  }
+`;
+
+function ProductList() {
+  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+    variables: { minPrice: 100 }
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return data.products.items.map(({ id, name, price }) => (
+    <div key={id}>{name} - ${price}</div>
+  ));
+}
+```
+
+### **4.4.2 Python (Requests Library)**  
+```python
+import requests
+
+query = """
+query GetProducts($color: String!) {
+  products(filter: { color: { eq: $color } }) {
+    items {
+      id
+      name
+    }
+  }
+}
+"""
+
+variables = { "color": "Blue" }
+
+response = requests.post(
+  "YOUR_GRAPHQL_ENDPOINT",
+  json={"query": query, "variables": variables}
+)
+
+print(response.json()["data"]["products"]["items"])
+```
+
+---
+
+## **Key Takeaways**  
+✅ **Complex queries** (filtering, sorting, pagination) are easy in GraphQL.  
+✅ **Optimize performance** with caching, batching, and indexing.  
+✅ **Handle errors gracefully** with structured responses.  
+✅ **Integrate seamlessly** with frontend/backend clients.  
+
+---
+  
+**Next Steps**:  
+➡️ **Explore GraphQL Subscriptions** for real-time updates.  
+➡️ **Set up CI/CD** for your GraphQL API in Fabric.  
+➡️ **Monitor production traffic** with Fabric Analytics.  
+
+Your API is now **production-ready**!
 
 ## Conclusion
 You've successfully:
@@ -406,6 +613,3 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
-
-
-
