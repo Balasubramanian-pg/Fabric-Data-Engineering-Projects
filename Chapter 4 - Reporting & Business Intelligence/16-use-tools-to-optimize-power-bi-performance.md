@@ -86,18 +86,47 @@ DAX Studio is a feature-rich tool for DAX authoring, diagnosis, performance tuni
 2. Ensure the **Sales Analysis - Use tools to optimize Power BI performance** model is selected in the dropdown list.
 3. Select **Connect**.
 
-### Step 3: Optimize a Query Using DAX Studio
+### Step 3: Review the Data Model
 
-1. Download the [Monthly Profit Growth.dax](https://aka.ms/fabric-optimize-dax) file and save it to your local computer.
-2. In DAX Studio, open the **Monthly Profit Growth.dax** file.
-3. Review the comments and the query in the file.
-4. Run a server trace to record detailed timing information for performance profiling by selecting **Server Timings** on the **Home** ribbon tab.
-5. Run the script and review the query results and server timing statistics.
-6. Modify the query to use the second measure by replacing the word **Bad** with **Better** at line 72.
-7. Run the updated query and review the server timing statistics again to compare performance.
+In this task, you will thoroughly review the data model to understand its structure and components. This understanding is crucial for effectively using the Best Practice Analyzer (BPA) to detect and fix issues.
+
+1. **Switch to Model View:**
+   - In Power BI Desktop, locate the left-hand navigation pane.
+   - Click on the **Model** icon, which looks like a small diagram. This will switch your view to the Model view, where you can see the visual representation of your data model.
+
+2. **Understand the Model Diagram:**
+   - The Model view displays a diagram of your data model, showing all the tables and the relationships between them.
+   - Tables are represented as boxes, and relationships are represented as lines connecting these boxes.
+   - Take a moment to familiarize yourself with the layout. Notice how the tables are arranged and connected.
+
+3. **Identify Tables and Their Roles:**
+   - **Fact Tables:** These tables contain the primary data you want to analyze. In this model, the **Sales** table is the fact table, storing sales order details.
+   - **Dimension Tables:** These tables contain attributes or dimensions that describe the data in the fact table. In this model, there are eight dimension tables, including **Category**, **Subcategory**, **Product**, and others.
+   - **Snowflake Schema:** Notice that the model uses a snowflake schema for the product dimension, where the **Category**, **Subcategory**, and **Product** tables are connected in a hierarchical manner.
+
+4. **Examine Relationships:**
+   - Click on the lines connecting the tables to see the details of the relationships.
+   - Note the type of relationships (e.g., one-to-many, many-to-one) and the columns used to create these relationships.
+   - Ensure that the relationships are correctly defined and that there are no missing or incorrect connections.
+
+5. **Review Table Contents:**
+   - Double-click on any table to see its contents and structure.
+   - Examine the columns within each table, their data types, and any measures or calculated columns that have been created.
+   - Pay attention to the naming conventions used for tables and columns, as consistent and clear naming is essential for a well-organized model.
+
+6. **Check for Data Issues:**
+   - Look for any obvious data issues, such as missing values, duplicate entries, or inconsistent data types.
+   - Note any tables or columns that might need further investigation or cleaning.
+
+7. **Document Your Observations:**
+   - As you review the model, take notes on any observations or potential issues you identify.
+   - This documentation will be helpful when you use the Best Practice Analyzer to detect and address specific issues in the model.
+
+By thoroughly reviewing the data model, you will gain a comprehensive understanding of its structure and components. This knowledge will enable you to effectively use the Best Practice Analyzer to optimize and improve the model.
 
 ### Conclusion
 
 Close all applications to conclude this exercise. There is no need to save the files.
 
 ---
+
