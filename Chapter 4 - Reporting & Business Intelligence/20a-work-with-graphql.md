@@ -21,14 +21,14 @@ This hands-on lab will guide you through using Microsoft Fabric's API for GraphQ
 3. Load sample data using the **Sample data** option
 4. Confirm the database appears with populated tables
 
-# Expanded Exercise 2: Deep Dive into SQL Data Exploration
+# Exercise 2: Deep Dive into SQL Data Exploration
 
 ## Objective
 This expanded exercise will provide a more comprehensive exploration of the SQL database in Microsoft Fabric, including advanced query techniques and data analysis that will later inform our GraphQL API design.
 
-## Task 1: Initial Data Exploration
+## Task 2.1: Initial Data Exploration
 
-### 1.1 Explore Database Schema
+### 2.1.1 Explore Database Schema
 1. In your AdventureWorksLT database, navigate to the **Tables** section
 2. Examine the available tables:
    - SalesLT.Product (ProductID, Name, ProductNumber, Color, etc.)
@@ -37,7 +37,7 @@ This expanded exercise will provide a more comprehensive exploration of the SQL 
    - SalesLT.ProductModelProductDescription (ProductModelID, ProductDescriptionID)
    - SalesLT.ProductDescription (ProductDescriptionID, Description)
 
-### 1.2 Basic Data Sampling
+### 2.1.2 Basic Data Sampling
 Run these queries to understand the data distribution:
 
 ```sql
@@ -66,9 +66,9 @@ WHERE
     ListPrice > 0;
 ```
 
-## Task 2: Advanced Query Techniques
+## Task 2.2: Advanced Query Techniques
 
-### 2.1 Hierarchical Category Query
+### 2.2.1 Hierarchical Category Query
 ```sql
 -- Recursive CTE for category hierarchy
 WITH CategoryHierarchy AS (
@@ -105,7 +105,7 @@ ORDER BY
     Level, Name;
 ```
 
-### 2.2 Product Attribute Analysis
+### 2.2.2 Product Attribute Analysis
 ```sql
 -- Pivot table showing available sizes by category
 SELECT 
@@ -129,9 +129,9 @@ PIVOT (
 ) AS PivotTable;
 ```
 
-## Task 3: Data Quality Assessment
+## Task 2.3: Data Quality Assessment
 
-### 3.1 Missing Value Analysis
+### 2.3.1 Missing Value Analysis
 ```sql
 -- Check for missing critical data
 SELECT
@@ -144,7 +144,7 @@ FROM
     SalesLT.Product;
 ```
 
-### 3.2 Price Consistency Check
+### 2.3.2 Price Consistency Check
 ```sql
 -- Find products where cost exceeds price (data anomaly)
 SELECT 
@@ -163,9 +163,9 @@ ORDER BY
     MarginPercentage;
 ```
 
-## Task 4: Preparing for GraphQL Exposure
+## Task 2.4: Preparing for GraphQL Exposure
 
-### 4.1 Identify Key Relationships
+### 2.4.1 Identify Key Relationships
 ```sql
 -- Many-to-many relationship between products and models
 SELECT 
@@ -181,7 +181,7 @@ GROUP BY
     pm.Name;
 ```
 
-### 4.2 Determine Optimal GraphQL Types
+### 2.4.2 Determine Optimal GraphQL Types
 Based on our analysis, we can identify these natural GraphQL types:
 - Product (with fields: id, name, number, color, size, cost, price)
 - ProductCategory (with hierarchy support)
@@ -246,4 +246,5 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
+
 
