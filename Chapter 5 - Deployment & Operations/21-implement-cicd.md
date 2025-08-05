@@ -380,5 +380,3 @@ For deeper learning, explore:
 **Next Steps:**  
 - Try deploying a **Power BI report** through the pipeline.  
 - Experiment with **branching strategies** for larger teams.  
-
-Would you like additional details on any specific part of this process?
