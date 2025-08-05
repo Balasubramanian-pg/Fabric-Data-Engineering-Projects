@@ -195,23 +195,183 @@ Based on our analysis, we can identify these natural GraphQL types:
 5. The data structure naturally maps to GraphQL types and relationships
 ---
 
-## Exercise 3: Configure GraphQL API
+# **Exercise 3: Configuring a Robust GraphQL API in Microsoft Fabric**  
 
-### Task 1: Create GraphQL Endpoint
-1. In your workspace, select **New item** → **API for GraphQL**
-2. Name your API (e.g., "ProductsAPI") and create it
-3. Select **Select data source**
-4. Choose SSO authentication option
-5. Connect to your AdventureWorksLT database
-6. Select the `SalesLT.Product` table and load it
-7. Note the API endpoint URL (optional)
+## **Objective**  
+This expanded exercise will guide you through configuring a **production-ready GraphQL API** in Microsoft Fabric, covering:  
+- **Data source configuration**  
+- **Schema customization**  
+- **Security hardening**  
+- **Performance optimization**  
+- **Query testing & validation**  
 
-### Task 2: Secure the API
-1. In Schema Explorer, expand **Mutations**
-2. For each mutation operation:
-   - Select the **...** menu
-   - Choose **Disable**
-3. Confirm all mutations are now disabled
+---
+
+## **Task 3.1: Configure Data Sources for GraphQL**  
+
+### **3.1.1 Connect Multiple Data Sources**  
+Microsoft Fabric allows connecting **multiple tables** (even across different databases) to a single GraphQL API.  
+
+1. **Add additional tables** from `AdventureWorksLT`:  
+   - `SalesLT.ProductCategory`  
+   - `SalesLT.ProductModel`  
+   - `SalesLT.ProductDescription`  
+
+2. **Steps to add tables**:  
+   - In your **GraphQL API**, select **"Select data source"**  
+   - Choose **"Add more data"**  
+   - Select the additional tables and **"Load"**  
+
+3. **Verify relationships**:  
+   - The system **auto-detects foreign keys** (e.g., `Product.ProductCategoryID → ProductCategory.ProductCategoryID`)  
+   - If relationships aren't detected automatically, manually define them in the **Schema Editor**  
+
+---
+
+## **Task 3.2: Customize the GraphQL Schema**  
+
+### **3.2.1 Rename Fields for Better Usability**  
+By default, field names match database columns. Modify them for a cleaner API:  
+
+1. Open the **Schema Explorer**  
+2. For the `Product` type:  
+   - Rename `ProductID` → `id`  
+   - Rename `ProductNumber` → `sku`  
+   - Rename `ListPrice` → `price`  
+3. For the `ProductCategory` type:  
+   - Rename `Name` → `categoryName`  
+
+### **3.2.2 Add Computed Fields (Virtual Fields)**  
+GraphQL allows adding **derived fields** that don’t exist in the database.  
+
+Example: Add a `isOnSale` field to `Product` that checks if `ListPrice < StandardCost * 1.2`  
+
+1. In the **Schema Editor**, modify the `Product` type:  
+   ```graphql
+   type Product {
+     id: Int!
+     name: String!
+     sku: String!
+     price: Float!
+     isOnSale: Boolean! @resolver(query: "SELECT CASE WHEN ListPrice < StandardCost * 1.2 THEN 1 ELSE 0 END FROM SalesLT.Product WHERE ProductID = $id")
+   }
+   ```
+   *(Note: The exact resolver syntax may vary based on Fabric’s implementation.)*  
+
+---
+
+## **Task 3.3: Secure the GraphQL API**  
+
+### **3.3.1 Disable All Mutations (Read-Only API)**  
+Since we only need **read operations**, disable all mutations:  
+
+1. In the **Schema Explorer**, expand **Mutations**  
+2. For each mutation (`createProduct`, `updateProduct`, `deleteProduct`), select **"Disable"**  
+
+### **3.3.2 Enable Query Rate Limiting**  
+Prevent API abuse by setting request limits:  
+
+1. Go to **API Settings**  
+2. Set:  
+   - **Max requests per minute**: 100  
+   - **Max query depth**: 10 (to prevent overly complex queries)  
+
+### **3.3.3 (Optional) Enable Authentication**  
+If exposing externally, require API keys or OAuth:  
+
+1. In **API Settings**, enable **"Require API Key"**  
+2. Generate & distribute keys to clients  
+
+---
+
+## **Task 3.4: Optimize Performance**  
+
+### **3.4.1 Enable Caching for Frequent Queries**  
+Cache responses to reduce database load:  
+
+1. In **API Settings**, enable **"Response Caching"**  
+2. Set **TTL (Time-to-Live)**: 60 seconds  
+
+### **3.4.2 Optimize Resolver Queries**  
+For complex fields (like `isOnSale`), ensure the resolver SQL is efficient:  
+
+```sql
+-- Instead of a subquery per record, batch-process in a single SQL call
+SELECT 
+  ProductID,
+  CASE WHEN ListPrice < StandardCost * 1.2 THEN 1 ELSE 0 END AS IsOnSale
+FROM SalesLT.Product
+```
+
+---
+
+## **Task 3.5: Test & Validate the API**  
+
+### **3.5.1 Run Sample Queries**  
+Test different query patterns in the **GraphQL Playground**:  
+
+#### **Basic Product Query**  
+```graphql
+query {
+  products(filter: { price: { gt: 1000 } }) {
+    items {
+      id
+      name
+      price
+      isOnSale
+      category {
+        categoryName
+      }
+    }
+  }
+}
+```
+
+#### **Nested Query (Products + Categories + Models)**  
+```graphql
+query {
+  productCategories {
+    items {
+      categoryName
+      products {
+        name
+        price
+        model {
+          name
+        }
+      }
+    }
+  }
+}
+```
+
+### **3.5.2 Check Performance Metrics**  
+1. In **API Analytics**, monitor:  
+   - **Query execution time**  
+   - **Most frequent queries**  
+   - **Error rates**  
+
+2. Optimize slow queries by:  
+   - Adding database **indexes**  
+   - Simplifying **nested queries**  
+
+---
+
+## **Key Takeaways**  
+✅ **Multi-source GraphQL APIs** can combine data from different tables seamlessly.  
+✅ **Schema customization** improves usability (renaming fields, adding computed fields).  
+✅ **Security hardening** (disabling mutations, rate limiting) prevents abuse.  
+✅ **Caching & query optimization** ensure high performance.  
+✅ **Testing with real queries** validates functionality before production use.  
+
+This **production-grade GraphQL API** is now ready for client applications!   
+
+---
+  
+**Next Steps**:  
+➡️ **Exercise 4** will explore **querying this API from a client app** (React, Python, etc.).  
+➡️ Learn about **GraphQL subscriptions** for real-time updates.  
+➡️ Explore **Fabric’s monitoring tools** for API analytics.
 
 ## Exercise 4: Query Data with GraphQL
 
@@ -246,5 +406,6 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
+
 
 
