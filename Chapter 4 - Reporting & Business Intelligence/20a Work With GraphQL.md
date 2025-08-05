@@ -1,4 +1,4 @@
-# Lab: Work with API for GraphQL in Microsoft Fabric
+# Work with API for GraphQL in Microsoft Fabric
 
 ## Introduction  
 This hands-on lab will guide you through using Microsoft Fabric's API for GraphQL to efficiently query data from multiple sources. GraphQL provides a flexible query language that enables clients to request exactly the data they need in a single API call.
@@ -613,3 +613,4 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
+
