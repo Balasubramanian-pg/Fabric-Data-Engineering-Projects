@@ -21,26 +21,179 @@ This hands-on lab will guide you through using Microsoft Fabric's API for GraphQ
 3. Load sample data using the **Sample data** option
 4. Confirm the database appears with populated tables
 
-## Exercise 2: Explore SQL Data
+# Expanded Exercise 2: Deep Dive into SQL Data Exploration
 
-### Task 1: Execute SQL Queries
-1. Open your AdventureWorksLT database
-2. Select **New query**
-3. Run the following query:
+## Objective
+This expanded exercise will provide a more comprehensive exploration of the SQL database in Microsoft Fabric, including advanced query techniques and data analysis that will later inform our GraphQL API design.
+
+## Task 1: Initial Data Exploration
+
+### 1.1 Explore Database Schema
+1. In your AdventureWorksLT database, navigate to the **Tables** section
+2. Examine the available tables:
+   - SalesLT.Product (ProductID, Name, ProductNumber, Color, etc.)
+   - SalesLT.ProductCategory (ProductCategoryID, ParentCategoryID, Name)
+   - SalesLT.ProductModel (ProductModelID, Name)
+   - SalesLT.ProductModelProductDescription (ProductModelID, ProductDescriptionID)
+   - SalesLT.ProductDescription (ProductDescriptionID, Description)
+
+### 1.2 Basic Data Sampling
+Run these queries to understand the data distribution:
+
 ```sql
+-- Count products per category
 SELECT 
-    p.Name AS ProductName,
-    pc.Name AS CategoryName,
-    p.ListPrice
+    pc.Name AS Category,
+    COUNT(p.ProductID) AS ProductCount
 FROM 
     SalesLT.Product p
-INNER JOIN 
+JOIN 
     SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
+GROUP BY 
+    pc.Name
 ORDER BY 
-    p.ListPrice DESC;
+    ProductCount DESC;
+
+-- Price distribution analysis
+SELECT 
+    MIN(ListPrice) AS MinPrice,
+    MAX(ListPrice) AS MaxPrice,
+    AVG(ListPrice) AS AvgPrice,
+    STDEV(ListPrice) AS PriceStdDev
+FROM 
+    SalesLT.Product
+WHERE 
+    ListPrice > 0;
 ```
-4. Review the results showing products with their categories and prices
-5. Close all query tabs
+
+## Task 2: Advanced Query Techniques
+
+### 2.1 Hierarchical Category Query
+```sql
+-- Recursive CTE for category hierarchy
+WITH CategoryHierarchy AS (
+    -- Anchor member (top-level categories)
+    SELECT 
+        ProductCategoryID,
+        ParentProductCategoryID,
+        Name,
+        0 AS Level
+    FROM 
+        SalesLT.ProductCategory
+    WHERE 
+        ParentProductCategoryID IS NULL
+    
+    UNION ALL
+    
+    -- Recursive member (subcategories)
+    SELECT 
+        pc.ProductCategoryID,
+        pc.ParentProductCategoryID,
+        pc.Name,
+        ch.Level + 1
+    FROM 
+        SalesLT.ProductCategory pc
+    JOIN 
+        CategoryHierarchy ch ON pc.ParentProductCategoryID = ch.ProductCategoryID
+)
+SELECT 
+    REPLICATE('    ', Level) + Name AS CategoryTree,
+    Level
+FROM 
+    CategoryHierarchy
+ORDER BY 
+    Level, Name;
+```
+
+### 2.2 Product Attribute Analysis
+```sql
+-- Pivot table showing available sizes by category
+SELECT 
+    CategoryName,
+    [S], [M], [L], [XL], [38], [40], [42], [44], [48], [52]
+FROM (
+    SELECT 
+        pc.Name AS CategoryName,
+        p.Size,
+        p.ProductID
+    FROM 
+        SalesLT.Product p
+    JOIN 
+        SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
+    WHERE 
+        p.Size IS NOT NULL
+) AS SourceTable
+PIVOT (
+    COUNT(ProductID)
+    FOR Size IN ([S], [M], [L], [XL], [38], [40], [42], [44], [48], [52])
+) AS PivotTable;
+```
+
+## Task 3: Data Quality Assessment
+
+### 3.1 Missing Value Analysis
+```sql
+-- Check for missing critical data
+SELECT
+    SUM(CASE WHEN Name IS NULL THEN 1 ELSE 0 END) AS MissingNames,
+    SUM(CASE WHEN ProductNumber IS NULL THEN 1 ELSE 0 END) AS MissingProductNumbers,
+    SUM(CASE WHEN StandardCost IS NULL THEN 1 ELSE 0 END) AS MissingCosts,
+    SUM(CASE WHEN ListPrice IS NULL THEN 1 ELSE 0 END) AS MissingPrices,
+    COUNT(*) AS TotalProducts
+FROM 
+    SalesLT.Product;
+```
+
+### 3.2 Price Consistency Check
+```sql
+-- Find products where cost exceeds price (data anomaly)
+SELECT 
+    ProductID,
+    Name,
+    StandardCost,
+    ListPrice,
+    ListPrice - StandardCost AS Margin,
+    (ListPrice - StandardCost)/NULLIF(StandardCost, 0) AS MarginPercentage
+FROM 
+    SalesLT.Product
+WHERE 
+    StandardCost > ListPrice
+    OR StandardCost <= 0
+ORDER BY 
+    MarginPercentage;
+```
+
+## Task 4: Preparing for GraphQL Exposure
+
+### 4.1 Identify Key Relationships
+```sql
+-- Many-to-many relationship between products and models
+SELECT 
+    pm.Name AS ModelName,
+    STRING_AGG(p.Name, ', ') AS ProductsInModel
+FROM 
+    SalesLT.ProductModel pm
+JOIN 
+    SalesLT.ProductModelProductDescription pmpd ON pm.ProductModelID = pmpd.ProductModelID
+JOIN 
+    SalesLT.Product p ON p.ProductModelID = pm.ProductModelID
+GROUP BY 
+    pm.Name;
+```
+
+### 4.2 Determine Optimal GraphQL Types
+Based on our analysis, we can identify these natural GraphQL types:
+- Product (with fields: id, name, number, color, size, cost, price)
+- ProductCategory (with hierarchy support)
+- ProductModel (with product collections)
+
+## Key Takeaways
+1. The database contains a complete product catalog with hierarchical categories
+2. Price data is generally clean but has a few anomalies to address
+3. Product models group multiple product variants
+4. Size information is available for apparel products
+5. The data structure naturally maps to GraphQL types and relationships
+---
 
 ## Exercise 3: Configure GraphQL API
 
@@ -93,3 +246,4 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
+
