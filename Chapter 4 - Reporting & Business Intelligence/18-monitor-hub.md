@@ -1,140 +1,114 @@
+
+### **Lab: Monitor Fabric Activity in the Monitoring Hub**
+### **Module: Monitoring Fabric**
+
 ---
-lab:
-    title: 'Monitor Fabric activity in the monitoring hub'
-    module: 'Monitoring Fabric'
----
 
-# Monitor Fabric activity in the monitoring hub
+# Monitor Fabric Activity in the Monitoring Hub
 
-The *monitoring hub* in Microsoft Fabric provides a central place where you can monitor activity. You can use the monitoring hub to review events related to items you have permission to view.
+The **monitoring hub** is your central command center in Microsoft Fabric for overseeing all activity. It provides a comprehensive view of events, allowing you to track the status, history, and performance of items you have permission to access.
 
-This lab takes approximately **30** minutes to complete.
+This lab will take approximately **30 minutes** to complete.
 
-> **Note**: You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> **Note:** To complete this exercise, you will need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial).
 
-## Create a workspace
+## Create a Workspace
 
-Before working with data in Fabric, create a workspace in a tenant with the Fabric capacity enabled.
+First, you'll need a workspace to contain the Fabric items you'll create and monitor.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
+1.  Sign into the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`.
+2.  In the left navigation pane, select **Workspaces** (the icon resembles stacked papers).
+3.  Create a **New workspace**. Give it a descriptive name.
+4.  Expand the **Advanced** section and select a licensing mode that includes Fabric capacity (such as *Trial*, *Premium*, or *Fabric*).
+5.  Once your new workspace opens, it will be empty and ready for you to add items.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
-## Create a lakehouse
+## Create a Lakehouse
 
-Now that you have a workspace, it's time to create a data lakehouse for your data.
+Now that you have a workspace, let's create a lakehouse to store and manage our data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
-
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
-
-    After a minute or so, a new lakehouse will be created:
+1.  In the left navigation pane, select **Create**.
+    > **Note:** If **Create** is not pinned to the pane, select the Fabric icon at the bottom left to open the item creation menu.
+2.  In the **Data Engineering** section, select **Lakehouse**. Assign it a unique name of your choice.
+3.  After a moment, your new lakehouse will be created. In the **Lakehouse explorer** pane on the left, you can browse the **Tables** and **Files** within your lakehouse. Currently, it contains no data.
 
     ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
+## Create and Monitor a Dataflow
 
-    Currently, there are no tables or files in the lakehouse.
+Dataflows (Gen2) in Fabric are powerful tools for ingesting and transforming data. You will now create a dataflow to load product data from a CSV file into a table in your new lakehouse.
 
-## Create and monitor a Dataflow
-
-In Microsoft Fabric, you can use a Dataflow (Gen2) to ingest data from a wide range of sources. In this exercise, you'll use a dataflow to get data from a CSV file and load it into a table in your lakehouse.
-
-1. On the **Home** page for your lakehouse, in the **Get data** menu, select **New Dataflow Gen2**.
-
-   A new dataflow named **Dataflow 1** is created and opened.
-
-    ![Screenshot of a new dataflow.](./Images/new-data-flow.png)
-
-1. At the top left of the dataflow page, select **Dataflow 1** to see its details and rename the dataflow to **Get Product Data**.
-1. In the dataflow designer, select **Import from a Text/CSV file**. Then complete the Get Data wizard to create a data connection by linking to `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv` using anonymous authentication. When you have completed the wizard, a preview of the data will be shown in the dataflow designer like this:
-
+1.  On your lakehouse's **Home** page, select **New Dataflow Gen2** from the **Get data** menu. A new dataflow, named **Dataflow 1**, will open in the editor.
+2.  At the top left, select the **Dataflow 1** name to open its properties pane, and rename it to **Get Product Data**.
+3.  In the dataflow editor, select **Import from a Text/CSV file**.
+4.  In the connection settings, paste the following URL and proceed with anonymous authentication:
+    ```
+    https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv
+    ```
+5.  Once the connection is established, a preview of the product data will appear in the editor.
     ![Screenshot of a dataflow query.](./Images/data-flow-query.png)
-
-1. Publish the dataflow.
-1. In the navigation bar on the left, select **Monitor** to view the monitoring hub and observe that your dataflow is in-progress (if not, refresh the view until you see it).
-
+6.  **Publish** the dataflow to save and run it.
+7.  In the left navigation pane, select **Monitor** to open the monitoring hub. You should see your **Get Product Data** dataflow with an "In progress" status. If not, refresh the view.
     ![Screenshot of the monitoring hub with a dataflow in-progress.](./Images/monitor-dataflow.png)
-
-1. Wait for a few seconds, and then refresh the page until the status of the dataflow is **Succeeded**.
-1. In the navigation pane, select your lakehouse. Then expand the **Tables** folder to verify that a table named **products** has been created and loaded by the dataflow (you may need to refresh the **Tables** folder).
+8.  Wait a few moments and refresh the page again until the dataflow status changes to **Succeeded**.
+9.  Return to your lakehouse by selecting it from the navigation pane. Expand the **Tables** folder (you may need to refresh it) to confirm that a new table named **products** has been successfully created.
 
     ![Screenshot of the products table in the lakehouse page.](./Images/products-table.png)
 
-## Create and monitor a Spark notebook
+## Create and Monitor a Spark Notebook
 
-In Microsoft Fabric, you can use notebooks to run Spark code.
+Next, you'll use a Spark notebook to query the data you just loaded. Notebooks in Fabric provide an interactive environment for running Spark code.
 
-1. In the navigation hub, select **Home**. The  on the Data Engineering home page, create a new **Notebook**.
-
-    A new notebook named **Notebook 1** is created and opened.
-
-    ![Screenshot of a new notebook.](./Images/new-notebook.png)
-
-1. At the top left of the notebook, select **Notebook 1** to view its details, and change its name to **Query Products**.
-1. In the notebook editor, in the **Explorer** pane, select **Lakehouses** and add the lakehouse you created previously.
-1. In the **...** menu for the **Products** table, select **Load data** > **Spark**. This adds a new code cell to the notebook as shown here:
-
+1.  Navigate to the **Data Engineering** home page and create a new **Notebook**.
+2.  A new notebook, named **Notebook 1**, will open. At the top left, select its name and rename it to **Query Products**.
+3.  In the **Explorer** pane, select **Lakehouses** and add the lakehouse you created earlier to the notebook.
+4.  In the **Explorer** pane, find the **products** table. Select the **...** menu next to it and choose **Load data > Spark**. This will automatically generate and add a new code cell to your notebook.
     ![Screenshot of a notebook with code to query a table.](./Images/load-spark.png)
-
-1. Use the **&#9655; Run all** button to run all cells in the notebook. It will take a moment or so to start the Spark session, and then the results of the query will be shown under the code cell.
-
+5.  Select the **Run all** button to execute the code. The Spark session will start, and after a moment, the query results will appear below the cell.
     ![Screenshot of a notebook with query results.](./Images/notebook-output.png)
-
-1. On the toolbar, use the **&#9723;** (*Stop session*) button to stop the Spark session.
-1. In the navigation bar, select **Monitor** to view the monitoring hub, and note that the notebook activity is listed.
-
+6.  On the toolbar, select the **Stop session** button (**&#9723;**) to release the Spark resources.
+7.  Return to the **Monitor** hub in the left navigation pane. You will now see the activity from your notebook run listed.
     ![Screenshot of the monitoring hub with a notebook activity.](./Images/monitor-notebook.png)
 
-## Monitor history for an item
+## Monitor Item History
 
-Some items in a workspace might be run multiple times. You can use the monitoring hub to view their run history.
+Many items in a workspace are run multiple times. The monitoring hub allows you to easily view the complete run history for any item.
 
-1. In the navigation bar, return to the page for your workspace. Then use the **&#8635;** (*Refresh now*) button for your **Get Product Data** dataflow to re-run it.
-1. In the navigation pane, select the **Monitor** page to view the monitoring hub and verify that the dataflow is in-progress.
-1. In the **...** menu for the **Get Product Data** dataflow, select **Historical runs** to view the run history for the dataflow:
-
+1.  Navigate back to your workspace. Find your **Get Product Data** dataflow and select its **Refresh now** icon (**&#8635;**) to run it again.
+2.  Go back to the **Monitor** hub and confirm that the dataflow is "In progress."
+3.  Find the **Get Product Data** dataflow in the list. Select its **...** menu and choose **Historical runs**. This will display the complete run history for the dataflow.
     ![Screenshot of the monitoring hub historical runs view.](./Images/historical-runs.png)
+4.  From the history list, select the **...** menu for any run and choose **View detail** to inspect its specific details.
+5.  Close the **Details** pane and select **Back to main view** to return to the main monitoring hub page.
 
-1. In the **...** menu for any of the historical runs select **View detail** to see details of the run.
-1. Close the **Details** pane and use the **Back to main view** button to return to the main monitoring hub page.
+## Customize Monitoring Hub Views
 
-## Customize monitoring hub views
+In a busy Fabric environment, finding specific events can be challenging. The monitoring hub provides powerful filtering and column customization options to help you focus on what matters.
 
-In this exercise you've only run a few activities, so it should be fairly easy to find events in the monitoring hub. However, in a real environment you may need to search through a large number of events. Using filters and other view customizations can make this easier.
-
-1. In the monitoring hub, use the **Filter** button to apply the following filter:
-    - **Status**: Succeeeded
-    - **Item type**: Dataflow Gen2
-
-    With the filter applied, only successful runs of dataflows are listed.
-
+1.  In the monitoring hub, select the **Filter** button and apply the following criteria:
+    *   **Status**: Succeeded
+    *   **Item type**: Dataflow Gen2
+    *   The view will update to show only successful runs of dataflows.
     ![Screenshot of the monitoring hub with a filter applied.](./Images/monitor-filter.png)
 
-1. Use the **Column Options** button to include the following columns in the view (use the **Apply** button to apply the changes):
-    - Activity name
-    - Status
-    - Item type
-    - Start time
-    - Submitted by
-    - Location
-    - End time
-    - Duration
-    - Refresh type
-
-    You may need to scroll horizontally to see all of the columns:
-
+2.  Next, select the **Column Options** button to customize the displayed columns. Add the following columns to your view and select **Apply**:
+    *   Activity name
+    *   Status
+    *   Item type
+    *   Start time
+    *   Submitted by
+    *   Location
+    *   End time
+    *   Duration
+    *   Refresh type
+    *   You can now scroll horizontally to see the detailed, customized view.
     ![Screenshot of the monitoring hub with custom columns.](./Images/monitor-columns.png)
 
-## Clean up resources
+## Clean Up Resources
 
-In this exercise, you have created a lakehouse, a dataflow, and a Spark notebook; and you've used the monitoring hub to view item activity.
+You have successfully created a lakehouse, a dataflow, and a Spark notebook, and used the monitoring hub to track their activity. If you are finished exploring, you can delete the workspace to clean up all associated resources.
 
-If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
-
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **General** section, select **Remove this workspace**.
+1.  In the left navigation pane, select your workspace to view its contents.
+2.  In the toolbar, select the **...** menu and choose **Workspace settings**.
+3.  In the **General** section, select **Remove this workspace** and confirm the deletion.
