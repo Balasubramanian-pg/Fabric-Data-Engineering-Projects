@@ -1,9 +1,3 @@
----
-lab:
-    title: 'Use delta tables in Apache Spark'
-    module: 'Work with Delta Lake tables in Microsoft Fabric'
----
-
 # Use Delta Tables in Apache Spark
 
 Tables in a Microsoft Fabric Lakehouse are based on the open-source Delta Lake format. Delta Lake adds support for relational semantics for both batch and streaming data. In this exercise you will create Delta tables and explore the data using SQL queries.
