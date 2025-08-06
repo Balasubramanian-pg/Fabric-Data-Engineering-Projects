@@ -216,15 +216,164 @@ By completing this lab, you will:
 This expanded exercise provides a comprehensive exploration of table creation, management, and querying in a Fabric lakehouse, giving you practical experience with both basic and advanced features.
 
 ## Exercise 5: Create a Report
+**Objective:** Transform your lakehouse data into an interactive Power BI report with visualizations, filters, and business insights.  
 
-1. Examine the default semantic model:
-   - View the model layout
-   - Note the automatic inclusion of lakehouse tables
+---
 
-2. Create a new report:
-   - Add a visualization showing items and quantities
-   - Convert to a clustered bar chart
-   - Save as "Item Sales Report"
+## **5.1 Explore the Default Semantic Model**  
+Before creating a report, understand the semantic model automatically generated from your lakehouse tables.  
+
+### **Steps:**  
+1. **Navigate to the SQL Analytics Endpoint:**  
+   - From your lakehouse, click **Switch to SQL analytics endpoint** in the top-right corner.  
+   - This opens the SQL endpoint where you can manage the semantic model.  
+
+2. **Review the Data Model:**  
+   - Click **Model layouts** in the toolbar.  
+   - Observe:  
+     - The **sales** table (your Delta Lake table).  
+     - Any automatically detected relationships (if multiple tables existed).  
+     - Columns with data types (e.g., `Item` as text, `Quantity` as whole number).  
+
+3. **Check for Hidden Tables (Optional):**  
+   - If you see tables under **queryinsights**, ignore them (they are system-generated for query monitoring).  
+
+---
+
+## **5.2 Create a New Report**  
+Now, build a Power BI report using the lakehouse data.  
+
+### **Steps:**  
+1. **Open the Report Editor:**  
+   - In the top ribbon, select the **Reporting** tab.  
+   - Click **New report**.  
+   - A blank report canvas opens in Power BI Desktop-like interface.  
+
+2. **Understand the Interface:**  
+   - **Visualizations pane (right):** Contains charts, tables, and filters.  
+   - **Data pane (right):** Lists tables and fields from your lakehouse.  
+   - **Filters pane (right):** Allows report-level, page-level, or visual-level filtering.  
+   - **Canvas (center):** Where you design visuals.  
+
+---
+
+## **5.3 Design Your First Visualization**  
+Create a bar chart showing **total quantity sold per item**.  
+
+### **Steps:**  
+1. **Add a Clustered Bar Chart:**  
+   - In the **Visualizations** pane, click the **Clustered bar chart** icon.  
+   - A blank chart appears on the canvas.  
+
+2. **Configure the Chart:**  
+   - From the **Data** pane, drag:  
+     - **Item** to the **X-axis**.  
+     - **Quantity** to the **Y-axis**.  
+   - The chart now shows sales quantities per product.  
+
+3. **Enhance the Visualization:**  
+   - **Sort descending** (click the ellipsis `...` on the chart > **Sort by Quantity**).  
+   - **Adjust colors** (go to **Format visual** > **Data colors**).  
+   - **Add data labels** (enable in **Format visual** > **Data labels**).  
+
+---
+
+## **5.4 Add a Second Visualization (Table with Revenue)**  
+Now, create a table showing **revenue per item** (UnitPrice × Quantity).  
+
+### **Steps:**  
+1. **Add a Table Visual:**  
+   - Click the **Table** icon in the **Visualizations** pane.  
+   - Drag the following fields:  
+     - **Item**  
+     - **Quantity**  
+     - **UnitPrice**  
+
+2. **Create a Revenue Measure:**  
+   - In the **Data** pane, right-click the **sales** table.  
+   - Select **New measure**.  
+   - Enter:  
+     ```DAX
+     Revenue = SUM(sales[Quantity]) * SUM(sales[UnitPrice])
+     ```
+   - Press **Enter** to save.  
+
+3. **Add Revenue to the Table:**  
+   - Drag the new **Revenue** measure into the table.  
+   - Format as currency (**Column tools** > **Format** > **Currency**).  
+
+---
+
+## **5.5 Add Interactive Filters**  
+Make the report dynamic with slicers (filters).  
+
+### **Steps:**  
+1. **Add a Slicer for Item Selection:**  
+   - Click the **Slicer** icon in **Visualizations**.  
+   - Drag **Item** into the slicer.  
+   - Resize and position it at the top of the report.  
+
+2. **Add a Date Filter (If Available):**  
+   - If your data has an **OrderDate**, add a **Date slicer**.  
+   - Configure it to allow range selection.  
+
+3. **Test Interactivity:**  
+   - Select different items in the slicer—the bar chart and table should update.  
+
+---
+
+## **5.6 Format and Finalize the Report**  
+Improve readability and aesthetics.  
+
+### **Steps:**  
+1. **Adjust Layout:**  
+   - Resize visuals for a clean dashboard look.  
+   - Align elements using the **Format** > **Align** tools.  
+
+2. **Add a Title:**  
+   - Insert a **Text box** from the **Insert** tab.  
+   - Type: **"Sales Performance Dashboard"**.  
+   - Format with a larger font and bold styling.  
+
+3. **Apply a Theme:**  
+   - Go to **View** > **Themes** and select a professional theme (e.g., **Corporate**).  
+
+4. **Save the Report:**  
+   - Click **File** > **Save**.  
+   - Name it **"Item Sales Report"** and save to your workspace.  
+
+---
+
+## **5.7 Publish and Share (Optional)**  
+If working in a team, publish and share insights.  
+
+### **Steps:**  
+1. **Publish to Workspace:**  
+   - Click **Publish** in the top-right corner.  
+   - Confirm the destination workspace.  
+
+2. **Set Permissions (Optional):**  
+   - In the workspace, right-click the report.  
+   - Select **Manage permissions** to control access.  
+
+---
+
+## **Verification Checklist**  
+✅ Report contains:  
+- A **bar chart** (quantity by item).  
+- A **table** (revenue calculation).  
+- At least **one slicer** (interactive filtering).  
+- A **title** and proper formatting.  
+
+✅ Report is saved in the workspace.  
+
+---
+
+## **Next Steps**  
+- **Explore more visuals** (pie charts, KPIs, maps).  
+- **Add drill-through filters** (click an item to see details).  
+- **Schedule data refreshes** if connected to live sources.  
+
 
 ## Verification Steps
 
