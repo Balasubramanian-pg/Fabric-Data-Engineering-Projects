@@ -603,6 +603,192 @@ END;
 ✅ **Defense-in-Depth** - Combine multiple security layers  
 
 ---
+# **Exercise 4: Performance Tuning in Microsoft Fabric SQL Database**
+
+In this comprehensive performance tuning lab, you'll optimize your SQL database in Microsoft Fabric through:
+
+## **4.1. Indexing Strategies**
+### **4.1.1 Creating Basic Indexes**
+```sql
+-- Create clustered index on primary key (if not existing)
+CREATE CLUSTERED INDEX IX_Customer_CustomerID 
+ON SalesLT.Customer(CustomerID);
+
+-- Create nonclustered indexes for frequent queries
+CREATE NONCLUSTERED INDEX IX_Product_ProductCategoryID
+ON SalesLT.Product(ProductCategoryID)
+INCLUDE (Name, ListPrice);
+
+CREATE NONCLUSTERED INDEX IX_SalesOrderHeader_CustomerID_OrderDate
+ON SalesLT.SalesOrderHeader(CustomerID, OrderDate DESC)
+INCLUDE (TotalDue);
+```
+
+### **4.1.2 Indexing for JOIN Operations**
+```sql
+-- Covering index for common join patterns
+CREATE NONCLUSTERED INDEX IX_SalesOrderDetail_ProductID
+ON SalesLT.SalesOrderDetail(ProductID)
+INCLUDE (OrderQty, UnitPrice, UnitPriceDiscount);
+```
+
+### **4.1.3 Filtered Indexes**
+```sql
+-- Optimize for active products
+CREATE NONCLUSTERED INDEX IX_Product_Active
+ON SalesLT.Product(ProductCategoryID, ListPrice)
+WHERE DiscontinuedDate IS NULL;
+```
+
+## **4.2. Query Performance Analysis**
+### **4.2.1 Using Execution Plans**
+```sql
+-- Enable actual execution plan (Ctrl+M)
+SELECT 
+    p.Name,
+    SUM(sod.LineTotal) AS TotalSales
+FROM SalesLT.SalesOrderDetail sod
+JOIN SalesLT.Product p ON sod.ProductID = p.ProductID
+GROUP BY p.Name
+ORDER BY TotalSales DESC;
+```
+
+### **4.2.2 Query Store Analysis**
+```sql
+-- Check top resource-consuming queries
+SELECT 
+    qt.query_sql_text,
+    qrs.avg_duration,
+    qrs.avg_logical_io_reads
+FROM sys.query_store_query qq
+JOIN sys.query_store_query_text qt ON qq.query_text_id = qt.query_text_id
+JOIN sys.query_store_plan qp ON qq.query_id = qp.query_id
+JOIN sys.query_store_runtime_stats qrs ON qp.plan_id = qrs.plan_id
+ORDER BY qrs.avg_duration DESC;
+```
+
+## **4.3. Partitioning Large Tables**
+### **4.3.1 Creating Partition Function**
+```sql
+-- Partition SalesOrderHeader by year
+CREATE PARTITION FUNCTION pf_OrderDateYear(DATE)
+AS RANGE RIGHT FOR VALUES 
+    ('2019-01-01', '2020-01-01', '2021-01-01', '2022-01-01');
+```
+
+### **4.3.2 Creating Partition Scheme**
+```sql
+CREATE PARTITION SCHEME ps_OrderDateYear
+AS PARTITION pf_OrderDateYear
+ALL TO ([PRIMARY]);
+```
+
+### **4.3.3 Rebuilding Table with Partitioning**
+```sql
+-- Create partitioned clustered index
+CREATE CLUSTERED INDEX IX_SalesOrderHeader_OrderDate
+ON SalesLT.SalesOrderHeader(OrderDate)
+ON ps_OrderDateYear(OrderDate);
+```
+
+## **4.4. Statistics and Cardinality Estimation**
+### **4.4.1 Updating Statistics**
+```sql
+-- Update statistics with full scan
+UPDATE STATISTICS SalesLT.Product WITH FULLSCAN;
+
+-- Create filtered statistics
+CREATE STATISTICS stats_Product_HighPrice
+ON SalesLT.Product(ListPrice)
+WHERE ListPrice > 1000;
+```
+
+### **4.4.2 Optimizer Hints**
+```sql
+-- Force a specific join type
+SELECT p.Name, sod.SalesOrderID
+FROM SalesLT.Product p
+INNER LOOP JOIN SalesLT.SalesOrderDetail sod
+    ON p.ProductID = sod.ProductID
+OPTION (MAXDOP 4);
+```
+
+## **4.5. In-Memory Optimization**
+### **4.5.1 Memory-Optimized Tables**
+```sql
+-- Create memory-optimized version of ShoppingCart
+CREATE TABLE SalesLT.ShoppingCart (
+    CartID INT IDENTITY PRIMARY KEY NONCLUSTERED,
+    CustomerID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    DateCreated DATETIME2 NOT NULL,
+    INDEX IX_CustomerID HASH (CustomerID) WITH (BUCKET_COUNT = 100000)
+) WITH (MEMORY_OPTIMIZED = ON, DURABILITY = SCHEMA_AND_DATA);
+```
+
+### **4.5.2 Natively Compiled Stored Procedures**
+```sql
+CREATE PROCEDURE SalesLT.usp_AddToCart
+    @CustomerID INT,
+    @ProductID INT,
+    @Quantity INT
+WITH NATIVE_COMPILATION, SCHEMABINDING
+AS
+BEGIN ATOMIC WITH
+    (TRANSACTION ISOLATION LEVEL = SNAPSHOT, LANGUAGE = 'us_english')
+    
+    INSERT INTO SalesLT.ShoppingCart
+    VALUES (@CustomerID, @ProductID, @Quantity, GETUTCDATE());
+END;
+```
+
+## **4.6. Monitoring and Maintenance**
+### **4.6.1 Automated Index Maintenance**
+```sql
+-- Create index maintenance procedure
+CREATE PROCEDURE dbo.usp_IndexMaintenance
+AS
+BEGIN
+    -- Rebuild indexes with >30% fragmentation
+    DECLARE @SQL NVARCHAR(MAX) = '';
+    
+    SELECT @SQL = @SQL + 
+        'ALTER INDEX ' + i.name + ' ON ' + OBJECT_NAME(i.object_id) + 
+        CASE WHEN avg_fragmentation_in_percent > 30 
+             THEN ' REBUILD' 
+             ELSE ' REORGANIZE' END + ';' + CHAR(13)
+    FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'LIMITED') ps
+    JOIN sys.indexes i ON ps.object_id = i.object_id AND ps.index_id = i.index_id
+    WHERE avg_fragmentation_in_percent > 10;
+    
+    EXEC sp_executesql @SQL;
+END;
+```
+
+### **4.6.2 Performance Dashboard Queries**
+```sql
+-- Top 10 CPU-intensive queries
+SELECT TOP 10
+    q.query_id,
+    qt.query_sql_text,
+    qrs.avg_cpu_time,
+    qrs.last_cpu_time
+FROM sys.query_store_query q
+JOIN sys.query_store_query_text qt ON q.query_text_id = qt.query_text_id
+JOIN sys.query_store_plan qp ON q.query_id = qp.query_id
+JOIN sys.query_store_runtime_stats qrs ON qp.plan_id = qrs.plan_id
+ORDER BY qrs.avg_cpu_time DESC;
+```
+
+## **Key Performance Concepts Demonstrated**
+✅ **Strategic Indexing** - Right indexes for your workload  
+✅ **Query Optimization** - Execution plans and hints  
+✅ **Advanced Partitioning** - Manage large datasets  
+✅ **In-Memory OLTP** - High-throughput scenarios  
+✅ **Automated Maintenance** - Keep performance consistent  
+
+
 
 ## Cleanup
 
@@ -620,6 +806,7 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
 
 
 
