@@ -33,39 +33,206 @@ Welcome to this hands-on lab where you'll explore SQL Database capabilities in M
 
 ## Working with Data
 
-### Exercise 1: Querying the Database
+# **Exercise 1: Querying the SQL Database in Microsoft Fabric**
 
-1. In your AdventureWorksLT database, click **New query**
-2. Run this query to analyze product pricing:
+In this expanded exercise, you will dive deeper into querying the **AdventureWorksLT** database in Microsoft Fabric. You will explore different SQL operations, including filtering, aggregations, joins, and subqueries to extract meaningful business insights.
 
+---
+
+## **1.1 Basic Querying: Retrieving Data**
+### **1.1.1 Simple SELECT Statements**
+Start with basic queries to understand the data structure.
+
+#### **Query 1: Retrieve All Products**
+```sql
+SELECT * FROM SalesLT.Product;
+```
+- Lists all columns from the `Product` table.
+- Helps understand available fields (e.g., `ProductID`, `Name`, `ProductNumber`, `Color`, `StandardCost`, `ListPrice`).
+
+#### **Query 2: Get Specific Columns (Product Name & Price)**
 ```sql
 SELECT 
-    p.Name AS ProductName,
-    pc.Name AS CategoryName,
-    p.ListPrice
-FROM 
-    SalesLT.Product p
-INNER JOIN 
-    SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
-ORDER BY 
-    p.ListPrice DESC;
+    Name AS ProductName, 
+    ListPrice 
+FROM SalesLT.Product;
 ```
+- Returns only product names and their list prices.
 
-3. Run this query to examine customer orders:
+---
 
+## **1.2. Filtering Data with WHERE Clause**
+### **1.2.1. Filtering by Price Range**
+```sql
+SELECT 
+    Name AS ProductName, 
+    ListPrice 
+FROM SalesLT.Product
+WHERE ListPrice > 1000;
+```
+- Retrieves only high-value products (price > $1000).
+
+### **1.2.2. Filtering by Product Category**
+```sql
+SELECT 
+    p.Name AS ProductName, 
+    p.ListPrice,
+    pc.Name AS CategoryName
+FROM SalesLT.Product p
+JOIN SalesLT.ProductCategory pc 
+    ON p.ProductCategoryID = pc.ProductCategoryID
+WHERE pc.Name = 'Mountain Bikes';
+```
+- Returns only products in the "Mountain Bikes" category.
+
+---
+
+## **1.3. Sorting Results with ORDER BY**
+### **1.3.1. Sorting by Price (High to Low)**
+```sql
+SELECT 
+    Name AS ProductName, 
+    ListPrice 
+FROM SalesLT.Product
+ORDER BY ListPrice DESC;
+```
+- Lists products from most to least expensive.
+
+### **1.3.2. Sorting by Name (Alphabetical)**
+```sql
+SELECT 
+    Name AS ProductName, 
+    ListPrice 
+FROM SalesLT.Product
+ORDER BY Name ASC;
+```
+- Returns products in alphabetical order.
+
+---
+
+## **1.4. Aggregating Data with GROUP BY**
+### **1.4.1. Average Price by Product Category**
+```sql
+SELECT 
+    pc.Name AS CategoryName,
+    AVG(p.ListPrice) AS AvgPrice
+FROM SalesLT.Product p
+JOIN SalesLT.ProductCategory pc 
+    ON p.ProductCategoryID = pc.ProductCategoryID
+GROUP BY pc.Name;
+```
+- Computes average price for each product category.
+
+### **1.4.2. Count of Products per Category**
+```sql
+SELECT 
+    pc.Name AS CategoryName,
+    COUNT(p.ProductID) AS ProductCount
+FROM SalesLT.Product p
+JOIN SalesLT.ProductCategory pc 
+    ON p.ProductCategoryID = pc.ProductCategoryID
+GROUP BY pc.Name
+ORDER BY ProductCount DESC;
+```
+- Shows which categories have the most products.
+
+---
+
+## **1.5. Advanced Joins**
+### **1.5.1. Retrieve Customer Orders**
 ```sql
 SELECT 
     c.FirstName,
     c.LastName,
+    soh.SalesOrderID,
     soh.OrderDate,
-    soh.SubTotal
-FROM 
-    SalesLT.Customer c
-INNER JOIN 
-    SalesLT.SalesOrderHeader soh ON c.CustomerID = soh.CustomerID
-ORDER BY 
-    soh.OrderDate DESC;
+    soh.TotalDue
+FROM SalesLT.Customer c
+JOIN SalesLT.SalesOrderHeader soh 
+    ON c.CustomerID = soh.CustomerID
+ORDER BY soh.OrderDate DESC;
 ```
+- Lists customers along with their orders.
+
+### **1.5.2. Order Details with Product Info**
+```sql
+SELECT 
+    soh.SalesOrderID,
+    p.Name AS ProductName,
+    sod.OrderQty,
+    sod.UnitPrice,
+    (sod.OrderQty * sod.UnitPrice) AS LineTotal
+FROM SalesLT.SalesOrderHeader soh
+JOIN SalesLT.SalesOrderDetail sod 
+    ON soh.SalesOrderID = sod.SalesOrderID
+JOIN SalesLT.Product p 
+    ON sod.ProductID = p.ProductID
+WHERE soh.SalesOrderID = 71774;  -- Example order ID
+```
+- Shows detailed line items for a specific order.
+
+---
+
+## **1.6. Subqueries for Complex Filtering**
+### **1.6.1. Find Products Priced Above Average**
+```sql
+SELECT 
+    Name AS ProductName, 
+    ListPrice
+FROM SalesLT.Product
+WHERE ListPrice > (SELECT AVG(ListPrice) FROM SalesLT.Product);
+```
+- Retrieves products priced higher than the average.
+
+### **1.6.2. Customers Who Placed Orders**
+```sql
+SELECT 
+    FirstName,
+    LastName,
+    EmailAddress
+FROM SalesLT.Customer
+WHERE CustomerID IN (SELECT DISTINCT CustomerID FROM SalesLT.SalesOrderHeader);
+```
+- Lists only customers who have made purchases.
+
+---
+
+## **1.7. Practical Business Insights**
+### **1.7.1. Top 5 Most Expensive Products**
+```sql
+SELECT TOP 5
+    Name AS ProductName,
+    ListPrice
+FROM SalesLT.Product
+ORDER BY ListPrice DESC;
+```
+- Helps identify premium products.
+
+### **1.7.2. Sales Revenue by Customer**
+```sql
+SELECT 
+    c.FirstName + ' ' + c.LastName AS CustomerName,
+    SUM(soh.TotalDue) AS TotalSpent
+FROM SalesLT.Customer c
+JOIN SalesLT.SalesOrderHeader soh 
+    ON c.CustomerID = soh.CustomerID
+GROUP BY c.FirstName, c.LastName
+ORDER BY TotalSpent DESC;
+```
+- Identifies high-value customers.
+
+---
+
+## **Summary of Key Learnings**
+✅ **Basic SELECT queries** – Retrieve data from tables.  
+✅ **Filtering with WHERE** – Narrow down results.  
+✅ **Sorting with ORDER BY** – Organize output.  
+✅ **Aggregations with GROUP BY** – Summarize data.  
+✅ **Joins** – Combine data from multiple tables.  
+✅ **Subqueries** – Perform complex filtering.  
+✅ **Business insights** – Extract actionable data.  
+
+---
 
 ### Exercise 2: Data Integration
 
@@ -152,3 +319,4 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
