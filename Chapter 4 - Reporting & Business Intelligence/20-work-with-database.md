@@ -788,7 +788,224 @@ ORDER BY qrs.avg_cpu_time DESC;
 ✅ **In-Memory OLTP** - High-throughput scenarios  
 ✅ **Automated Maintenance** - Keep performance consistent  
 
+# **Exercise 5: Creating a Semantic Model in Microsoft Fabric** (This portion is completely option, you need not continue if needed)
 
+This comprehensive lab will guide you through building an enterprise-ready semantic model in Microsoft Fabric, transforming your SQL database into a powerful analytics engine.
+
+## **1. Setting Up the Semantic Model**
+
+### **1.1 Creating a New Semantic Model**
+1. Navigate to your Fabric workspace
+2. Select **New** → **Semantic model**
+3. Choose **Import from SQL database** and select your AdventureWorksLT database
+4. Name your model "AdventureWorks Analytics"
+
+![Creating a new semantic model in Fabric](Images/new-semantic-model.png)
+
+### **1.2 Initial Data Import**
+```powerquery
+let
+    Source = Sql.Database("your-server.database.windows.net", "AdventureWorksLT"),
+    SalesLT = Source{[Schema="SalesLT"]}[Data]
+in
+    SalesLT
+```
+
+## **2. Dimensional Modeling Best Practices**
+
+### **2.1 Creating a Star Schema**
+
+**Dimension Tables:**
+```powerquery
+// Products Dimension
+let
+    Source = Sql.Database("your-server.database.windows.net", "AdventureWorksLT"),
+    Product = Source{[Schema="SalesLT",Item="Product"]}[Data],
+    ProductCategory = Source{[Schema="SalesLT",Item="ProductCategory"]}[Data],
+    Merged = Table.NestedJoin(Product, {"ProductCategoryID"}, ProductCategory, {"ProductCategoryID"}, "ProductCategory", JoinKind.LeftOuter),
+    Expanded = Table.ExpandTableColumn(Merged, "ProductCategory", {"Name"}, {"CategoryName"}),
+    RemovedColumns = Table.RemoveColumns(Expanded,{"ProductCategoryID"}),
+    Renamed = Table.RenameColumns(RemovedColumns, {{"Name", "ProductName"}})
+in
+    Renamed
+```
+
+**Fact Tables:**
+```powerquery
+// Sales Fact
+let
+    Source = Sql.Database("your-server.database.windows.net", "AdventureWorksLT"),
+    Header = Source{[Schema="SalesLT",Item="SalesOrderHeader"]}[Data],
+    Detail = Source{[Schema="SalesLT",Item="SalesOrderDetail"]}[Data],
+    Merged = Table.NestedJoin(Header, {"SalesOrderID"}, Detail, {"SalesOrderID"}, "Details", JoinKind.Inner),
+    Expanded = Table.ExpandTableColumn(Merged, "Details", {"ProductID", "OrderQty", "UnitPrice", "UnitPriceDiscount", "LineTotal"}, {"ProductID", "Quantity", "UnitPrice", "Discount", "LineTotal"})
+in
+    Expanded
+```
+
+### **2.2 Implementing Hierarchies**
+1. In Model view, create these hierarchies:
+   - **Product Hierarchy**: Category → Product Name
+   - **Date Hierarchy**: Year → Quarter → Month → Day
+   - **Geography Hierarchy**: Country → State → City
+
+2. Set appropriate data types for each column
+
+## **3. Advanced DAX Measures**
+
+### **3.1 Core Business Metrics**
+```dax
+// Sales Metrics
+Total Sales = SUM(Sales[LineTotal])
+
+YTD Sales = 
+TOTALYTD(
+    [Total Sales],
+    'Date'[Date],
+    "12/31"
+)
+
+YoY Growth = 
+VAR CurrentYear = [Total Sales]
+VAR PriorYear = CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))
+RETURN
+    DIVIDE(CurrentYear - PriorYear, PriorYear)
+
+// Inventory Metrics
+Days Inventory = 
+DIVIDE(
+    AVERAGE(Inventory[QuantityOnHand]),
+    [Daily Sales],
+    0
+)
+```
+
+### **3.2 Time Intelligence**
+```dax
+// Rolling 30-Day Sales
+Rolling 30 Days = 
+CALCULATE(
+    [Total Sales],
+    DATESINPERIOD(
+        'Date'[Date],
+        MAX('Date'[Date]),
+        -30,
+        DAY
+    )
+)
+
+// Same Store Sales
+Same Store Sales = 
+CALCULATE(
+    [Total Sales],
+    FILTER(
+        ALL('Store'),
+        [First Sale Date] <= MIN('Date'[Date]) && 
+        NOT ISBLANK([First Sale Date])
+    )
+)
+```
+
+## **4. Performance Optimization**
+
+### **4.1 Aggregations Setup**
+1. Create aggregation tables:
+   ```sql
+   CREATE TABLE Aggregates.DailySales (
+       DateKey INT PRIMARY KEY,
+       TotalSales DECIMAL(18,2),
+       OrderCount INT
+   );
+   ```
+   
+2. Configure in Fabric:
+   - Navigate to **Model** → **Aggregations**
+   - Map base tables to aggregation tables
+   - Set storage mode as "Dual" for critical tables
+
+### **4.2 Partitioning Strategy**
+```powerquery
+// Incremental refresh setup
+let
+    Source = Sql.Database("your-server.database.windows.net", "AdventureWorksLT"),
+    Sales = Source{[Schema="SalesLT",Item="SalesOrderHeader"]}[Data],
+    Filtered = Table.SelectRows(Sales, each [OrderDate] >= RangeStart and [OrderDate] < RangeEnd)
+in
+    Filtered
+```
+
+## **5. Security Implementation**
+
+### **5.1 Row-Level Security (RLS)**
+```dax
+// Region Security Filter
+[Region Access] = 
+SWITCH(
+    USERNAME(),
+    "east_manager@company.com", "East",
+    "west_manager@company.com", "West",
+    "ALL"  // Admin sees all
+)
+```
+
+### **5.2 Object-Level Security**
+1. Create roles:
+   - **Sales Managers**: Full access to sales data
+   - **Inventory Team**: Only product and inventory tables
+   - **Executives**: Read-only access to all data
+
+2. Configure in Fabric portal under **Model security**
+
+## **6. Deployment Pipeline**
+
+### **6.1 CI/CD Setup**
+1. Create three environments:
+   - **Development** (for modeling)
+   - **Test** (for validation)
+   - **Production** (for end-users)
+
+2. Configure deployment pipeline in Fabric:
+   ```powershell
+   # Sample deployment script
+   fabric-cli model deploy \
+       --source-workspace "Dev-Workspace" \
+       --target-workspace "Prod-Workspace" \
+       --model "AdventureWorks Analytics" \
+       --overwrite
+   ```
+
+## **7. Monitoring and Usage Analytics**
+
+### **7.1 Built-in Monitoring**
+1. Access the **Metrics** tab to track:
+   - Query performance
+   - Refresh times
+   - User activity
+
+2. Set up alerts for:
+   - Failed refreshes
+   - Long-running queries
+   - Storage threshold breaches
+
+### **7.2 Advanced Telemetry**
+```kusto
+// Sample KQL query for usage analysis
+SemanticModelEvents
+| where Timestamp > ago(30d)
+| where OperationName == "QueryExecution"
+| summarize 
+    AvgDuration=avg(DurationMs),
+    QueryCount=count()
+    by bin(Timestamp, 1d), UserName
+| render timechart
+```
+
+## **Key Takeaways**
+✅ **Star Schema Design** - Optimized for analytics  
+✅ **Advanced DAX** - Powerful business calculations  
+✅ **Performance Tuning** - Aggregations and partitioning  
+✅ **Enterprise Security** - RLS and object-level controls  
+✅ **DevOps Integration** - Professional deployment pipelines  
 
 ## Cleanup
 
@@ -806,6 +1023,7 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
 
 
 
