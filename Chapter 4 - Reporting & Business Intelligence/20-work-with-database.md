@@ -414,23 +414,195 @@ END;
 
 ### Exercise 3: Implementing Security
 
-1. Create a filtered view:
+In this expanded exercise, we'll dive deep into **data security** in Microsoft Fabric's SQL Database. You'll learn how to implement:
+- **Role-based access control (RBAC)**
+- **Row-level security (RLS)**
+- **Column-level security**
+- **Dynamic data masking**
+- **Auditing and compliance tracking**
 
+---
+
+## **3.1. Role-Based Access Control (RBAC)**
+RBAC restricts database access based on user roles.
+
+### **3.1.1. Creating Database Roles**
 ```sql
-CREATE VIEW SalesLT.vw_SalesOrderHoliday AS
-SELECT DISTINCT soh.SalesOrderID, soh.OrderDate, ph.HolidayName, ph.CountryOrRegion
-FROM SalesLT.SalesOrderHeader AS soh
-INNER JOIN SalesLT.Address a ON a.AddressID = soh.ShipToAddressID
-INNER JOIN SalesLT.PublicHolidays AS ph ON soh.OrderDate = ph.Date AND a.CountryRegion = ph.CountryOrRegion
-WHERE a.CountryRegion = 'United Kingdom';
+-- Create roles for different departments
+CREATE ROLE SalesTeam;
+CREATE ROLE FinanceTeam;
+CREATE ROLE ReadOnlyUsers;
 ```
 
-2. Set up role-based access:
-
+### **3.1.2. Granting Permissions**
 ```sql
-CREATE ROLE SalesOrderRole;
-GRANT SELECT ON SalesLT.vw_SalesOrderHoliday TO SalesOrderRole;
+-- Sales team can read/write customer and order data
+GRANT SELECT, INSERT, UPDATE ON SalesLT.Customer TO SalesTeam;
+GRANT SELECT, INSERT, UPDATE ON SalesLT.SalesOrderHeader TO SalesTeam;
+
+-- Finance team can access pricing and financial data
+GRANT SELECT ON SalesLT.Product TO FinanceTeam;
+GRANT SELECT ON SalesLT.SalesOrderHeader TO FinanceTeam;
+GRANT SELECT ON SalesLT.SalesOrderDetail TO FinanceTeam;
+
+-- Read-only users can only view data
+GRANT SELECT ON SCHEMA::SalesLT TO ReadOnlyUsers;
 ```
+
+### **3.1.3. Adding Users to Roles**
+```sql
+-- Add existing users to roles
+EXEC sp_addrolemember 'SalesTeam', 'john@company.com';
+EXEC sp_addrolemember 'FinanceTeam', 'jane@company.com';
+EXEC sp_addrolemember 'ReadOnlyUsers', 'guest@company.com';
+```
+
+---
+
+## **3.2. Row-Level Security (RLS)**
+RLS restricts which rows users can see based on filters.
+
+### **3.2.1. Create a Security Predicate Function**
+```sql
+CREATE FUNCTION SalesLT.fn_securitypredicate(@CountryRegion AS NVARCHAR(50))
+RETURNS TABLE
+WITH SCHEMABINDING
+AS
+RETURN SELECT 1 AS fn_securitypredicate_result
+WHERE @CountryRegion = USER_NAME() OR USER_NAME() = 'admin@company.com';
+```
+
+### **3.2.2. Create Security Policy**
+```sql
+CREATE SECURITY POLICY SalesLT.CountryFilter
+ADD FILTER PREDICATE SalesLT.fn_securitypredicate(CountryRegion)
+ON SalesLT.Customer,
+ADD BLOCK PREDICATE SalesLT.fn_securitypredicate(CountryRegion)
+ON SalesLT.Customer;
+```
+
+### **3.2.3. Test RLS**
+```sql
+-- Create test users
+CREATE USER [CanadaUser] WITHOUT LOGIN;
+CREATE USER [USUser] WITHOUT LOGIN;
+
+-- Grant access
+GRANT SELECT ON SalesLT.Customer TO [CanadaUser], [USUser];
+
+-- Set user context and test
+EXECUTE AS USER = 'CanadaUser';
+SELECT * FROM SalesLT.Customer; -- Only sees Canadian customers
+REVERT;
+
+EXECUTE AS USER = 'USUser';
+SELECT * FROM SalesLT.Customer; -- Only sees US customers
+REVERT;
+```
+
+---
+
+## **3.3. Column-Level Security**
+Restrict access to sensitive columns.
+
+### **3.3.1. Grant Partial Access**
+```sql
+-- Create view without sensitive columns
+CREATE VIEW SalesLT.SafeCustomerView AS
+SELECT 
+    CustomerID,
+    FirstName,
+    LastName,
+    CompanyName
+FROM SalesLT.Customer;
+
+-- Grant access to view instead of table
+GRANT SELECT ON SalesLT.SafeCustomerView TO SalesTeam;
+```
+
+### **3.3.2. Dynamic Data Masking**
+```sql
+-- Add masking to sensitive columns
+ALTER TABLE SalesLT.Customer
+ALTER COLUMN EmailAddress ADD MASKED WITH (FUNCTION = 'email()');
+
+ALTER TABLE SalesLT.Customer
+ALTER COLUMN Phone ADD MASKED WITH (FUNCTION = 'partial(2, "XXX-XXX", 2)');
+
+-- Test masking
+EXECUTE AS USER = 'ReadOnlyUsers';
+SELECT EmailAddress, Phone FROM SalesLT.Customer; -- Shows masked data
+REVERT;
+```
+
+---
+
+## **3.4. Auditing and Compliance**
+Track who accesses what data.
+
+### **3.4.1. Enable Database Auditing**
+```sql
+-- Create audit specification
+CREATE DATABASE AUDIT SPECIFICATION [SalesDBAudit]
+FOR SERVER AUDIT [FabricAudit]
+ADD (SELECT, INSERT, UPDATE, DELETE ON SCHEMA::SalesLT BY PUBLIC),
+ADD (EXECUTE ON DATABASE::AdventureWorksLT BY PUBLIC);
+```
+
+### **3.4.2. View Audit Logs**
+```sql
+SELECT 
+    event_time,
+    server_principal_name,
+    object_name,
+    statement
+FROM sys.fn_get_audit_file('https://fabricaudit.blob.core.windows.net/logs/*', NULL, NULL);
+```
+
+---
+
+## **3.5. Implementing a Complete Security Model**
+
+### **3.5.1. Create Security Schema**
+```sql
+-- Schema for security objects
+CREATE SCHEMA Security;
+GO
+
+-- Function to check department access
+CREATE FUNCTION Security.fn_department_access(@DeptName NVARCHAR(50))
+RETURNS BIT
+AS
+BEGIN
+    IF IS_MEMBER(@DeptName) = 1 OR IS_SRVROLEMEMBER('sysadmin') = 1
+        RETURN 1;
+    RETURN 0;
+END;
+```
+
+### **3.5.2. Secure Stored Procedures**
+```sql
+CREATE PROCEDURE SalesLT.GetCustomerOrders
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+    IF Security.fn_department_access('SalesTeam') = 1
+        SELECT * FROM SalesLT.SalesOrderHeader;
+    ELSE
+        RAISERROR('Access denied', 16, 1);
+END;
+```
+
+---
+
+## **3.6. Key Takeaways**
+✅ **RBAC** - Control access by organizational roles  
+✅ **Row-Level Security** - Filter data by user attributes  
+✅ **Column Security** - Protect sensitive columns with views or masking  
+✅ **Auditing** - Track all database access for compliance  
+✅ **Defense-in-Depth** - Combine multiple security layers  
+
+---
 
 ## Cleanup
 
@@ -448,5 +620,6 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
 
 
