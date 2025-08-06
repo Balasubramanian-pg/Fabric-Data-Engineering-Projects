@@ -1,4 +1,4 @@
-# Hands-on Lab: Working with SQL Database in Microsoft Fabric
+# Working with SQL Database in Microsoft Fabric
 
 ## Introduction
 
@@ -1023,6 +1023,7 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
 
 
 
