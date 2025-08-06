@@ -236,52 +236,181 @@ ORDER BY TotalSpent DESC;
 
 ### Exercise 2: Data Integration
 
-1. Create a table for public holidays data:
+In this exercise, you will explore **data integration** techniques in Microsoft Fabric's SQL Database. You will learn how to:
+- **Import external datasets** into your database
+- **Enrich existing data** with new information
+- **Combine multiple sources** for deeper analysis
+- **Automate data refreshes** (optional)
 
+---
+
+## **2.1. Setting Up External Data Sources**
+Before integrating data, you need to **prepare the external dataset**. In this lab, we'll use a **Public Holidays** dataset.
+
+### **2.1.1. Create the PublicHolidays Table**
 ```sql
 CREATE TABLE SalesLT.PublicHolidays (
-    CountryOrRegion NVARCHAR(50),
-    HolidayName NVARCHAR(100),
-    Date DATE,
-    IsPaidTimeOff BIT
+    HolidayID INT IDENTITY(1,1) PRIMARY KEY,
+    CountryOrRegion NVARCHAR(50) NOT NULL,
+    HolidayName NVARCHAR(100) NOT NULL,
+    Date DATE NOT NULL,
+    IsPaidTimeOff BIT DEFAULT 1,
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+```
+- Adds a **primary key** (`HolidayID`) for better data integrity.
+- Uses `NOT NULL` constraints to ensure required fields are populated.
+- Includes `ModifiedDate` for tracking changes.
+
+### **2.1.2. Insert Sample Holiday Data**
+```sql
+INSERT INTO SalesLT.PublicHolidays (CountryOrRegion, HolidayName, Date)
+VALUES
+    ('United States', 'New Year''s Day', '2024-01-01'),
+    ('United States', 'Independence Day', '2024-07-04'),
+    ('United States', 'Thanksgiving Day', '2024-11-28'),
+    ('Canada', 'Canada Day', '2024-07-01'),
+    ('United Kingdom', 'Christmas Day', '2024-12-25'),
+    ('United Kingdom', 'Boxing Day', '2024-12-26');
+```
+
+---
+
+## **2.2. Enriching Sales Data with Holiday Information**
+Now, let’s **link sales orders to public holidays** to analyze seasonal trends.
+
+### **2.2.1. Add Sample Sales Orders**
+```sql
+-- Insert new customers (if needed)
+INSERT INTO SalesLT.Customer (FirstName, LastName, EmailAddress, Phone)
+VALUES
+    ('John', 'Doe', 'john.doe@example.com', '555-1001'),
+    ('Jane', 'Smith', 'jane.smith@example.com', '555-1002');
+
+-- Insert new addresses
+INSERT INTO SalesLT.Address (AddressLine1, City, StateProvince, CountryRegion, PostalCode)
+VALUES
+    ('123 Main St', 'New York', 'NY', 'United States', '10001'),
+    ('456 Maple Ave', 'Toronto', 'ON', 'Canada', 'M5V 2H1'),
+    ('789 Oxford St', 'London', NULL, 'United Kingdom', 'W1D 1BS');
+
+-- Insert holiday-related sales orders
+INSERT INTO SalesLT.SalesOrderHeader (
+    OrderDate, DueDate, CustomerID, ShipToAddressID, SubTotal, TaxAmt, Freight, TotalDue
+)
+VALUES
+    ('2024-07-04', '2024-07-11', 1, 1, 500.00, 50.00, 25.00, 575.00), -- US Independence Day
+    ('2024-12-25', '2024-12-31', 2, 3, 750.00, 75.00, 40.00, 865.00), -- UK Christmas Day
+    ('2024-11-28', '2024-12-05', 1, 1, 300.00, 30.00, 15.00, 345.00);  -- US Thanksgiving
+```
+
+### **2.2.2. Query: Find Sales on Public Holidays**
+```sql
+SELECT 
+    soh.SalesOrderID,
+    soh.OrderDate,
+    ph.HolidayName,
+    ph.CountryOrRegion,
+    soh.TotalDue
+FROM SalesLT.SalesOrderHeader soh
+JOIN SalesLT.Address a ON soh.ShipToAddressID = a.AddressID
+JOIN SalesLT.PublicHolidays ph 
+    ON soh.OrderDate = ph.Date 
+    AND a.CountryRegion = ph.CountryOrRegion;
+```
+**Expected Output:**
+| SalesOrderID | OrderDate   | HolidayName       | CountryOrRegion | TotalDue |
+|-------------|------------|------------------|----------------|---------|
+| 1001        | 2024-07-04 | Independence Day | United States   | 575.00  |
+| 1002        | 2024-12-25 | Christmas Day    | United Kingdom  | 865.00  |
+| 1003        | 2024-11-28 | Thanksgiving Day | United States   | 345.00  |
+
+---
+
+## **2.3. Advanced Integration: Combining Multiple Data Sources**
+Let’s **import a CSV file** containing **discount promotions** and analyze its impact on sales.
+
+### **2.3.1. Create a Promotions Table**
+```sql
+CREATE TABLE SalesLT.Promotions (
+    PromotionID INT IDENTITY(1,1) PRIMARY KEY,
+    PromotionName NVARCHAR(100) NOT NULL,
+    DiscountPercentage DECIMAL(5,2) NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    ApplicableCategory NVARCHAR(50) NULL
 );
 ```
 
-2. Populate the holidays table:
-
+### **2.3.2. Insert Promotions Data**
 ```sql
-INSERT INTO SalesLT.PublicHolidays VALUES
-    ('Canada', 'Victoria Day', '2024-02-19', 1),
-    ('United Kingdom', 'Christmas Day', '2024-12-25', 1),
-    ('United Kingdom', 'Spring Bank Holiday', '2024-05-27', 1),
-    ('United States', 'Thanksgiving Day', '2024-11-28', 1);
-```
-
-3. Add sample addresses and orders:
-
-```sql
-INSERT INTO SalesLT.Address (AddressLine1, City, StateProvince, CountryRegion, PostalCode, rowguid, ModifiedDate)
+INSERT INTO SalesLT.Promotions (PromotionName, DiscountPercentage, StartDate, EndDate, ApplicableCategory)
 VALUES
-    ('123 Main St', 'Seattle', 'WA', 'United States', '98101', NEWID(), GETDATE()),
-    ('456 Maple Ave', 'Toronto', 'ON', 'Canada', 'M5H 2N2', NEWID(), GETDATE()),
-    ('789 Oak St', 'London', 'England', 'United Kingdom', 'EC1A 1BB', NEWID(), GETDATE());
-
-INSERT INTO SalesLT.SalesOrderHeader VALUES
-    (1001, 1, '2024-12-25', '2024-12-30', '2024-12-26', 1, 1, 'PO12345', 'AN123', 1, 
-     (SELECT TOP 1 AddressID FROM SalesLT.Address WHERE AddressLine1 = '789 Oak St'), 
-     (SELECT TOP 1 AddressID FROM SalesLT.Address WHERE AddressLine1 = '123 Main St'), 
-     'Ground', '12345', 100.00, 10.00, 5.00, 'New Order 1', NEWID(), GETDATE()),
-    -- Additional orders omitted for brevity
+    ('Summer Sale', 15.00, '2024-06-01', '2024-08-31', 'Mountain Bikes'),
+    ('Black Friday', 20.00, '2024-11-25', '2024-11-29', NULL),
+    ('Holiday Special', 10.00, '2024-12-20', '2024-12-31', 'Accessories');
 ```
 
-4. Analyze holiday sales:
-
+### **2.3.3. Query: Sales with Applied Discounts**
 ```sql
-SELECT DISTINCT soh.SalesOrderID, soh.OrderDate, ph.HolidayName, ph.CountryOrRegion
-FROM SalesLT.SalesOrderHeader AS soh
-INNER JOIN SalesLT.Address a ON a.AddressID = soh.ShipToAddressID
-INNER JOIN SalesLT.PublicHolidays AS ph ON soh.OrderDate = ph.Date AND a.CountryRegion = ph.CountryOrRegion
+SELECT 
+    p.Name AS ProductName,
+    pc.Name AS CategoryName,
+    pr.PromotionName,
+    pr.DiscountPercentage,
+    sod.UnitPrice,
+    (sod.UnitPrice * (1 - pr.DiscountPercentage/100)) AS DiscountedPrice
+FROM SalesLT.SalesOrderDetail sod
+JOIN SalesLT.Product p ON sod.ProductID = p.ProductID
+JOIN SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID
+JOIN SalesLT.Promotions pr 
+    ON sod.ModifiedDate BETWEEN pr.StartDate AND pr.EndDate
+    AND (pr.ApplicableCategory IS NULL OR pc.Name = pr.ApplicableCategory)
+WHERE pr.PromotionName IS NOT NULL;
 ```
+**Expected Output:**
+| ProductName         | CategoryName    | PromotionName  | DiscountPercentage | UnitPrice | DiscountedPrice |
+|--------------------|----------------|---------------|-------------------|----------|----------------|
+| Mountain-100 Silver| Mountain Bikes  | Summer Sale   | 15.00             | 3399.99  | 2889.99        |
+| HL Road Frame      | Road Frames     | Black Friday  | 20.00             | 1431.50  | 1145.20        |
+
+---
+
+## **2.4. Automating Data Integration (Optional)**
+Microsoft Fabric allows **scheduled refreshes** of external data.
+
+### **2.4.1. Using Power Query in Fabric**
+1. Go to **Data Engineering** or **Data Factory** in Fabric.
+2. Create a **new data pipeline**.
+3. Add a **SQL query** to pull external data.
+4. Set a **refresh schedule** (daily/weekly).
+
+### **2.4.2. Example: Auto-Update Holidays Table**
+```sql
+-- Step 1: Create a stored procedure to refresh data
+CREATE PROCEDURE SalesLT.sp_RefreshHolidays
+AS
+BEGIN
+    -- Clear old data
+    TRUNCATE TABLE SalesLT.PublicHolidays;
+    
+    -- Insert new data (could be from an API or CSV)
+    INSERT INTO SalesLT.PublicHolidays (CountryOrRegion, HolidayName, Date)
+    VALUES
+        ('United States', 'Labor Day', '2024-09-02'),
+        ('Canada', 'Labour Day', '2024-09-02');
+END;
+```
+
+---
+
+## **2.5. Key Takeaways**
+✅ **Import external datasets** into SQL Database.  
+✅ **Enrich transactional data** with contextual information (e.g., holidays, promotions).  
+✅ **Combine multiple sources** for deeper business insights.  
+✅ **Automate data refreshes** to keep reports up-to-date.  
+
+---
 
 ### Exercise 3: Implementing Security
 
@@ -319,4 +448,5 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
+
 
