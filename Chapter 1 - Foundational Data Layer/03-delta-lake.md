@@ -10,7 +10,7 @@ Tables in a Microsoft Fabric Lakehouse are based on the open-source Delta Lake f
 
 This exercise should take approximately **45** minutes to complete
 
-> [!TODO]
+> [!NOTE]
 > You need a [Microsoft Fabric](/fabric/get-started/fabric-trial) trial to complete this exercise.
 
 ## Create a workspace
