@@ -8,9 +8,9 @@
 Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track, analyze, and optimize data workflows.  
 
 **Learning Outcomes:**  
-✔ Understand how to monitor **dataflows, notebooks, and lakehouses** in Fabric.  
-✔ Learn to filter and customize monitoring views for better insights.  
-✔ Track historical runs and troubleshoot activity logs.  
+1. Understand how to monitor **dataflows, notebooks, and lakehouses** in Fabric.  
+2. Learn to filter and customize monitoring views for better insights.  
+3. Track historical runs and troubleshoot activity logs.  
 
 **Estimated Time:** **30 minutes**  
 
