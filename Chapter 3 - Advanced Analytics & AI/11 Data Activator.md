@@ -1,9 +1,7 @@
 # Using Data Activator in Microsoft Fabric  
 
-> [!CAUTION]
-> This is a caution about irreversible actions.
-
-> **IMPORTANT**: This exercise is deprecated and will be removed or updated soon. The instructions may no longer be accurate, and the exercise is unsupported.
+> [!IMPORTANT]
+> This exercise is deprecated and will be removed or updated soon. The instructions may no longer be accurate, and the exercise is unsupported.
 
 ## Overview  
 Data Activator in Microsoft Fabric enables automated actions based on real-time data changes. This lab will guide you through:  
