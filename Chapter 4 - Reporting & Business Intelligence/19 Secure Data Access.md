@@ -6,9 +6,9 @@
 ## **Lab Overview**  
 **Objective:**  
 Implement and validate multi-layered security controls in Microsoft Fabric, including:  
-✔ **Workspace-level access** (roles and permissions)  
-✔ **Item-level security** (granular permissions for warehouses/lakehouses)  
-✔ **OneLake data access roles** (folder-level restrictions)  
+1. **Workspace-level access** (roles and permissions)  
+2. **Item-level security** (granular permissions for warehouses/lakehouses)  
+3. **OneLake data access roles** (folder-level restrictions)  
 
 **Learning Outcomes:**  
 1. Configure workspace roles to control user visibility and actions.  
