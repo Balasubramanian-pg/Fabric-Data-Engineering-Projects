@@ -68,8 +68,8 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
     <!--- Placeholder for image of a query with a custom column step. -->
     ![Query with a custom column step.](./Images/custom-column-added.png)
 
-    > [!TIP]
-    > In the Query Settings pane on the right side, notice the **Applied Steps** include each transformation step. At the bottom, you can also toggle the **Diagram flow** button to turn on the Visual Diagram of the steps.
+>[!TIP]
+> In the Query Settings pane on the right side, notice the **Applied Steps** include each transformation step. At the bottom, you can also toggle the **Diagram flow** button to turn on the Visual Diagram of the steps.
     >
     > Steps can be moved up or down, edited by selecting the gear icon, and you can select each step to see the transformations apply in the preview pane.
 
@@ -79,8 +79,8 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 1.  On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
 
-    > [!NOTE]
-    > If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
+> [!NOTE]
+> If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
 
 2.  In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
@@ -94,8 +94,8 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 4.  Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
     
-    > [!NOTE]
-    > We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
+> [!NOTE]
+> We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
     <!--- Placeholder for image of data destination settings page. -->
     ![Data destination settings page.](./Images/destination-settings.png)
@@ -118,8 +118,8 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
     <!--- Placeholder for image of an empty data pipeline. -->
     ![Empty data pipeline.](./Images/new-pipeline.png)
 
-    > [!TIP]
-    > If the Copy Data wizard opens automatically, close it!
+> [!TIP]
+> If the Copy Data wizard opens automatically, close it!
 
 2.  Select **Add pipeline activity**, and add a **Dataflow** activity to the pipeline.
 
@@ -142,7 +142,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
 > [!TIP]
 > In Power BI Desktop, you can connect directly to the data transformations done with your dataflow by using the *Power BI dataflows (Legacy)* connector.
->
+
 > You can also make additional transformations, publish as a new dataset, and distribute with intended audience for specialized datasets.
 >
 > <!--- Placeholder for image of Power BI data source connectors -->
