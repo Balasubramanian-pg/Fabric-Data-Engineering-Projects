@@ -27,8 +27,8 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 1.  On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
 
-    > [!NOTE]
-    > If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+> [!NOTE]
+> If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
     After a minute or so, a new empty lakehouse will be created.
 
