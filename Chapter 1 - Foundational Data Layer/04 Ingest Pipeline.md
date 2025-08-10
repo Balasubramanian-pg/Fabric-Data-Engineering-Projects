@@ -15,34 +15,83 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 - Workspace creation rights  
 - Lakehouse management permissions  
 
-## 3. Implementation  
-### 3.1 Environment Setup  
-#### 3.1.1 Create Workspace  
-1. Navigate to [Microsoft Fabric](https://app.fabric.microsoft.com)  
-2. Select **Workspaces** (&#128455;)  
-3. Create new workspace with Fabric capacity  
+---
+### **3. Implementation**  
+#### **3.1 Pipeline Creation**  
+1. **Objective**:  
+   - Ingest data from an external HTTP source (CSV) into the Fabric Lakehouse.  
 
-#### 3.1.2 Create Lakehouse  
-1. Select **Create** → **Lakehouse**  
-2. Create **new_data** subfolder in Files  
+2. **Step-by-Step**:  
+   - **Step 3.1.1**: Initiate Pipeline  
+     - From the Lakehouse **Home** tab → **Get Data** → **New Data Pipeline** → Name: `Ingest Sales Data`.  
+     - *Why*: Establishes the workflow container for ETL operations.  
 
-### 3.2 Pipeline Configuration  
-#### 3.2.1 Create Pipeline  
-1. From lakehouse **Home**, select **Get data** → **New data pipeline**  
-2. Name: "Ingest Sales Data"  
+   - **Step 3.1.2**: Configure Copy Data Activity  
+     - **Source**:  
+       ```plaintext
+       Type: HTTP  
+       URL: https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv  
+       Authentication: Anonymous  
+       ```  
+     - **Destination**:  
+       ```plaintext
+       Folder: Files/new_data  
+       Filename: sales.csv  
+       File Format: DelimitedText (CSV)  
+       ```  
+     - *Critical Settings*:  
+       - `First row as header`: Enabled (preserves column names).  
+       - `Column delimiter`: Comma (`,`).  
 
-#### 3.2.2 Configure Copy Activity  
+   - **Step 3.1.3**: Execute Pipeline  
+     - **Action**: Select **Save + Run** in the Copy Data wizard.  
+     - **Validation**:  
+       - Monitor status in **Output** pane.  
+       - Confirm `sales.csv` appears in `Files/new_data`.  
 
-Source:
-- URL: https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv
-- Authentication: Anonymous
+3. **Technical Nuances**:  
+   - **File Handling**:  
+     - The pipeline auto-creates the `new_data` folder if missing.  
+   - **Error Handling**:  
+     - Failed runs log details in the **Output** pane for debugging.  
 
-Destination:
-- Folder: Files/new_data
-- Filename: sales.csv
+---
 
-> [!WARNING]  
-> Ensure "First row as header" is selected for CSV format.
+#### **3.2 Pipeline Output & Validation**  
+1. **Expected Outcome**:  
+   - Raw `sales.csv` lands in the Lakehouse’s `Files` section (unstructured storage).  
+
+2. **Verify Ingestion**:  
+   - Navigate to **Lakehouse Explorer** → **Files** → `new_data` → Open `sales.csv`.  
+   - *Sample Data Preview*:  
+     | SalesOrderNumber | CustomerName       | OrderDate  |  
+     |------------------|--------------------|------------|  
+     | SO12345          | John Doe           | 2023-01-01 |  
+
+3. **Pipeline Artifact**:  
+   - A single `Copy Data` activity is saved in the pipeline canvas.  
+   - *Reusability*: The pipeline can be rerun to fetch fresh data (overwrites existing CSV).  
+
+---
+
+### **Key Technical Considerations**  
+- **Source Flexibility**:  
+  - The HTTP connector supports public URLs (anonymous auth) or authenticated APIs (OAuth/Basic).  
+- **Performance**:  
+  - For large files, adjust `Max concurrent connections` in the source settings.  
+- **Idempotency**:  
+  - Each run fetches the same CSV; real-world scenarios may use incremental ingestion.  
+
+> [!CAUTION]  
+> Avoid hardcoding URLs in production. Use **Linked Services** for secure credential management.  
+
+---
+
+### **Why This Matters**  
+- **Foundation for ETL**: Raw data ingestion is the first step in building analytics solutions.  
+- **Low-Code Approach**: The Copy Data wizard abstracts complex Spark code for simple file transfers.  
+- **Integration Ready**: Output can be consumed by downstream Spark jobs (see *Exercise 4*).  
+
 ---
 
 ### **4. Data Transformation**  
