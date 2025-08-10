@@ -16,7 +16,7 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 - Lakehouse management permissions  
 
 ---
-### **3. Implementation**  
+## **3. Implementation**  
 #### **3.1 Pipeline Creation**  
 1. **Objective**:  
    - Ingest data from an external HTTP source (CSV) into the Fabric Lakehouse.  
@@ -94,7 +94,7 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 
 ---
 
-### **4. Data Transformation**  
+## **4. Data Transformation**  
 #### **4.1 Create Notebook**  
 1. **Purpose**:  
    - Transform raw CSV data (copied via pipeline) into structured Delta tables using Spark.  
