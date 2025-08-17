@@ -203,8 +203,8 @@ This chapter focuses on **preparation and transformation** using Spark, Data Sci
 **No shortcuts.** Start with the [Read Me](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md).
 
 <div align="center">
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmV0Mmx3bm50Nmc4ZzRvdG9oMDI3OGE2NG5rY3BwZzM1am45YWc3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/sIIhZliB2McAo/giphy.gif" width="150">
-<h2><strong>Chapter 3: From Batch to Real-Time AI</strong></h2>
+  <img width="1125" height="750" alt="image" src="https://github.com/user-attachments/assets/adeaca3f-adb2-4fb6-9dd1-e87c8d0259ed" />
+  <h2><strong>Chapter 3: From Batch to Real-Time AI</strong></h2>
 </div>
 
 **Problem:** Your analytics are slow, reactive, and stuck in spreadsheets.
