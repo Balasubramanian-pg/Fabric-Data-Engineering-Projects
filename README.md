@@ -1,4 +1,4 @@
-# Fabric-Data-Engineering-Projects
+# Data Engineering With Fabric
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
 <div align="center">
