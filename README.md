@@ -2,7 +2,7 @@
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
 <div align="center">
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnk0aHB1a29zMTd2c3NzdjJtb2o2ZDNzZjE1MXd4dmJzZHJ2cW1xYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L1JjM5mcI9rnwZJde5/giphy.gif" width="150">
+<img src="[https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnk0aHB1a29zMTd2c3NzdjJtb2o2ZDNzZjE1MXd4dmJzZHJ2cW1xYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L1JjM5mcI9rnwZJde5/giphy.gif](https://private-user-images.githubusercontent.com/74038190/238353467-897cd757-ea1f-492d-aaf9-6d1674177e08.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU0MDg5NzEsIm5iZiI6MTc1NTQwODY3MSwicGF0aCI6Ii83NDAzODE5MC8yMzgzNTM0NjctODk3Y2Q3NTctZWExZi00OTJkLWFhZjktNmQxNjc0MTc3ZTA4LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA4MTclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwODE3VDA1MzExMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTU3ZWNhYjliYmYxNjVlMmRmZTYwZjQzNzlmYTU4NWIxNWJiYTVkYzY5ZTdjOWQwYzEzYzAwNDA3NzA1MzJjM2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.ABCMU-gVB_hdczyNO4qtWI-p08IibUK9NnJWXj6rDB4)" width="150">
 <h2><strong>Chapter 1: Building a Modern Data Foundation in Microsoft Fabric</strong></h2>
 </div>
 
