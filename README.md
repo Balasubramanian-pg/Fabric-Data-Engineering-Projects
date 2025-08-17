@@ -1,7 +1,7 @@
 # Fabric-Data-Engineering-Projects
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
-### **Chapter 1: Building a Modern Data Foundation in Microsoft Fabric**
+## **Chapter 1: Building a Modern Data Foundation in Microsoft Fabric**
 **Goal:** Turn raw data into a trusted, high-performance analytical asset—step by step.
 This chapter is your blueprint for constructing a **scalable, governed data platform** in Fabric. We’ll start with ingestion, enforce quality at every layer, and end with a warehouse ready for analytics. Each guide builds on the last, so tackle them in order.
 
@@ -45,7 +45,7 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 ### **Your Next Step**
 Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)** to grasp the "why," then dive into **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)** to build your foundation.
 
-### **Chapter 2: From Raw Data to Actionable Insights**
+## **Chapter 2: From Raw Data to Actionable Insights**
 **Problem:** Data is messy. Models fail. Teams waste time cleaning instead of analyzing.
 **Solution:** A **repeatable, scalable** process to explore, clean, and train data—*without reinventing the wheel every time*.
 
@@ -94,18 +94,65 @@ This chapter focuses on **preparation and transformation** using Spark, Data Sci
 
 **No shortcuts.** Start with the [Read Me](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md).
 
-## Chapter 3 - Advanced Analytics & AI
-- [10. Ingest Notebooks.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/10.%20Ingest%20Notebooks.md)
-- [11 Data Activator.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/11%20Data%20Activator.md)
-- [12. Query Data in KQL Database.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/12.%20Query%20Data%20in%20KQL%20Database.md)
-- [7. Real Time Intelligence.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/7.%20Real%20Time%20Intelligence.md)
-- [8. Data Science Get Started.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.%20Data%20Science%20Get%20Started.md)
-- [8.1 Data Science Explore Data.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.1%20Data%20Science%20Explore%20Data.md)
-- [8.2 Data Science Preprocess Data Wrangler.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.2%20Data%20Science%20Preprocess%20Data%20Wrangler.md)
-- [8.3 Data Science Train.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.3%20Data%20Science%20Train.md)
-- [8.4 Data Science Batch.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.4%20Data%20Science%20Batch.md)
-- [9 Real Time Analytics Eventstream.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/9%20Real%20Time%20Analytics%20Eventstream.md)
-- [Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/Read%20Me.md)
+## **Chapter 3: From Batch to Real-Time AI**
+**Problem:** Your analytics are slow, reactive, and stuck in spreadsheets.
+**Solution:** **Real-time insights, automated actions, and scalable AI**—without the PhD.
+
+This chapter covers **advanced analytics, event-driven systems, and AI that actually ships**.
+
+### **1. Start Here: The 5-Minute Primer**
+| **Document** | **What It Covers** | **Why It Matters** |
+|--------------|-------------------|-------------------|
+| **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/Read%20Me.md)** | The *what*, *why*, and *how* of advanced analytics in Fabric. | Skip this, and you’ll build cool demos that never go live. |
+
+### **2. Ingest and Process Data at Scale**
+**Mistake:** Waiting for batch jobs to finish.
+**Fix:** **Real-time pipelines + notebooks** for speed and flexibility.
+
+| **Document** | **Your Task** | **Outcome** |
+|--------------|---------------|-------------|
+| **[10. Ingest Notebooks.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/10.%20Ingest%20Notebooks.md)** | Use notebooks for flexible data ingestion. | No more rigid ETL—adapt on the fly. |
+| **[9 Real Time Analytics Eventstream.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/9%20Real%20Time%20Analytics%20Eventstream.md)** | Set up event streams for live data. | React to events *as they happen*—not tomorrow. |
+
+### **3. Real-Time Intelligence (The Game-Changer)**
+**Old Way:** Dashboards that show *yesterday’s* data.
+**New Way:** **Live monitoring + automated triggers**.
+
+| **Document** | **Action** | **Result** |
+|--------------|------------|------------|
+| **[7. Real Time Intelligence.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/7.%20Real%20Time%20Intelligence.md)** | Build real-time dashboards and alerts. | Spot trends *before* they become crises. |
+| **[11 Data Activator.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/11%20Data%20Activator.md)** | Automate actions based on data changes. | No more manual "check the dashboard" routines. |
+
+### **4. Query and Analyze High-Velocity Data**
+**Goal:** Ask complex questions *fast*—even on streaming data.
+
+| **Document** | **Focus** | **Business Impact** |
+|--------------|-----------|---------------------|
+| **[12. Query Data in KQL Database.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/12.%20Query%20Data%20in%20KQL%20Database.md)** | Use KQL for log analytics and time-series data. | Find anomalies in seconds, not hours. |
+
+### **5. Data Science That Ships (Not Just Experiments)**
+**Problem:** Models die in Jupyter notebooks.
+**Solution:** **End-to-end ML in Fabric**.
+
+| **Document** | **Task** | **Outcome** |
+|--------------|----------|-------------|
+| **[8. Data Science Get Started.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.%20Data%20Science%20Get%20Started.md)** | Set up your data science environment. | No more "it works on my machine." |
+| **[8.1 Data Science Explore Data.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.1%20Data%20Science%20Explore%20Data.md)** | Explore data with purpose. | Avoid training models on garbage. |
+| **[8.2 Data Science Preprocess Data Wrangler.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.2%20Data%20Science%20Preprocess%20Data%20Wrangler.md)** | Clean and prep data *at scale*. | Reproducible pipelines, not one-off scripts. |
+| **[8.3 Data Science Train.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.3%20Data%20Science%20Train.md)** | Train and validate models. | Models that *actually* deploy. |
+| **[8.4 Data Science Batch.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/8.4%20Data%20Science%20Batch.md)** | Schedule batch scoring. | Keep models fresh *without manual work*. |
+
+### **Where Teams Fail**
+1. **Stuck in batch?** Your competitors are reacting in real time.
+2. **Ignoring event streams?** You’re flying blind between reports.
+3. **Data science in silos?** Models that never leave the lab.
+
+### **Your First Step**
+1. Read **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/Read%20Me.md)** (5 min).
+2. Pick **one** real-time use case (e.g., fraud detection, live monitoring).
+3. Start with **[9 Real Time Analytics Eventstream.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/9%20Real%20Time%20Analytics%20Eventstream.md)**.
+
+**No more "we’ll get to real-time later."** Start now.
 
 ## Chapter 4 - Reporting & Business Intelligence
 - [13 Real Time Dashboards.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/13%20Real%20Time%20Dashboards.md)
