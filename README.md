@@ -2,7 +2,7 @@
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
 <div align="center">
-  <img src="https://media.giphy.com/media/L1JjM5mcI9rnwZJde5/giphy.gif" width="150" alt="Data Foundation GIF">
+  <img width="1135" height="525" alt="image" src="https://github.com/user-attachments/assets/7021e988-bb13-479c-8903-ff92237c8ff3" />
   <h2><strong>Chapter 1: Building a Modern Data Foundation in Microsoft Fabric</strong></h2>
 </div>
 
