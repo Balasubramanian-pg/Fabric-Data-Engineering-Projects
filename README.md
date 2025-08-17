@@ -106,8 +106,8 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)** to grasp the "why," then dive into **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)** to build your foundation.
 
 <div align="center">
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajJtMDRmaXl5ZGQyZHcxMXA3M3l0bjZweG05MTZtdnZrM3c1cGl6NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPCcdNni12S_1m/giphy.gif" width="150">
-<h2><strong>Chapter 2: From Raw Data to Actionable Insights</strong></h2>
+  https://videocdn.cdnpk.net/videos/bff5d1ac-4436-53b8-841d-ae55d2bf708a/horizontal/previews/clear/large.mp4?token=exp=1755410088~hmac=cd43013a86a385a87ea37c4917a36f2007564848bd286f2195a1f47a0e82e67f
+  <h2><strong>Chapter 2: From Raw Data to Actionable Insights</strong></h2>
 </div>
 
 **Problem:** Data is messy. Models fail. Teams waste time cleaning instead of analyzing.
