@@ -336,8 +336,9 @@ This chapter covers **advanced analytics, event-driven systems, and AI that actu
 **No more "we’ll get to real-time later."** Start now.
 
 <div align="center">
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnRna3R2czZua3gyMmFocW90NmYxemwzMGRkbmJnY2FkbmZqMHF2eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/u2dI2h52gAzNS/giphy.gif" width="150">
-<h3><strong>Chapter 4: Reports That Actually Get Used</strong></h3>
+<img width="1132" height="750" alt="image" src="https://github.com/user-attachments/assets/67b3b812-87d1-485e-878f-2bbf5eebe2fd" />
+
+  <h3><strong>Chapter 4: Reports That Actually Get Used</strong></h3>
 </div>
 
 **Problem:** Dashboards are slow, confusing, or ignored. Business teams still export to Excel.
