@@ -106,7 +106,7 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)** to grasp the "why," then dive into **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)** to build your foundation.
 
 <div align="center">
-  https://videocdn.cdnpk.net/videos/bff5d1ac-4436-53b8-841d-ae55d2bf708a/horizontal/previews/clear/large.mp4?token=exp=1755410088~hmac=cd43013a86a385a87ea37c4917a36f2007564848bd286f2195a1f47a0e82e67f
+<img width="1123" height="750" alt="image" src="https://github.com/user-attachments/assets/9c3ad27a-fb37-4987-91b3-83794646a423" />
   <h2><strong>Chapter 2: From Raw Data to Actionable Insights</strong></h2>
 </div>
 
