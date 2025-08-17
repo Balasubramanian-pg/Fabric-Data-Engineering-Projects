@@ -1,23 +1,16 @@
 # Fabric-Data-Engineering-Projects
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
-Here’s a sharper, more engaging rewrite—structured to highlight **purpose**, **action**, and **why it matters** at each step. I’ve trimmed redundancy, grouped related concepts, and framed it as a *journey* with clear milestones.
-
----
-
 ### **Chapter 1: Building a Modern Data Foundation in Microsoft Fabric**
 **Goal:** Turn raw data into a trusted, high-performance analytical asset—step by step.
 
 This chapter is your blueprint for constructing a **scalable, governed data platform** in Fabric. We’ll start with ingestion, enforce quality at every layer, and end with a warehouse ready for analytics. Each guide builds on the last, so tackle them in order.
-
----
 
 #### **1. The Big Picture**
 | **Document**       | **What It Covers**                                                                 | **Why It Matters**                                                                 |
 |--------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
 | **[Read Me.md]**   | Architecture overview, tech stack, and how the pieces fit together.               | Sets expectations: *What* you’re building and *why* it’s structured this way.      |
 
----
 #### **2. Core Components: Where Data Lives**
 | **Document**               | **Action Items**                                                                   | **Key Takeaway**                                                                   |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
@@ -25,14 +18,12 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 | **[03 Delta Lake.md]**     | Learn ACID transactions, time travel, and schema enforcement.                      | No more "garbage in, garbage out." Delta Lake keeps data reliable and auditable.   |
 | **[03b Medallion Lakehouse.md]** | Organize data into **Bronze (raw) → Silver (clean) → Gold (enriched)** layers.      | Prevents chaos. Each layer has a job: *landing → validating → serving*.           |
 
----
 #### **3. Moving and Transforming Data**
 | **Document**               | **What You’ll Do**                                                                 | **Outcome**                                                                        |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
 | **[04 Ingest Pipeline.md]** | Build a pipeline to pull data into **Bronze**.                                     | Automated, repeatable ingestion—no manual uploads.                                  |
 | **[05 Dataflows Gen2.md]** | Use Power Query to clean/transform Bronze → **Silver**.                            | Low-code way to standardize data *before* analysis.                                |
 
----
 #### **4. Serving Data for Analytics**
 | **Document**               | **Focus**                                                                          | **Business Impact**                                                                |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
@@ -40,7 +31,6 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 | **[06b Data Warehouse Query.md]** | Write T-SQL queries to analyze data.                                         | Answer questions like *"What’s our monthly revenue by region?"* in seconds.        |
 | **[06c Monitor Data Warehouse.md]** | Track query performance, resource use, and health.                          | Proactively fix slowdowns before users complain.                                   |
 
----
 ### **Key Patterns to Notice**
 1. **Progressive Refinement**: Data gets *better* as it moves from Bronze → Gold. No shortcuts.
 2. **Separation of Concerns**:
@@ -48,13 +38,11 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
    - *Warehouse* = Structured, high-speed queries.
 3. **Automation First**: Pipelines and Dataflows replace manual Excel hell.
 
----
 ### **Where People Stumble**
 - **Skipping Medallion layers?** You’ll drown in technical debt. Silver/Gold exist to *save time later*.
 - **Ignoring Delta Lake features?** No time travel = no easy rollbacks when data breaks.
 - **Not monitoring the Warehouse?** A slow report is a unused report.
 
----
 ### **Your Next Step**
 Start with **[Read Me.md]** to grasp the "why," then dive into **[01 Lakehouse.md]** to build your foundation.
 
