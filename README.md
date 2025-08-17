@@ -504,8 +504,8 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 **No more "the data is wrong."** Build BI that works.
 
 <div align="center">
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Zob2Z0ZGFjcWVjaDkzcTgwM2ZtZ3pqb3A1MTY4bDZqZXIzcHBqYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif" width="150">
-<h2><strong>Chapter 5: Deploy Without the Drama</strong></h2>
+<img width="1260" height="736" alt="image" src="https://github.com/user-attachments/assets/6701c88d-b5a5-4f61-be26-bcda87085bac" />
+  <h2><strong>Chapter 5: Deploy Without the Drama</strong></h2>
 </div>
 
 **Problem:** "It works on my machine" doesn’t cut it. Deployments break. Teams blame each other.
