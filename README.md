@@ -160,14 +160,11 @@ This chapter covers **advanced analytics, event-driven systems, and AI that actu
 
 This chapter turns raw data into **trusted, self-service insights**—without the chaos.
 
----
-
 ### **1. Start Here: The 5-Minute Blueprint**
 | **Document** | **What It Covers** | **Why It Matters** |
 |--------------|-------------------|-------------------|
 | **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/Read%20Me.md)** | The *what*, *why*, and *how* of BI in Fabric. | Skip this, and you’ll build reports nobody trusts. |
 
----
 ### **2. Build the Right Data Model (Do This First)**
 **Mistake:** Dumping tables into Power BI and calling it a day.
 **Fix:** **Star schemas + DAX** for performance and clarity.
@@ -179,7 +176,6 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 | **[15 Design Scalable Semantic Models.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/15%20Design%20Scalable%20Semantic%20Models.md)** | Optimize models for enterprise use. | Handles 10x data without choking. |
 | **[15.1 Work With Model Relationships.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/15.1%20Work%20With%20Model%20Relationships.md)** | Fix relationship issues. | No more "blank visuals" in reports. |
 
----
 ### **3. Dashboards That Don’t Suck**
 **Old Way:** Static reports that answer *yesterday’s* questions.
 **New Way:** **Real-time, interactive, and reusable**.
@@ -189,7 +185,6 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 | **[13 Real Time Dashboards.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/13%20Real%20Time%20Dashboards.md)** | Build live dashboards with Fabric. | Decisions made on *current* data, not last month’s. |
 | **[16 Create Reusable Power BI Assets.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/16%20Create%20Reusable%20Power%20BI%20Assets.md)** | Create templates, themes, and components. | Stop reinventing the wheel for every report. |
 
----
 ### **4. Make It Fast (Because Nobody Waits)**
 **Goal:** Reports that load in **under 3 seconds**.
 
@@ -197,7 +192,6 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 |--------------|-----------|---------------------|
 | **[16.1 Optimize Power BI Performance Using External Tools.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/16.1%20Optimize%20Power%20BI%20Performance%20Using%20External%20Tools.md)** | Use Tabular Editor, DAX Studio, etc. | Reports that *don’t* spin forever. |
 
----
 ### **5. Lock It Down (Before It’s Too Late)**
 **Problem:** Sensitive data leaks. Users see *everything*.
 **Solution:** **Row-level security + access controls**.
@@ -207,7 +201,6 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 | **[17 Enforce Model Security.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/17%20Enforce%20Model%20Security.md)** | Set up RLS and object-level security. | Sales sees *only* their region’s data. |
 | **[19 Secure Data Access.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/19%20Secure%20Data%20Access.md)** | Manage permissions in Fabric. | No more "Oops, wrong person saw this." |
 
----
 ### **6. Monitor and Maintain (Or It Will Break)**
 **Reality:** Reports slow down. Data drifts. Users complain.
 
@@ -215,7 +208,6 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 |--------------|------------|------------|
 | **[18 Monitor Hub.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/18%20Monitor%20Hub.md)** | Track usage, performance, and errors. | Fix issues *before* the CEO notices. |
 
----
 ### **7. Advanced: Query Like a Pro**
 **For when SQL isn’t enough.**
 
@@ -224,14 +216,12 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 | **[20 Work With Database.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/20%20Work%20With%20Database.md)** | Direct database queries. | Complex analytics without Power BI limits. |
 | **[20a Work With GraphQL.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/20a%20Work%20With%20GraphQL.md)** | Use GraphQL for flexible data fetching. | Build custom apps on top of your BI. |
 
----
 ### **Where Teams Fail**
 1. **No star schema?** Queries timeout. Users give up.
 2. **Ignoring DAX?** Numbers don’t add up. Trust erodes.
 3. **No security?** Compliance nightmares.
 4. **No monitoring?** "Why is this report so slow?" becomes a daily question.
 
----
 ### **Your First Step**
 1. Read **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/Read%20Me.md)** (5 min).
 2. Build your **star schema** ([Guide](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%204%20-%20Reporting%20%26%20Business%20Intelligence/14%20Create%20A%20Star%20Schema%20Model.md)).
@@ -240,6 +230,34 @@ This chapter turns raw data into **trusted, self-service insights**—without th
 
 **No more "the data is wrong."** Build BI that works.
 
-## Chapter 5 - Deployment & Operations
-- [21. Deployment Pipelines in Microsoft Fabric.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/21.%20Deployment%20Pipelines%20in%20Microsoft%20Fabric.md)
-- [Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/Read%20Me.md)
+## **Chapter 5: Deploy Without the Drama**
+**Problem:** "It works on my machine" doesn’t cut it. Deployments break. Teams blame each other.
+**Solution:** **Automated, repeatable, and zero-downtime** releases—so you can sleep at night.
+
+This chapter is about **getting your work into production**—*without the fire drills*.
+
+### **1. Start Here: The 5-Minute Survival Guide**
+| **Document** | **What It Covers** | **Why It Matters** |
+|--------------|-------------------|-------------------|
+| **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/Read%20Me.md)** | The *what*, *why*, and *how* of Fabric deployments. | Skip this, and you’ll be fixing production at 2 AM. |
+
+### **2. Deployment Pipelines (Your New Best Friend)**
+**Mistake:** Manual copies from Dev → Test → Prod.
+**Fix:** **Automated pipelines** with rollback plans.
+
+| **Document** | **Your Task** | **Outcome** |
+|--------------|---------------|-------------|
+| **[21. Deployment Pipelines in Microsoft Fabric.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/21.%20Deployment%20Pipelines%20in%20Microsoft%20Fabric.md)** | Set up CI/CD for Fabric. | One-click deployments. No more "forgot to update the parameter" disasters. |
+
+### **Where Teams Fail**
+1. **Manual deployments?** Human error *will* bite you.
+2. **No rollback plan?** Outages last *hours*.
+3. **Skipping testing?** Production becomes the test environment.
+
+### **Your First Step**
+1. Read **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/Read%20Me.md)** (5 min).
+2. **Build your first pipeline** ([Guide](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%205%20-%20Deployment%20%26%20Operations/21.%20Deployment%20Pipelines%20in%20Microsoft%20Fabric.md)).
+3. **Ask yourself:** *What’s the riskiest part of our current deployment process?*
+   Automate it *today*.
+
+**No more "hope it works."** Deploy with confidence.
