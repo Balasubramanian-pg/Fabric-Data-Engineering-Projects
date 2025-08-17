@@ -1,35 +1,37 @@
 # Fabric-Data-Engineering-Projects
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
+Here's your original text with **only the hyperlinks added**—no other changes:
+
+---
 ### **Chapter 1: Building a Modern Data Foundation in Microsoft Fabric**
 **Goal:** Turn raw data into a trusted, high-performance analytical asset—step by step.
-
 This chapter is your blueprint for constructing a **scalable, governed data platform** in Fabric. We’ll start with ingestion, enforce quality at every layer, and end with a warehouse ready for analytics. Each guide builds on the last, so tackle them in order.
 
 #### **1. The Big Picture**
 | **Document**       | **What It Covers**                                                                 | **Why It Matters**                                                                 |
 |--------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **[Read Me.md]**   | Architecture overview, tech stack, and how the pieces fit together.               | Sets expectations: *What* you’re building and *why* it’s structured this way.      |
+| **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)**   | Architecture overview, tech stack, and how the pieces fit together.               | Sets expectations: *What* you’re building and *why* it’s structured this way.      |
 
 #### **2. Core Components: Where Data Lives**
 | **Document**               | **Action Items**                                                                   | **Key Takeaway**                                                                   |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **[01 Lakehouse.md]**      | Create a Lakehouse (data lake + warehouse hybrid).                                 | Your single source of truth—scalable storage *and* SQL query power.                |
-| **[03 Delta Lake.md]**     | Learn ACID transactions, time travel, and schema enforcement.                      | No more "garbage in, garbage out." Delta Lake keeps data reliable and auditable.   |
-| **[03b Medallion Lakehouse.md]** | Organize data into **Bronze (raw) → Silver (clean) → Gold (enriched)** layers.      | Prevents chaos. Each layer has a job: *landing → validating → serving*.           |
+| **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)**      | Create a Lakehouse (data lake + warehouse hybrid).                                 | Your single source of truth—scalable storage *and* SQL query power.                |
+| **[03 Delta Lake.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03%20Delta%20Lake.md)**     | Learn ACID transactions, time travel, and schema enforcement.                      | No more "garbage in, garbage out." Delta Lake keeps data reliable and auditable.   |
+| **[03b Medallion Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03b%20Medallion%20Lakehouse.md)** | Organize data into **Bronze (raw) → Silver (clean) → Gold (enriched)** layers.      | Prevents chaos. Each layer has a job: *landing → validating → serving*.           |
 
 #### **3. Moving and Transforming Data**
 | **Document**               | **What You’ll Do**                                                                 | **Outcome**                                                                        |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **[04 Ingest Pipeline.md]** | Build a pipeline to pull data into **Bronze**.                                     | Automated, repeatable ingestion—no manual uploads.                                  |
-| **[05 Dataflows Gen2.md]** | Use Power Query to clean/transform Bronze → **Silver**.                            | Low-code way to standardize data *before* analysis.                                |
+| **[04 Ingest Pipeline.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/04%20Ingest%20Pipeline.md)** | Build a pipeline to pull data into **Bronze**.                                     | Automated, repeatable ingestion—no manual uploads.                                  |
+| **[05 Dataflows Gen2.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/05%20Dataflows%20Gen2.md)** | Use Power Query to clean/transform Bronze → **Silver**.                            | Low-code way to standardize data *before* analysis.                                |
 
 #### **4. Serving Data for Analytics**
 | **Document**               | **Focus**                                                                          | **Business Impact**                                                                |
 |----------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **[06a Data Warehouse Load.md]** | Load Gold-layer data into the **Warehouse** using T-SQL.                     | Optimized for speed: BI tools and reports run *fast*.                              |
-| **[06b Data Warehouse Query.md]** | Write T-SQL queries to analyze data.                                         | Answer questions like *"What’s our monthly revenue by region?"* in seconds.        |
-| **[06c Monitor Data Warehouse.md]** | Track query performance, resource use, and health.                          | Proactively fix slowdowns before users complain.                                   |
+| **[06a Data Warehouse Load.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06a%20Data%20Warehouse%20Load.md)** | Load Gold-layer data into the **Warehouse** using T-SQL.                     | Optimized for speed: BI tools and reports run *fast*.                              |
+| **[06b Data Warehouse Query.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06b%20Data%20Warehouse%20Query.md)** | Write T-SQL queries to analyze data.                                         | Answer questions like *"What’s our monthly revenue by region?"* in seconds.        |
+| **[06c Monitor Data Warehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06c%20Monitor%20Data%20Warehouse.md)** | Track query performance, resource use, and health.                          | Proactively fix slowdowns before users complain.                                   |
 
 ### **Key Patterns to Notice**
 1. **Progressive Refinement**: Data gets *better* as it moves from Bronze → Gold. No shortcuts.
@@ -44,7 +46,7 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 - **Not monitoring the Warehouse?** A slow report is a unused report.
 
 ### **Your Next Step**
-Start with **[Read Me.md]** to grasp the "why," then dive into **[01 Lakehouse.md]** to build your foundation.
+Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)** to grasp the "why," then dive into **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)** to build your foundation.
 
 ## Chapter 2 - Data Preparation & Transformation
 - [2. Analyze Spark.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/2.%20Analyze%20Spark.md)
