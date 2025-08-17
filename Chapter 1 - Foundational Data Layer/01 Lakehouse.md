@@ -1,4 +1,4 @@
-# Lab: Create a Microsoft Fabric Lakehouse
+# Create a Microsoft Fabric Lakehouse
 
 ## Introduction
 
