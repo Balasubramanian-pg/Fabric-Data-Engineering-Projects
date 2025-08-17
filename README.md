@@ -1,16 +1,46 @@
 # Fabric-Data-Engineering-Projects
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
-## Chapter 1 - Foundational Data Layer
-- [01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)
-- [03 Delta Lake.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03%20Delta%20Lake.md)
-- [03b Medallion Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03b%20Medallion%20Lakehouse.md)
-- [04 Ingest Pipeline.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/04%20Ingest%20Pipeline.md)
-- [05 Dataflows Gen2.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/05%20Dataflows%20Gen2.md)
-- [06a Data Warehouse Load.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06a%20Data%20Warehouse%20Load.md)
-- [06b Data Warehouse Query.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06b%20Data%20Warehouse%20Query.md)
-- [06c Monitor Data Warehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06c%20Monitor%20Data%20Warehouse.md)
-- [Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)
+### Chapter 1 - Foundational Data Layer
+
+This chapter outlines the end-to-end process of establishing a modern data platform using Microsoft Fabric, from initial data ingestion to creating a queryable, high-performance analytical layer. Think of this as the first step to Fabric data engineering
+
+To start things up please read this first
+**[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)**
+
+The Read Me file serves as the introduction for the chapter, providing a high-level overview of the project's goals. It outlines the architecture being constructed, the technologies involved, and the purpose of each subsequent guide, setting the context for the entire foundational data layer.
+
+**[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)**
+
+This document introduces the Lakehouse, a central component in Microsoft Fabric that combines the scalability of a data lake with the features of a data warehouse. It explains the core concepts and guides the user through creating and configuring a new Lakehouse, setting the foundation for all subsequent data storage and processing activities.
+
+**[03 Delta Lake.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03%20Delta%20Lake.md)**
+
+This section delves into Delta Lake, the open-source storage format that underpins the Fabric Lakehouse. It explains key features such as ACID transactions, time travel, and schema enforcement, which bring reliability and performance to the data lake. Understanding Delta Lake is crucial for managing data quality and versioning.
+
+**[03b Medallion Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03b%20Medallion%20Lakehouse.md)**
+
+This guide details the implementation of the Medallion architecture, a best practice for organizing data into Bronze (raw), Silver (validated), and Gold (enriched) layers. It outlines how to structure the Lakehouse to progressively clean, transform, and aggregate data, promoting governance and reusability.
+
+**[04 Ingest Pipeline.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/04%20Ingest%20Pipeline.md)**
+
+This document provides a step-by-step guide on building a data pipeline within Fabric. It focuses on creating a repeatable process to pull data from a source system and land it in the Bronze layer of the Lakehouse, marking the first step in the data engineering lifecycle.
+
+**[05 Dataflows Gen2.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/05%20Dataflows%20Gen2.md)**
+
+This section explores Dataflows Gen2, a low-code data transformation service in Fabric. It demonstrates how to use its Power Query-based interface to clean and transform the raw data from the Bronze layer and load the refined output into the Silver layer of the Lakehouse.
+
+**[06a Data Warehouse Load.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06a%20Data%20Warehouse%20Load.md)**
+
+This guide covers loading curated data from the Gold layer of the Lakehouse into the Fabric Data Warehouse. It focuses on using T-SQL commands to create a relational, high-performance analytical model ready for business intelligence and reporting.
+
+**[06b Data Warehouse Query.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06b%20Data%20Warehouse%20Query.md)**
+
+Following the data load, this document demonstrates how to query and analyze data within the Fabric Data Warehouse. It provides examples of standard T-SQL queries to interact with the tables, highlighting the performance and analytical capabilities of the Warehouse.
+
+**[06c Monitor Data Warehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/06c%20Monitor%20Data%20Warehouse.md)**
+
+This section addresses operational management, explaining how to monitor the performance and usage of the Data Warehouse. The guide covers using built-in Fabric tools and Dynamic Management Views (DMVs) to track query execution, resource consumption, and overall system health.
 
 ## Chapter 2 - Data Preparation & Transformation
 - [2. Analyze Spark.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/2.%20Analyze%20Spark.md)
