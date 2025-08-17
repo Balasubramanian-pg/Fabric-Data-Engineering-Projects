@@ -1,9 +1,6 @@
 # Fabric-Data-Engineering-Projects
 This repository contains learning materials and code samples for Microsoft Fabric Data Engineering. Below is the index of all chapters and files with direct links.
 
-Here's your original text with **only the hyperlinks added**—no other changes:
-
----
 ### **Chapter 1: Building a Modern Data Foundation in Microsoft Fabric**
 **Goal:** Turn raw data into a trusted, high-performance analytical asset—step by step.
 This chapter is your blueprint for constructing a **scalable, governed data platform** in Fabric. We’ll start with ingestion, enforce quality at every layer, and end with a warehouse ready for analytics. Each guide builds on the last, so tackle them in order.
@@ -48,14 +45,54 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
 ### **Your Next Step**
 Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/Read%20Me.md)** to grasp the "why," then dive into **[01 Lakehouse.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md)** to build your foundation.
 
-## Chapter 2 - Data Preparation & Transformation
-- [2. Analyze Spark.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/2.%20Analyze%20Spark.md)
-- [8.0 Data Science Get Started.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.0%20Data%20Science%20Get%20Started.md)
-- [8.1 Data Science Explore Data.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.1%20Data%20Science%20Explore%20Data.md)
-- [8.2 Data Science Preprocess Data Wrangler.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.2%20Data%20Science%20Preprocess%20Data%20Wrangler.md)
-- [8.3 Data Science Train.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.3%20Data%20Science%20Train.md)
-- [8.4 Data Science Batch.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.4%20Data%20Science%20Batch.md)
-- [Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md)
+### **Chapter 2: From Raw Data to Actionable Insights**
+**Problem:** Data is messy. Models fail. Teams waste time cleaning instead of analyzing.
+**Solution:** A **repeatable, scalable** process to explore, clean, and train data—*without reinventing the wheel every time*.
+
+This chapter focuses on **preparation and transformation** using Spark, Data Science tools, and automation. No theory—just what works.
+
+### **1. Start Here: The 5-Minute Overview**
+| **Document** | **What It Covers** | **Why It Matters** |
+|--------------|-------------------|-------------------|
+| **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md)** | Goals, tools, and workflow for this chapter. | Skip this, and you’ll waste time guessing how pieces fit together. |
+
+### **2. Explore and Understand Your Data**
+**Mistake:** Jumping into modeling without knowing your data.
+**Fix:** Profile, visualize, and validate *first*.
+
+| **Document** | **Your Task** | **Outcome** |
+|--------------|---------------|-------------|
+| **[2. Analyze Spark.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/2.%20Analyze%20Spark.md)** | Use Spark to analyze large datasets efficiently. | Find patterns, outliers, and issues *before* they derail your analysis. |
+| **[8.1 Data Science Explore Data.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.1%20Data%20Science%20Explore%20Data.md)** | Dive deep into data distributions, correlations, and quality. | Answer: *"Is this data even usable for modeling?"* |
+
+### **3. Clean and Preprocess (The Boring but Critical Step)**
+**Old Way:** Manual Excel cleaning, inconsistent scripts.
+**New Way:** **Automated wrangling** with audit trails.
+
+| **Document** | **Action** | **Result** |
+|--------------|------------|------------|
+| **[8.2 Data Science Preprocess Data Wrangler.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.2%20Data%20Science%20Preprocess%20Data%20Wrangler.md)** | Clean, transform, and standardize data with Wrangler. | No more "I forgot which column I fixed." Reproducible prep. |
+
+### **4. Train and Deploy Models (Where the Magic Happens)**
+**Goal:** Build models that *actually* work in production.
+
+| **Document** | **Focus** | **Business Impact** |
+|--------------|-----------|---------------------|
+| **[8.3 Data Science Train.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.3%20Data%20Science%20Train.md)** | Train ML models with Fabric’s built-in tools. | From prototype to production—*without hand-offs*. |
+| **[8.4 Data Science Batch.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.4%20Data%20Science%20Batch.md)** | Schedule batch scoring for new data. | Models stay fresh. No manual reruns. |
+
+### **Where Teams Waste Time**
+1. **Skipping exploration?** Garbage in → garbage predictions.
+2. **Manual preprocessing?** One-off scripts break when data changes.
+3. **No batch updates?** Models decay silently.
+
+### **Your First Step**
+1. Read **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md)** (5 min).
+2. Profile your data with **[2. Analyze Spark.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/2.%20Analyze%20Spark.md)**.
+3. **Ask yourself:** *What’s the riskiest assumption in our current data pipeline?*
+   This chapter helps you validate it.
+
+**No shortcuts.** Start with the [Read Me](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/Read%20Me.md).
 
 ## Chapter 3 - Advanced Analytics & AI
 - [10. Ingest Notebooks.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/10.%20Ingest%20Notebooks.md)
