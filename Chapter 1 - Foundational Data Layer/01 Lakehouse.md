@@ -16,7 +16,7 @@ By completing this lab, you will:
 
 ## Estimated Time
 
-30 minutes
+120 minutes
 
 ## Prerequisites
 
@@ -218,8 +218,6 @@ This expanded exercise provides a comprehensive exploration of table creation, m
 ## Exercise 5: Create a Report
 **Objective:** Transform your lakehouse data into an interactive Power BI report with visualizations, filters, and business insights.  
 
----
-
 ## **5.1 Explore the Default Semantic Model**  
 Before creating a report, understand the semantic model automatically generated from your lakehouse tables.  
 
@@ -238,8 +236,6 @@ Before creating a report, understand the semantic model automatically generated 
 3. **Check for Hidden Tables (Optional):**  
    - If you see tables under **queryinsights**, ignore them (they are system-generated for query monitoring).  
 
----
-
 ## **5.2 Create a New Report**  
 Now, build a Power BI report using the lakehouse data.  
 
@@ -254,8 +250,6 @@ Now, build a Power BI report using the lakehouse data.
    - **Data pane (right):** Lists tables and fields from your lakehouse.  
    - **Filters pane (right):** Allows report-level, page-level, or visual-level filtering.  
    - **Canvas (center):** Where you design visuals.  
-
----
 
 ## **5.3 Design Your First Visualization**  
 Create a bar chart showing **total quantity sold per item**.  
@@ -275,8 +269,6 @@ Create a bar chart showing **total quantity sold per item**.
    - **Sort descending** (click the ellipsis `...` on the chart > **Sort by Quantity**).  
    - **Adjust colors** (go to **Format visual** > **Data colors**).  
    - **Add data labels** (enable in **Format visual** > **Data labels**).  
-
----
 
 ## **5.4 Add a Second Visualization (Table with Revenue)**  
 Now, create a table showing **revenue per item** (UnitPrice × Quantity).  
@@ -302,8 +294,6 @@ Now, create a table showing **revenue per item** (UnitPrice × Quantity).
    - Drag the new **Revenue** measure into the table.  
    - Format as currency (**Column tools** > **Format** > **Currency**).  
 
----
-
 ## **5.5 Add Interactive Filters**  
 Make the report dynamic with slicers (filters).  
 
@@ -319,8 +309,6 @@ Make the report dynamic with slicers (filters).
 
 3. **Test Interactivity:**  
    - Select different items in the slicer—the bar chart and table should update.  
-
----
 
 ## **5.6 Format and Finalize the Report**  
 Improve readability and aesthetics.  
@@ -342,8 +330,6 @@ Improve readability and aesthetics.
    - Click **File** > **Save**.  
    - Name it **"Item Sales Report"** and save to your workspace.  
 
----
-
 ## **5.7 Publish and Share (Optional)**  
 If working in a team, publish and share insights.  
 
@@ -356,8 +342,6 @@ If working in a team, publish and share insights.
    - In the workspace, right-click the report.  
    - Select **Manage permissions** to control access.  
 
----
-
 ## **Verification Checklist**  
 ✅ Report contains:  
 - A **bar chart** (quantity by item).  
@@ -366,8 +350,6 @@ If working in a team, publish and share insights.
 - A **title** and proper formatting.  
 
 ✅ Report is saved in the workspace.  
-
----
 
 ## **Next Steps**  
 - **Explore more visuals** (pie charts, KPIs, maps).  
