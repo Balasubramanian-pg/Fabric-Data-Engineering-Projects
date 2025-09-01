@@ -2,8 +2,6 @@ Designing effective full and incremental loading patterns is absolutely fundamen
 
 Let's dive deep into this with a real-world case study, covering the design and implementation in Microsoft Fabric using T-SQL in the Synapse Data Warehouse.
 
----
-
 ### Case Study: Syncing an E-Commerce Database
 
 **Source System:** An operational **Azure SQL Database** that powers an e-commerce website. This is a classic Online Transaction Processing (OLTP) system.
@@ -16,8 +14,6 @@ We need to load two key tables from the source database into our Data Warehouse:
 2.  **`Orders` Table:** A fact table containing transaction records. This table is append-only; new orders are always added, and old ones are never updated.
 
 We need a robust process to perform an initial **full load** to populate the warehouse, followed by daily **incremental loads** to keep it synchronized with the source.
-
----
 
 ### End-to-End Design: The High-Watermark Pattern
 
@@ -48,8 +44,6 @@ This ensures we only process new or updated records, making our daily loads fast
                                                  |
                                                  +-----> [ControlTable_Watermarks]
 ```
-
----
 
 ### Step-by-Step Implementation in Microsoft Fabric
 
