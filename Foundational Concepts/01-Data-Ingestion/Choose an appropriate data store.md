@@ -9,8 +9,6 @@ Before diving into the specific data stores, you must understand **OneLake**. Th
 
 **Key Takeaway:** The "data store" you choose in Fabric is less about *where* the data is physically stored (it's all in OneLake) and more about the **engine, experience, and toolset you use to interact with that data**.
 
----
-
 ### The Three Core Data Stores in Microsoft Fabric
 
 Microsoft Fabric offers three primary data storage and analytics experiences.
@@ -24,8 +22,6 @@ Let's break down each one.
 ### 1. The Lakehouse
 
 A Lakehouse is the evolution of a data lake. It combines the flexibility and scale of a data lake with the structure and management features of a data warehouse.
-
-
 
 **What is it?**
 A platform for storing, managing, and analyzing unstructured, semi-structured, and structured data. It's built on an open architecture and uses Delta Lake tables as its primary structured format.
@@ -48,13 +44,9 @@ A platform for storing, managing, and analyzing unstructured, semi-structured, a
 
 **Primary User Persona:** Data Engineer, Data Scientist.
 
----
-
 ### 2. The Data Warehouse
 
 This is the modern, cloud-native evolution of the traditional enterprise data warehouse.
-
-
 
 **What is it?**
 A fully transactional, relational database experience designed for enterprise-scale business intelligence (BI) and SQL analytics.
@@ -74,13 +66,9 @@ A fully transactional, relational database experience designed for enterprise-sc
 
 **Primary User Persona:** Data Analyst, BI Developer, SQL Developer.
 
----
-
 ### 3. The KQL Database
 
 This is a specialized database optimized for telemetry, time-series, and log data. It's the Fabric version of Azure Data Explorer (ADX).
-
-
 
 **What is it?**
 A high-performance, read-optimized database for analyzing massive volumes of streaming data, typically from logs, IoT devices, and application telemetry.
@@ -101,8 +89,6 @@ A high-performance, read-optimized database for analyzing massive volumes of str
 
 **Primary User Persona:** DevOps Engineer, Security Analyst, Site Reliability Engineer (SRE), Product Manager.
 
----
-
 ### Comparison Table: Lakehouse vs. Warehouse vs. KQL DB
 
 | Feature | Lakehouse | Data Warehouse | KQL Database |
@@ -114,8 +100,6 @@ A high-performance, read-optimized database for analyzing massive volumes of str
 | **Primary Workload**| Data Engineering, Data Science, ETL/ELT | Enterprise BI, SQL Analytics | **Real-time Analytics**, Log Analysis, IoT |
 | **Transactions** | ACID on Delta tables, but no multi-table transactions | **Full ACID compliance**, multi-statement transactions | Optimized for append; not transactional |
 | **User Persona** | Data Engineer, Data Scientist | Data Analyst, BI Developer | DevOps, Security Analyst, SRE |
-
----
 
 ### How to Choose: A Decision Framework
 
