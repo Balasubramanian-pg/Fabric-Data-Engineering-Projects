@@ -2,15 +2,11 @@ Handling imperfect data is not just a best practice; it's a daily reality for an
 
 Let's break down how to handle each of these challenges in Microsoft Fabric, using our e-commerce case study with practical examples in both T-SQL and Spark.
 
----
-
 ### Case Study Recap
 
 **Source:** An operational e-commerce database.
 **Target:** A Fabric Lakehouse and Warehouse.
 **Data:** We are processing `Orders` data, which includes `OrderID`, `OrderDate`, `CustomerID`, and `TotalAmount`.
-
----
 
 ### Challenge 1: Handling Duplicate Data
 
@@ -95,9 +91,6 @@ df_deduplicated = df_stg.withColumn("rn", row_number().over(windowSpec)).where("
 (df_deduplicated.write
  .insertInto("Gold_FactOrders", overwrite=False)) # Or use a merge operation
 ```
-
----
-
 ### Challenge 2: Handling Missing Data (Nulls)
 
 Data can arrive with `NULL` values in important fields. How you handle this depends on the column and the business requirements.
@@ -146,8 +139,6 @@ df_final = df_clean.dropna(subset=["CustomerID"])
 (df_final.write
  .insertInto("Gold_FactOrders", overwrite=False))
 ```
-
----
 
 ### Challenge 3: Handling Late-Arriving Data
 
