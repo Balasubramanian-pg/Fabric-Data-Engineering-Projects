@@ -2,8 +2,6 @@ Ingesting data using pipelines is the most common and robust method for traditio
 
 This guide will walk you through the entire process using a practical case study, covering the design, implementation, and best practices.
 
----
-
 ### The Core Concept: What is a Data Pipeline in Fabric?
 
 A Fabric Data Pipeline is a workflow orchestration tool powered by the **Azure Data Factory** engine. Think of it as a visual canvas where you can design a sequence of steps (called "activities") to perform a data-related task.
@@ -14,8 +12,6 @@ The most fundamental activity in any ingestion pipeline is the **Copy data** act
 *   **Source:** Defines where the data is coming from (e.g., a file in a data lake, a table in a database, a REST API).
 *   **Sink:** Defines where the data is going to (e.g., a new table in a Lakehouse or Data Warehouse).
 *   **Mapping:** Defines how columns from the source should be mapped to columns in the sink.
-
----
 
 ### Case Study: Daily Ingestion of Customer Data
 
@@ -28,8 +24,6 @@ Every day, our marketing department drops a new CSV file containing the previous
     *   Example path: `customers/daily/2023/11/18/new_customers.csv`
 *   **Target (Sink):** A Fabric Lakehouse named `LH_Marketing_Analytics`.
 *   **Table Name:** The data should be loaded into a Delta table named `Bronze_New_Customers`.
-
----
 
 ### Step-by-Step Implementation Guide
 
@@ -85,8 +79,6 @@ You are now presented with a blank pipeline canvas.
 3.  Fabric will connect to both the source and sink to infer the schema. It will automatically try to map columns with the same name.
 4.  Review the mapping. You can manually change mappings, delete columns you don't want to load, or change the data types for the destination columns. This is a critical step for ensuring data quality.
 
----
-
 ### Step 6: Making the Pipeline Dynamic (Advanced but Essential)
 
 Right now, our pipeline would try to copy *all* historical CSV files. We only want to copy *yesterday's* file. To do this, we use **pipeline parameters** and **dynamic content**.
@@ -110,8 +102,6 @@ Right now, our pipeline would try to copy *all* historical CSV files. We only wa
     *   `pipeline().parameters.TargetDate`: This accesses the `TargetDate` parameter we created.
     *   `formatDateTime(...)`: This function formats the date into the `yyyy/MM/dd` string needed for our folder structure.
     *   `@concat(...)`: This function joins all the strings together to form the full, dynamic path.
-
----
 
 ### Step 7: Validate, Run, and Schedule
 
