@@ -1,7 +1,5 @@
 Designing a loading pattern for streaming data is a core task in modern data architecture. I will walk you through a detailed case study, explaining the end-to-end design and implementation in Microsoft Fabric, complete with code examples.
 
----
-
 ### Case Study: Real-Time Retail Analytics
 
 **Company:** *Global-Retail-Corp*, a large retailer with both online and physical stores.
@@ -17,8 +15,6 @@ The business wants a real-time dashboard to monitor sales as they happen. Specif
 *   **Source 1 (Streaming):** Point-of-Sale (POS) systems from all stores send a JSON message for every transaction to an **Azure Event Hub**.
 *   **Source 2 (Static):** A `Stores` dimension table in a Fabric Lakehouse contains store metadata (StoreID, City, State).
 
----
-
 ### End-to-End Design: The "Hot" and "Cold" Path Pattern
 
 This is a classic and highly effective pattern for streaming architectures.
@@ -29,8 +25,6 @@ This is a classic and highly effective pattern for streaming architectures.
 Fabric's unified nature makes this pattern exceptionally easy to implement.
 
 **Architectural Diagram:**
-
-```
 [Azure Event Hub] --(sends JSON messages)--> [Fabric Eventstream]
                                                     |
                                                     |
