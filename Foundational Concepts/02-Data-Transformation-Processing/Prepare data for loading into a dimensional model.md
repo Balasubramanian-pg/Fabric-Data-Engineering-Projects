@@ -2,8 +2,6 @@ Of course. Preparing data for loading into a dimensional model is one of the mos
 
 Here is a comprehensive guide on how to prepare data for a dimensional model in Microsoft Fabric, using a practical case study and code examples.
 
----
-
 ### The Goal: Creating a Star Schema
 
 The end goal of this process is to create a **star schema**. A star schema consists of:
@@ -12,8 +10,6 @@ The end goal of this process is to create a **star schema**. A star schema consi
 *   **Dimension Tables:** These tables contain the "who, what, where, when, why"—the descriptive context (attributes) for the facts (e.g., `CustomerName`, `ProductCategory`, `StoreLocation`, `Date`). Dimension tables are typically wide and shallow.
 
 This structure is highly optimized for analytical queries.
-
----
 
 ### Case Study: Building a Sales Star Schema
 
@@ -36,9 +32,6 @@ We have a "Silver" layer table in our Lakehouse called `Silver_Sales_Transaction
 *   `FactSales` (DateKey, CustomerKey, ProductKey, Quantity, UnitPrice, SalesAmount)
 
 Notice the `FactSales` table will use **surrogate keys** (`CustomerKey`, `ProductKey`) instead of the original business keys (`CustomerID`, `ProductID`). This is a critical best practice.
-
----
-
 ### Step-by-Step Data Preparation Process
 
 We will use a **Fabric Notebook (PySpark)** for this transformation, as it's ideal for handling these types of structural changes and data cleansing operations.
