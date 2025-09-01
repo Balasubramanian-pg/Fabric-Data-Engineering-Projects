@@ -134,8 +134,6 @@ GROUP BY
 | London   | 1                   |
 | New York | 2                   |
 
----
-
 ### Method 2: Using Spark in a Lakehouse Notebook
 
 This is the preferred method for data engineers working with large-scale data in a Lakehouse. You can use Spark SQL or the PySpark DataFrame API.
