@@ -4,8 +4,6 @@ The primary method for "processing" data with KQL is not through traditional bat
 
 Here's a comprehensive guide on how to process data using KQL in a Fabric KQL Database, complete with a practical case study.
 
----
-
 ### The Core Concept: KQL Processing Philosophy
 
 KQL is optimized for a "Schema-on-Read" approach. The philosophy is:
@@ -13,8 +11,6 @@ KQL is optimized for a "Schema-on-Read" approach. The philosophy is:
 1.  **Ingest Fast, Ask Questions Later:** Ingest the raw or semi-structured data as quickly as possible into a staging table with minimal friction.
 2.  **Transform on Ingest (When Necessary):** For cleansing, structuring, and enrichment that needs to happen for *all* data, use an **update policy**. This transforms the data as it moves from a staging table to a final, clean table.
 3.  **Transform at Query Time:** For most ad-hoc analysis, exploration, and visualization, apply transformations directly within your KQL queries or encapsulate them in reusable **functions**. This provides maximum flexibility.
-
----
 
 ### Case Study: Analyzing Web Server Logs
 
@@ -32,8 +28,6 @@ The raw log data arrives as a JSON string in a table called `WebServerLogs_Stagi
 | :--- |
 | `{"Timestamp": "2023-11-18T14:30:15Z", "ClientIP": "192.168.1.10", "UserID": "user-abc", "Request": "GET /products/laptop", "StatusCode": 200, "ResponseTime_ms": 150}` |
 | `{"Timestamp": "2023-11-18T14:30:20Z", "ClientIP": "203.0.113.55", "UserID": "user-xyz", "Request": "POST /cart/add", "StatusCode": 404, "ResponseTime_ms": 55}` |
-
----
 
 ### Step 1: Ingest-Time Processing with an Update Policy
 
