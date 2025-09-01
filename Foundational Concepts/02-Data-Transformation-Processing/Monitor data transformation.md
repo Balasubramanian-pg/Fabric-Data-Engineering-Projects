@@ -2,8 +2,6 @@ Monitoring data transformation is a crucial step that goes beyond simple ingesti
 
 In Microsoft Fabric, monitoring transformations involves a combination of observing pipeline and notebook runs, querying metadata, and implementing data quality checks.
 
----
-
 ### The Core Principle: What Are You Monitoring?
 
 When monitoring data transformations, you are primarily concerned with three things:
@@ -11,8 +9,6 @@ When monitoring data transformations, you are primarily concerned with three thi
 1.  **Operational Health:** Did the transformation job (e.g., a notebook or a stored procedure) run successfully and on time?
 2.  **Performance:** Did the job complete within an acceptable duration? Is its performance degrading over time?
 3.  **Data Quality & Integrity:** Did the transformation produce the expected results? Are there nulls, duplicates, or incorrect values in the output? Did it process the correct number of rows?
-
----
 
 ### Monitoring Different Transformation Methods
 
