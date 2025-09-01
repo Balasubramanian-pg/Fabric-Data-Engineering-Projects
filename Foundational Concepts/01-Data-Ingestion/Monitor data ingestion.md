@@ -2,8 +2,6 @@ Monitoring data ingestion is not just an operational task; it's a critical compo
 
 Let's break down how to effectively monitor data ingestion across different Fabric components, using a comprehensive approach.
 
----
-
 ### The Central Hub: Fabric Monitoring Hub
 
 This is your starting point for almost all monitoring activities. It provides a single pane of glass to view the status and history of various Fabric items.
@@ -15,8 +13,6 @@ This is your starting point for almost all monitoring activities. It provides a 
 *   **Unified View:** See runs for Dataflows, Data Pipelines, Notebooks, and more, all in one place.
 *   **Filtering:** You can filter by Item type, Status (Succeeded, Failed, In Progress, Cancelled), Submission time, and User.
 *   **Drill-Down:** From the hub, you can click on any specific run to navigate to a detailed view with logs and error messages.
-
----
 
 ### Monitoring Different Ingestion Methods
 
