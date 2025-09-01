@@ -2,8 +2,6 @@ Creating windowing functions is a fundamental and powerful technique for advance
 
 This guide will explain everything you need to know, from the basic concepts to practical examples in both environments.
 
----
-
 ### What is a Windowing Function?
 
 A windowing function performs a calculation across a set of table rows that are somehow related to the current row. This set of rows is the "window."
@@ -31,8 +29,6 @@ FUNCTION_NAME() OVER (
 *   **`PARTITION BY` (Optional)**: Divides the rows into "partitions" or groups. The window function is applied independently to each partition. This is the most important clause. (e.g., `PARTITION BY ProductCategory`).
 *   **`ORDER BY` (Optional but common)**: Sorts the rows *within* each partition. This is essential for ranking functions (`ROW_NUMBER`) and running totals.
 *   **`ROWS/RANGE BETWEEN` (Optional)**: Specifies the frame or subset of rows within the partition to include in the calculation (e.g., "the preceding row and the current row"). This is used for things like moving averages.
-
----
 
 ### Method 1: Using T-SQL in a Synapse Data Warehouse
 
@@ -137,8 +133,6 @@ FROM (
 | 2023-11-02 | Electronics     | 1300.00         | **1225.00**          |
 | 2023-11-03 | Electronics     | 27.00           | **1300.00**          |
 
----
-
 ### Method 2: Using Spark in a Notebook
 
 This approach is perfect for data engineers and data scientists working in a Lakehouse. You can use either **Spark SQL** (with identical syntax to the T-SQL examples) or the **PySpark DataFrame API**.
@@ -210,8 +204,6 @@ df_lagged = df_daily_agg.withColumn("PreviousDaySales", lag("TotalDailySales", 1
 
 display(df_lagged)
 ```
-
----
 
 ### How to Choose: T-SQL vs. Spark
 
