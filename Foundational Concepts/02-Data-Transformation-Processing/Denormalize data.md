@@ -4,8 +4,6 @@ In Microsoft Fabric, you have several excellent tools to denormalize data, prima
 
 Here's a comprehensive guide on how to denormalize data in Fabric, covering the concepts, methods, and best practices for each approach.
 
----
-
 ### What is Denormalization?
 
 **Normalization** is the process of organizing data in a database to minimize redundancy. This typically results in many small, related tables (e.g., Customers, Products, Orders, OrderDetails). This is great for transactional systems (OLTP) because it makes writing data fast and consistent.
@@ -22,8 +20,6 @@ Here's a comprehensive guide on how to denormalize data in Fabric, covering the 
     *   `FactSales` (OrderID, OrderDate, CustomerName, City, ProductName, Category, ...)
 
 This `FactSales` table is perfect for Power BI, as most of the information needed for a sales report is already in one place.
-
----
 
 ### Method 1: Denormalizing with T-SQL in a Synapse Data Warehouse
 
@@ -107,8 +103,6 @@ This table is now perfectly optimized for consumption by Power BI in DirectLake 
 *   SQL developers and data analysts who are comfortable with T-SQL.
 *   Transforming structured, relational data that is already clean.
 
----
-
 ### Method 2: Denormalizing with Spark in a Lakehouse Notebook
 
 This approach is extremely powerful and flexible, especially when dealing with large volumes of data or semi-structured data in a Lakehouse. It is the workhorse of data engineers.
@@ -165,8 +159,6 @@ The output will be the same wide table as the T-SQL example, now stored as a new
 *   Data engineers and data scientists comfortable with Python or Scala.
 *   Denormalizing data from various sources (Parquet, JSON, CSV) before it's structured.
 *   Incorporating complex, non-SQL logic during the denormalization process.
-
----
 
 ### How to Choose: T-SQL vs. Spark
 
