@@ -2,8 +2,6 @@ This is one of the most common and important decisions you'll make when building
 
 Here is a comprehensive breakdown of everything you need to know to choose the appropriate data transformation tool.
 
----
-
 ### The Core Concept: Where Transformations Happen
 
 In Fabric, transformations can occur in different places using different engines, but they often read from and write to the same central storage: **OneLake**.
@@ -12,8 +10,6 @@ In Fabric, transformations can occur in different places using different engines
 *   **T-SQL** transformations primarily operate within the **Data Warehouse** experience.
 
 The magic is that a Notebook can prepare data that is then transformed further by T-SQL in a Warehouse, all without copying the data.
-
----
 
 ### 1. Dataflows Gen2 (The Low-Code / No-Code Option)
 
@@ -39,8 +35,6 @@ A web-based, drag-and-drop interface for connecting to hundreds of data sources,
 *   **Replacing Power BI Dataflows:** Migrating existing Power BI data preparation logic into a reusable, enterprise-scale Fabric pipeline.
 
 **Primary User Persona:** Data Analyst, BI Developer, Citizen Developer.
-
----
 
 ### 2. Notebooks (The Pro-Code Powerhouse)
 
@@ -68,8 +62,6 @@ An interactive coding environment that uses the powerful **Apache Spark** engine
 
 **Primary User Persona:** Data Engineer, Data Scientist.
 
----
-
 ### 3. T-SQL (The Relational Workhorse)
 
 T-SQL is the language of relational databases. In Fabric, it's the primary way to interact with data inside the **Synapse Data Warehouse**.
@@ -95,8 +87,6 @@ The standard language for querying and manipulating structured data in a relatio
 
 **Primary User Persona:** Data Analyst, BI Developer, SQL Developer, Analytics Engineer.
 
----
-
 ### Comparison Table: Dataflows vs. Notebooks vs. T-SQL
 
 | Feature | Dataflows Gen2 | Notebooks (Spark) | T-SQL (Warehouse) |
@@ -109,8 +99,6 @@ The standard language for querying and manipulating structured data in a relatio
 | **Main Purpose** | Self-service data prep | **Heavy-duty ETL**, Data Science | **Final modeling for BI**, ELT |
 | **Paradigm** | Step-by-step visual flow | Procedural / Functional programming | Declarative, Set-based |
 | **Typical Stage** | Ingestion, simple cleansing | **Bronze -> Silver** (Raw to Cleaned) | **Silver -> Gold** (Cleaned to BI Model) |
-
----
 
 ### How to Choose: A Decision Framework
 
