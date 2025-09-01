@@ -2,8 +2,6 @@ Processing data using Eventstreams is a powerful feature in Microsoft Fabric for
 
 Here’s a comprehensive guide on how to process data using Eventstreams, complete with a practical case study and examples.
 
----
-
 ### The Core Concept: What is Eventstream Processing?
 
 In Fabric, an Eventstream acts as a central hub for real-time data. The "processing" part refers to the ability to intercept the stream of data between its source and destination and apply transformations to it.
@@ -26,8 +24,6 @@ This is done using a special node called the **Event processor**.
 *   For complex business logic or stateful operations (use a Spark Notebook).
 *   For joining with large historical or dimensional tables (use a Spark Notebook or a KQL Database Update Policy).
 
----
-
 ### Case Study: Real-Time IoT Sensor Data Processing
 
 **Objective:**
@@ -45,8 +41,6 @@ We are receiving a continuous stream of data from IoT sensors in a factory into 
 // Heartbeat Message
 {"deviceId": "sensor-02", "eventType": "heartbeat", "timestamp": "2023-11-18T12:00:10Z"}
 ```
-
----
 
 ### Step-by-Step Implementation Guide
 
@@ -105,8 +99,6 @@ This is the most advanced feature of the Event processor: creating a summary ove
         *   **Alias:** Give the new aggregated field a name, like `AvgTemperature`.
 4.  The output of this processor will now be a new stream. Instead of individual sensor readings, it will produce one message every 30 seconds containing the average temperature from that window.
 5.  **Add a Destination:** Connect the output of this aggregation processor to a new destination, for example, a Lakehouse table named `TemperatureSummary_30s`.
-
----
 
 ### The Final Eventstream Design
 
