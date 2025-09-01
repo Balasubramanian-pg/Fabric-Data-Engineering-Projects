@@ -2,8 +2,6 @@ Grouping and aggregating data is the cornerstone of all analytics and business i
 
 I will follow the same detailed, case-study-driven approach to explain every concept and its implementation in Microsoft Fabric.
 
----
-
 ### Case Study: Summarizing E-Commerce Sales Data
 
 **Company:** Our familiar *Global-Retail-Corp*.
@@ -18,7 +16,6 @@ The business analytics team needs to move beyond looking at individual transacti
 **Source Data:**
 We'll use a denormalized table called `FactSales_Denormalized`, which we created in the previous example. This table is the perfect input for aggregation because it already contains all the attributes we need to group by (e.g., `Category`, `City`) and the measures we want to aggregate (e.g., `TotalAmount`).
 
----
 
 ### The Core Concepts: The Building Blocks of Aggregation
 
@@ -45,8 +42,6 @@ To perform any aggregation, you need to understand three key SQL clauses.
     *   `WHERE` filters rows **before** aggregation.
     *   `HAVING` filters groups **after** aggregation.
     *   You can use both in the same query.
-
----
 
 ### Method 1: Using T-SQL in a Synapse Data Warehouse
 
@@ -200,8 +195,6 @@ df_unique_customers = df.groupBy("City").agg(
 display(df_unique_customers)
 ```
 The results of these PySpark operations will be identical to their T-SQL counterparts.
-
----
 
 ### How to Choose: T-SQL vs. Spark
 
