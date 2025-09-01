@@ -8,8 +8,6 @@ Think of it as a no-code, drag-and-drop "data traffic cop":
 
 **Key Takeaway:** You'll almost always start a streaming project in Fabric by creating an Eventstream. The important decision is where you send the data from the Eventstream, as that choice determines which **processing engine** you will use.
 
----
-
 ### The Streaming Engine Options in Microsoft Fabric
 
 There are three primary ways to process streaming data in Fabric, each with a different underlying engine and purpose.
@@ -44,8 +42,6 @@ You route your data from an Eventstream to a **Lakehouse**. Then, you use a **No
 
 **Primary User Persona:** Data Engineer, Data Scientist.
 
----
-
 ### 2. Kusto Engine (The Real-Time Analytics Engine)
 
 This engine is purpose-built for ultra-low latency ingestion and immediate querying, making it ideal for observability and real-time monitoring.
@@ -70,8 +66,6 @@ You route your data from an Eventstream directly to a **KQL Database**. The Kust
 
 **Primary User Persona:** DevOps Engineer, Security Analyst, Site Reliability Engineer (SRE), Product Manager.
 
----
-
 ### 3. Streaming Dataflows (The Low-Code Engine)
 
 This is the most accessible option, bringing the familiar Power Query experience to the world of streaming data.
@@ -93,8 +87,6 @@ You create a Streaming Dataflow and connect it to a streaming source (like an Ev
 *   **Rapid Prototyping:** Quickly setting up a streaming pipeline to see results without the overhead of Spark development.
 
 **Primary User Persona:** BI Analyst, Data Analyst, Power Platform Developer.
-
----
 
 ### Comparison Table: Choosing Your Engine
 
