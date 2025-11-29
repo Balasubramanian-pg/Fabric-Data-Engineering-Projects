@@ -4,7 +4,8 @@ In this exercise you will build out a medallion architecture in a Fabric lakehou
 
 This exercise should take approximately **45** minutes to complete
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> [!Note]:
+> You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace
 
