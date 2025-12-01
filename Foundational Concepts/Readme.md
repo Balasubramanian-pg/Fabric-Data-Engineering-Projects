@@ -1,10 +1,4 @@
----
-Due Date: 2025-11-30
-Status: To Do
-Who: Balu
-Urgency: Next Focus - Parallel Throttle
----
-Study Guide for Exam DP-700: Implementing Data Engineering Solutions Using Microsoft Fabric  
+# Study Guide for Exam DP-700: Implementing Data Engineering Solutions Using Microsoft Fabric  
 1.  
 [Purpose of this document](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#purpose-of-this-document)  
 2.  
@@ -13,8 +7,6 @@ Study Guide for Exam DP-700: Implementing Data Engineering Solutions Using Micro
 [Skills measured](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#skills-measured)  
 4.  
 [Study resources](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#study-resources)
-
-  
 
 **Purpose of this document**
 
@@ -56,13 +48,6 @@ This study guide should help you understand what to expect on the exam and inclu
         You work closely with analytics engineers, architects, analysts, and administrators to design and deploy data engineering solutions for analytics.
         
         You should be skilled at manipulating and transforming data by using Structured Query Language (SQL), PySpark, and Kusto Query Language (KQL).
-        
-          
-        
-          
-        
-    
-      
     
 - **Skills at a glance**
     - Implement and manage an analytics solution (30–35%)
@@ -206,11 +191,6 @@ B
     [[Optimize Spark performance]]
     
     [[Optimize query performance]]
-    
-
-  
-
-  
 
 **Study resources**
 
