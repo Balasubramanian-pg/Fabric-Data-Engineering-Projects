@@ -1,12 +1,8 @@
 # Study Guide for Exam DP-700: Implementing Data Engineering Solutions Using Microsoft Fabric  
-1.  
-[Purpose of this document](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#purpose-of-this-document)  
-2.  
-[About the exam](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#about-the-exam)  
-3.  
-[Skills measured](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#skills-measured)  
-4.  
-[Study resources](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#study-resources)
+1.  [Purpose of this document](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#purpose-of-this-document)  
+2.  [About the exam](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#about-the-exam)  
+3.  [Skills measured](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#skills-measured)  
+4.  [Study resources](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700#study-resources)
 
 **Purpose of this document**
 
