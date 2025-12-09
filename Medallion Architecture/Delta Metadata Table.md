@@ -1,4 +1,4 @@
-# Persisting the manifest to a Delta metadata table — plan, DDL, and runnable examples
+# Persisting the manifest to a Delta metadata table - plan, DDL, and runnable examples
 
 Below is a complete, production-ready recipe to persist the extractor’s `manifest.json` into a Delta table (ingestion history). It contains:
 
@@ -26,8 +26,6 @@ All code examples assume the extractor already produced a `manifest` JSON object
   "reprocess": false
 }
 ```
-
----
 
 # 1. Delta table schema and DDL (recommended)
 
@@ -79,8 +77,6 @@ TBLPROPERTIES ('delta.appendOnly' = 'false');
 ```
 
 **Why partition by `ingest_date`:** Partitioning by ingest date keeps small, targeted partitions for typical queries (recent ingest checks) and reduces scan cost. This is a common pattern for ingestion history tables. (Delta creation/writing patterns referenced). ([Delta][1])
-
----
 
 # 2. PySpark / Databricks example — append or MERGE (recommended)
 
@@ -172,8 +168,6 @@ Notes:
 
 * `MERGE` requires Delta support (available in Databricks and Delta Lake). This pattern guarantees idempotency and lets you record reprocess attempts by toggling `reprocess` or `status`. Delta MERGE examples and best practices are standard. ([Databricks Documentation][2])
 
----
-
 # 3. Pure-Python example: write manifest JSON to ADLS and register via SQL
 
 If the extractor runs in an environment without Spark (e.g., Azure Function, container in Airflow), you can write the manifest JSON/Parquet to ADLS and then run a small Databricks/SQL job to ingest it into the Delta table.
@@ -220,8 +214,6 @@ WHEN NOT MATCHED THEN INSERT *
 
 This two-step approach separates concerns: lightweight extractor upload + a small Spark job to canonicalize and merge. ADLS + Delta registration patterns are common practice. ([Microsoft Learn][3])
 
----
-
 # 4. Upsert semantics and reprocessing patterns
 
 * Use `file_sha` as the unique natural key for idempotency: if `file_sha` already exists, skip full ingestion of the raw file or set `status = 'SKIPPED'` while still recording the attempted `pull_ts`. The manifest allows audit trail for skipped uploads. GitHub Contents API returns `sha` for exact file content fingerprint so this is a reliable idempotency anchor. ([GitHub Docs][4])
@@ -232,8 +224,6 @@ This two-step approach separates concerns: lightweight extractor upload + a smal
   * Or update the `status` of the canonical `file_sha` row to `REPROCESSED` and set `updated_at`. Both are valid; event logging is better for strict auditability.
 
 * When implementing MERGE, ensure the merge logic updates only relevant fields (status, updated_at, error_message) and preserves original ingest metadata for audit.
-
----
 
 # 5. Useful queries and monitoring checks
 
@@ -270,9 +260,6 @@ FROM metadata.ingestion_manifest
 GROUP BY ingest_date
 ORDER BY ingest_date DESC;
 ```
-
----
-
 # 6. Best practices and tradeoffs
 
 * **Use Delta MERGE** for idempotent upserts (supported in Databricks / Delta Lake). MERGE is reliable for dimension/manifest updates and avoids duplicates. ([Databricks Documentation][2])
@@ -280,15 +267,11 @@ ORDER BY ingest_date DESC;
 * **Event log vs canonical row**: keep an append-only event log of manifests for full audit. Maintain a separate “current” view/table (materialized) for fast lookups if needed.
 * **Small writes**: writing one-row manifests directly into Delta is fine, but batch-writing (accumulate a few manifests and write in bulk) reduces small-file overhead at scale. If you expect thousands of files per minute, batch; otherwise single-row commits are acceptable. Delta write performance notes are well-documented. ([Delta][1])
 
----
-
 # 7. Concise explanation of reasoning steps taken
 
 * Use the GitHub file SHA (returned by the Contents API) as the idempotency anchor because it’s a content fingerprint and shelters us from duplicate ingestion attempts. ([GitHub Docs][4])
 * Persist the manifest to a Delta table to gain ACID semantics, efficient MERGE/upsert, and querying by downstream teams (Delta is the recommended pattern for lakehouse metadata). ([Delta][1])
 * Partition on `ingest_date` and use MERGE for idempotent updates and reprocess handling; provide both Spark-based and pure-Python + follow-up-Spark ingestion paths to cover different runtime capabilities. ([Databricks Documentation][2])
-
----
 
 # 8. Points that require verification (uncertain / please confirm)
 
@@ -297,8 +280,6 @@ ORDER BY ingest_date DESC;
 * Confirm retention/archival policy for manifest and Bronze raw files (how long to keep them).
 * Confirm whether you prefer append-only event logging (recommended) or a single-row canonical manifest (overwrite). I recommended event log + MERGE for flexibility.
 * Decide whether to compress manifest storage (JSON vs Parquet) for storage efficiency; Parquet is more query-friendly if you will do ad-hoc queries without Spark conversion.
-
----
 
 # 9. Next actions I can produce immediately (pick one)
 
