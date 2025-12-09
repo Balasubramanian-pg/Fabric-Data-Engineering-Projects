@@ -11,10 +11,6 @@ Target environment assumptions
 * Transformations: dbt (v1.x recommended).
 * Dashboard: Tableau (Desktop / Cloud) connecting to Databricks SQL Warehouse or live cluster.
 
-ASSUMPTION: the dataset's business key is `enquiryNumber`. Confirm this before wide rollout.
-
----
-
 # Table of contents
 
 1. Project summary and goals
@@ -30,8 +26,6 @@ ASSUMPTION: the dataset's business key is `enquiryNumber`. Confirm this before w
 11. Tableau and dashboard publishing notes
 12. Runbook and operational playbook
 13. Appendix: sample queries and utilities
-
----
 
 # 1. Project summary and goals
 
@@ -50,8 +44,6 @@ ASSUMPTION: the dataset's business key is `enquiryNumber`. Confirm this before w
 * Orchestration DAG and Databricks Job specs.
 * Documentation, field mappings, and tests.
 * Tableau workbook skeleton and connection instructions.
-
----
 
 # 2. Folder and repo layout
 
@@ -100,8 +92,6 @@ Notes
 * Keep extractor and pipeline infra separate from dbt code so data engineers and analytics engineers can iterate independently.
 * Use environment-specific configs: `dev`, `qa`, `prod` in `profiles.yml` and Airflow connections.
 
----
-
 # 3. Bronze / Silver / Gold design
 
 ## Bronze (raw)
@@ -128,8 +118,6 @@ Notes
 
 * Goal: normalized dimensions + fact tables, ready for BI consumption.
 * Materialize `dim_*` and `fact_enquiry` tables. Use surrogate keys and optional SCD Type 2 for contacts and salesreps.
-
----
 
 # 4. Schema design and star schema DDL
 
@@ -221,8 +209,6 @@ Notes
 
 * Use `MERGE` semantics when loading incremental data into fact and dims to avoid duplicates.
 * Use surrogate keys for joins in BI tools.
-
----
 
 # 5. Sample dbt project structure and sample models
 
@@ -332,8 +318,6 @@ where rn = 1
 * Use `not_null` on `enquiry_number`, `enq_created_date_key`.
 * Value tests for `mobile_e164` pattern.
 
----
-
 # 6. Extractor (GitHub) implementation - Python example
 
 This extractor will pull the CSV from GitHub using the contents API and write the file and manifest to ADLS Gen2 via the cloud SDK or to Databricks DBFS.
@@ -384,8 +368,6 @@ Notes
 * For private repos, ensure the PAT has `repo` permissions.
 * If files are large, use `raw.githubusercontent.com` download or Git LFS approaches.
 
----
-
 # 7. Orchestration: Airflow / Databricks Jobs specs
 
 ## DAG overview
@@ -418,8 +400,6 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
 * Job 1: `bronze_process` - Cluster config, notebook to register file and write to Bronze Delta.
 * Job 2: `run_dbt` - if dbt is run inside Databricks, mount repo and run dbt commands in job.
 
----
-
 # 8. CI / CD and testing strategy
 
 ## CI pipeline (GitHub Actions)
@@ -432,8 +412,6 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
 * Unit tests for extractor.
 * dbt tests: `unique`, `not_null`, `accepted_values` and custom SQL tests for date plausibility.
 * End-to-end integration test: run extractor on sample file and validate expected rows in `gold.fact_enquiry`.
-
----
 
 # 9. Data quality and monitoring
 
@@ -449,8 +427,6 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
 * Push metrics to a `monitoring` table in the lake and surface via a lightweight Grafana / Tableau dashboard.
 * Configure alerts for failing dbt tests or Airflow job failures.
 
----
-
 # 10. Security and governance
 
 * Store GitHub token in Key Vault / Secret Manager.
@@ -458,15 +434,11 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
 * Mask or hash `mobile_no` at presentation layer if PII policy requires.
 * Role-based access to Gold tables; limit Bronze access to engineers only.
 
----
-
 # 11. Tableau and dashboard publishing notes
 
 * Connect Tableau Desktop to Databricks SQL Warehouse using the Databricks connector.
 * Build extracts for high-cardinality visuals; publish to Tableau Cloud or Server and schedule refreshes.
 * Use surrogate keys in Star Schema for joins.
-
----
 
 # 12. Runbook and operational playbook
 
@@ -482,8 +454,6 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
 2. Re-run the failed task after resolving root cause.
 3. If data corrected in source, reprocess by adding an entry to manifest with `reprocess=true`.
 
----
-
 # 13. Appendix: sample utilities
 
 * `normalize_phone.py` - python utility to standardize phone.
@@ -497,5 +467,3 @@ with DAG('github_to_medallion', schedule_interval='@daily') as dag:
   * produce the extractor script with full ADLS upload (next artifact), or
   * scaffold the dbt project with the critical models and tests, or
   * write the Airflow DAG and Databricks Job JSON specs.
-
-Pick which of the three to build next and I will produce runnable code in the next message.
