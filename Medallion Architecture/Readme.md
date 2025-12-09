@@ -1,9 +1,6 @@
-# High-level assumptions and plan summary
+# The Project Plan
 
-**ASSUMPTION:** when you wrote “gen 2” I assume you mean an enterprise lakehouse environment such as Azure Data Lake Storage Gen2 or Databricks on ADLS Gen2 as the target landing zone. If that is wrong I will adapt, but for this full plan I will proceed with ADLS Gen2 / Databricks-style lakehouse as the execution environment.
-**Why this assumption is necessary:** it determines ingestion method, storage format (Delta/Parquet), and connections to BI tools.
-
-Short summary of the project I will outline below:
+The overview of the movement of the data is as such :
 
 * Ingest CSV from GitHub via GitHub REST API into a Bronze raw layer.
 * Clean, standardize, and validate into a Silver conformed layer.
@@ -12,8 +9,7 @@ Short summary of the project I will outline below:
 
 Key references used: Databricks Medallion architecture, GitHub REST API docs, dbt dimensional modeling guidance, and Tableau <-> Databricks connectivity docs. ([Databricks][1])
 
----
-
+So let us start with the scope and goals of the project
 # 1. Project scope and goals
 
 ## Goals
@@ -32,18 +28,16 @@ Key references used: Databricks Medallion architecture, GitHub REST API docs, db
 * A connected Tableau dashboard with live/refreshable data.
 * Documentation, monitoring, and access controls.
 
----
-
 # 2. Data understanding and immediate questions (items that need verification)
 
 These points must be clarified before final physical model design:
 
-* What is the canonical unique business key? Is `enquiryNumber` unique across the dataset? (ASSUMPTION: yes for this plan.)
-* What does the column named `3` contain? It looks like a stray name. Needs inspection.
-* What do `DCdate` and `DCnumber` represent and are they authoritative for order/fiscal data?
-* Is `mobile_no` considered PII that must be masked or tokenized? What privacy policy applies?
-* Expected data volume and refresh cadence from GitHub: daily, hourly, ad-hoc?
-* Private repo vs public repo access. If private, we must use personal access token for GitHub API.
+1. What is the canonical unique business key? Is `enquiryNumber` unique across the dataset?
+2. What does the column named `3` contain? It looks like a stray name. Needs inspection.
+3. What do `DCdate` and `DCnumber` represent and are they authoritative for order/fiscal data?
+4. Is `mobile_no` considered PII that must be masked or tokenized? What privacy policy applies?
+5. Expected data volume and refresh cadence from GitHub: daily, hourly, ad-hoc?
+6. Private repo vs public repo access. If private, we must use personal access token for GitHub API.
 
 List of uncertain points requiring verification:
 
@@ -52,28 +46,24 @@ List of uncertain points requiring verification:
 * Target deployment platform: Databricks / Azure Synapse / Snowflake / plain ADLS Gen2.
 * Retention and archival policy for Bronze raw files.
 
----
-
 # 3. Architecture overview (medallion layers)
 
-* **Bronze (raw ingestion)**
+### Bronze *(raw ingestion)*
 
   * Purpose: immutable raw snapshots of CSVs as landed from GitHub. Keep original file plus metadata (source, pull timestamp, sha). Store as Delta or Parquet with partitioning by ingest_date.
   * Notes: keep one raw file per commit/pull for traceability. Use GitHub REST API `GET /repos/{owner}/{repo}/contents/{path}` or raw download_url for public files with optional token for private repos. ([GitHub Docs][2])
 
-* **Silver (cleaned, conformed)**
+### Silver *(cleaned, conformed)*
 
   * Purpose: parsed and typed columns, deduplicated, normalized values for fields like `enq_stage`, `state`, `source_of_enq`. Resolve inconsistent encodings, normalize phone numbers, parse timestamps, map categorical values to canonical codes.
   * Techniques: type coercion, null handling, phone regex, standardized date parsing using ISO 8601, mapping table lookups for stages and sources.
 
-* **Gold (analytics / star schema)**
+### Gold *(analytics / star schema)*
 
   * Purpose: dimensional model exposed to BI. Build conformed dimensions and fact table(s) for sales/enquiries with grain = one enquiry event or one sales interaction depending on business definition. Materialize performance-optimized tables and aggregates.
   * Use-case tables: `dim_date`, `dim_customer` (or `dim_contact`), `dim_location`, `dim_salesrep`, `dim_source`, and `fact_enquiry` or `fact_sales_activity`.
 
 Medallion architecture background and best practices references. ([Databricks][1])
-
----
 
 # 4. Ingestion design (GitHub -> Bronze)
 
@@ -105,8 +95,6 @@ Medallion architecture background and best practices references. ([Databricks][1
 
 * Use incremental pull: compare `sha` in manifest to avoid reprocessing identical files.
 * Log failures and retries.
-
----
 
 # 5. Bronze -> Silver processing (clean, standardize, validate)
 
@@ -159,8 +147,6 @@ SELECT * EXCEPT(rank) FROM (
 ) WHERE rank = 1
 ```
 
----
-
 # 6. Silver -> Gold: star schema design
 
 ## Grain decisions
@@ -211,8 +197,6 @@ SELECT * EXCEPT(rank) FROM (
 
 Design reference for dimensional modeling and dbt workflows. ([dbt Labs][3])
 
----
-
 # 7. Implementation technologies and why
 
 * **Storage and compute**
@@ -238,8 +222,6 @@ Design reference for dimensional modeling and dbt workflows. ([dbt Labs][3])
 * **BI**
 
   * Tableau or Tableau Cloud connecting directly to Databricks SQL Warehouse or to the Gold tables. Databricks provides a Tableau connector for low-latency access. ([Databricks Documentation][5])
-
----
 
 # 8. End-to-end pipeline orchestration (detailed flow)
 
@@ -270,8 +252,6 @@ Design reference for dimensional modeling and dbt workflows. ([dbt Labs][3])
 
    * Pipeline success/failure, data quality failures, new schema changes detected in Bronze.
 
----
-
 # 9. Example dbt model structure and naming
 
 * `models/`
@@ -295,8 +275,6 @@ Design reference for dimensional modeling and dbt workflows. ([dbt Labs][3])
 
 Use dbt tests: `unique`, `not_null`, `relationships`. Use `sources:` definitions to point at Bronze tables.
 
----
-
 # 10. Data quality, testing, and lineage
 
 ## Tests
@@ -310,16 +288,12 @@ Use dbt tests: `unique`, `not_null`, `relationships`. Use `sources:` definitions
 
 * dbt docs will surface lineage from staging to final gold. Persist commit hashes in manifest to tie final rows back to source file SHA.
 
----
-
 # 11. Security, governance, and compliance
 
 * Mask or hash `mobile_no` if required. Use column-level access to restrict PII exposure.
 * Secure GitHub token in Key Vault or Secrets Manager.
 * Audit logs for who ran jobs and when.
 * Data retention: keep Bronze raw for X months, purge policy based on retention requirement.
-
----
 
 # 12. Tableau dashboarding and UX notes
 
@@ -339,8 +313,6 @@ Use dbt tests: `unique`, `not_null`, `relationships`. Use `sources:` definitions
 
 * Pre-aggregate heavy measures in Gold if live queries are slow. Use materialized aggregate tables for week/month. Use Tableau extracts during peak hours.
 
----
-
 # 13. CI/CD and deployment
 
 * **Repo layout**
@@ -355,15 +327,11 @@ Use dbt tests: `unique`, `not_null`, `relationships`. Use `sources:` definitions
   * PR triggers: run unit dbt tests, lints, and a lightweight integration run against a test environment.
   * Merge to main triggers deployment to prod environment via GitHub Actions.
 
----
-
 # 14. Observability, cost control, and runbook
 
 * Track daily row counts in Bronze/Silver/Gold and run-time for each job.
 * Budget controls: limit cluster runtime, use spot instances when permissible.
 * Create runbook for common failures: GitHub auth errors, schema drift, credential rotation.
-
----
 
 # 15. Minimal first sprint (MVP) plan — what I would do first
 
@@ -375,16 +343,12 @@ Use dbt tests: `unique`, `not_null`, `relationships`. Use `sources:` definitions
 
 This MVP will give a working end-to-end path and let us iterate on schema and additional dimensions.
 
----
-
 # 16. Deliverables I will provide if you want me to proceed next
 
 * Full technical design document with folder structure, sample SQL/dbt models, and Airflow/Databricks job specs.
 * Example extractor script (Python) that calls GitHub API, handles private token, and writes to ADLS Gen2 or Databricks.
 * dbt project skeleton with `stg_github_sales`, `dim_date`, `fact_enquiry` and sample tests.
 * Example Tableau workbook skeleton or instructions to connect.
-
----
 
 # 17. Concise reasoning steps I took to create this plan
 
@@ -393,15 +357,11 @@ This MVP will give a working end-to-end path and let us iterate on schema and ad
 * Selected dbt for transformations because it is suited to building and testing modular SQL models for dimensional design. ([dbt Labs][3])
 * Chose Delta/ADLS Gen2 and Databricks-style connectivity to support ACID writes and Tableau connectivity for dashboards. ([Delta][4])
 
----
-
-# 18. Next concrete actions (pick one to proceed)
+# 18. Next concrete actions
 
 * I will produce the extractor script that downloads the CSV from GitHub and writes it to Bronze plus a sample manifest entry.
 * I will scaffold the dbt project with `stg_github_sales` including parsing and the first tests.
 * I will design the star schema DDL and give exact SQL for creating `dim_date`, `dim_contact`, and `fact_enquiry`.
-
-Tell me which of the three to build first and I will deliver the artifact in the next message without delay.
 
 [1]: https://www.databricks.com/glossary/medallion-architecture?utm_source=chatgpt.com "What is a Medallion Architecture?"
 [2]: https://docs.github.com/rest/repos/contents?utm_source=chatgpt.com "REST API endpoints for repository contents"
