@@ -1,0 +1,171 @@
+version: "1.0"
+
+philosophy:
+  model: "MICE"
+  link_style: "directional"
+  axis_exposure: "mandatory_all"
+  foundational_concepts_role: "axis_primers"
+
+axes:
+
+  axis_a_data_movement_velocity:
+    id: "A"
+    name: "Data Movement & Velocity"
+    question: "How does data enter and flow through the system, and at what speed?"
+    direction_rule: "slower_to_faster"
+    backward_priority:
+      - "Foundational Concepts/Data Ingestion"
+    forward_priority:
+      - "Real Time Intelligence"
+      - "Real Time Dashboards"
+      - "Data Activator"
+    keywords:
+      - ingest
+      - ingestion
+      - pipeline
+      - dataflow
+      - notebook
+      - event
+      - stream
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+  axis_b_data_shape_refinement:
+    id: "B"
+    name: "Data Shape & Refinement"
+    question: "How structured, curated, and business-ready is the data?"
+    direction_rule: "raw_to_refined"
+    backward_priority:
+      - "Chapter 1 - Foundational Data Layer/Lakehouse"
+      - "Chapter 1 - Foundational Data Layer/Delta Lake"
+    forward_priority:
+      - "Create A Star Schema Model"
+      - "Design Scalable Semantic Models"
+    keywords:
+      - lakehouse
+      - delta
+      - medallion
+      - transform
+      - preprocess
+      - schema
+      - semantic
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+  axis_c_compute_execution_context:
+    id: "C"
+    name: "Compute & Execution Context"
+    question: "Where does logic execute and under what constraints?"
+    direction_rule: "flexible_to_constrained"
+    backward_priority:
+      - "Analyze Spark"
+      - "Data Science Explore Data"
+    forward_priority:
+      - "Data Warehouse Query"
+      - "Query Data in KQL Database"
+    keywords:
+      - spark
+      - notebook
+      - sql
+      - dax
+      - kql
+      - execution
+      - batch
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+  axis_d_analytical_intent:
+    id: "D"
+    name: "Analytical Intent"
+    question: "Why does this data exist and what decision does it support?"
+    direction_rule: "insight_to_action"
+    backward_priority:
+      - "Data Science Explore Data"
+    forward_priority:
+      - "Real Time Intelligence"
+      - "Data Activator"
+    keywords:
+      - explore
+      - analyze
+      - train
+      - predict
+      - intelligence
+      - decision
+      - automate
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+  axis_e_trust_security_governance:
+    id: "E"
+    name: "Trust, Security & Governance"
+    question: "Who can see, trust, and operate this data?"
+    direction_rule: "implicit_to_enforced"
+    backward_priority:
+      - "Foundational Concepts/Governance"
+      - "Foundational Concepts/Security"
+    forward_priority:
+      - "Enforce Model Security"
+      - "Secure Data Access"
+    keywords:
+      - security
+      - governance
+      - access
+      - rls
+      - permission
+      - audit
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+  axis_f_operability_lifecycle:
+    id: "F"
+    name: "Operability & Lifecycle"
+    question: "How does this behave under scale, failure, and change?"
+    direction_rule: "prototype_to_optimized"
+    backward_priority:
+      - "Workspace Setup"
+    forward_priority:
+      - "Monitor Hub"
+      - "Optimize Power BI Performance Using External Tools"
+      - "Troubleshooting"
+    keywords:
+      - monitor
+      - performance
+      - optimize
+      - deploy
+      - pipeline
+      - troubleshoot
+    required_links:
+      backward: 1
+      forward: 1
+    max_links: 3
+
+global_rules:
+  enforce_all_axes: true
+  enforce_directionality: true
+  allow_cross_chapter_links: true
+  allow_multi_axis_membership: true
+  max_total_links_per_file: 18
+  prefer_foundational_backward_links: true
+  prefer_higher_chapter_forward_links: true
+
+foundational_concepts:
+  role: "axis_primers"
+  mandatory_reference: true
+  concepts:
+    - "Data Ingestion"
+    - "Data Transformation Processing"
+    - "Workspace Setup"
+    - "Governance"
+    - "Security"
+    - "Performance"
+    - "Troubleshooting"
