@@ -2,7 +2,6 @@ Implementing **Mirroring** is one of the most exciting and powerful new features
 
 Here is a comprehensive, step-by-step guide on how to implement Mirroring in Fabric, using a real-world example.
 
----
 
 ### What is Mirroring in Fabric?
 
@@ -32,7 +31,6 @@ As of late 2023 / early 2024, the supported sources for Mirroring are:
 
 Microsoft is actively working on adding more sources, such as Azure Database for PostgreSQL, MySQL, and others.
 
----
 
 ### Step-by-Step Implementation Guide
 
@@ -84,7 +82,6 @@ Once the status is "Running", your data is successfully mirrored.
 1.  In your Fabric workspace, you will see the new `Mirrored_RetailDB` item.
 2.  Clicking on it takes you to the mirrored database view, where you can see the tables that have been replicated (e.g., `dbo_Orders`, `dbo_Customers`).
 
----
 
 ### Using Your Mirrored Data
 
