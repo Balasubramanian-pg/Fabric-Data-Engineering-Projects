@@ -8,7 +8,6 @@ This lab explores how to:
 
 **Estimated Time**: 25 minutes  
 
----
 
 ## 1. Create a Workspace  
 1. Sign in to [Microsoft Fabric](https://app.fabric.microsoft.com)  
@@ -20,7 +19,6 @@ This lab explores how to:
 
 ![Empty workspace](./Images/new-workspace.png)  
 
----
 
 ## 2. Create an Eventhouse with Sample Data  
 1. Navigate to **Real-Time Intelligence** workload  
@@ -30,7 +28,6 @@ This lab explores how to:
 
 ![Eventhouse with sample data](./Images/create-eventhouse-sample.png)  
 
----
 
 ## 3. Query Data Using KQL  
 
@@ -70,7 +67,6 @@ Bikestream
 | where Neighbourhood == "Chelsea"
 ```
 
----
 
 ## 4. Query Data Using T-SQL  
 
@@ -112,14 +108,12 @@ ORDER BY Neighbourhood ASC
 HAVING Neighbourhood = 'Chelsea'
 ```
 
----
 
 ## 5. Clean Up Resources  
 1. Navigate to your workspace  
 2. Select **Workspace settings**  
 3. Choose **Remove this workspace**  
 
----
 
 ## Key Takeaways  
 - Eventhouses store real-time streaming data in KQL databases  
