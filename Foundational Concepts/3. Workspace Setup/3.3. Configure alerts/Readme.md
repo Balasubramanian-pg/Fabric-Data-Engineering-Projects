@@ -4,7 +4,6 @@ The primary and most powerful tool for this is **Data Activator**. However, ther
 
 Let's break down everything you need to know.
 
----
 
 ### The Primary Tool: Data Activator (The Digital Nervous System)
 
@@ -25,7 +24,6 @@ A no-code experience that continuously monitors data to detect patterns or thres
     *   Post a message in a Microsoft Teams channel.
     *   (Coming soon) Run a Fabric Pipeline or Power Automate flow.
 
----
 
 ### How to Configure an Alert with Data Activator (Common Scenario)
 
@@ -68,7 +66,6 @@ You are now in the Data Activator UI. It will have automatically tried to unders
 
 Whenever the Power BI dataset is refreshed and a product's sales value drops below 500, a message will be automatically sent to your chosen Teams channel.
 
----
 
 ### Other Alerting Methods in Fabric
 
@@ -104,7 +101,6 @@ This isn't about business data; it's about monitoring the health of your data pi
 
 **Choose this when:** You need to monitor the operational status (success/failure) of your data integration jobs.
 
----
 
 ### Summary Table: Choosing Your Alerting Method
 
