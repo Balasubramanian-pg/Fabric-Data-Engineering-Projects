@@ -12,7 +12,6 @@ This lab demonstrates how to:
 > [!IMPORTANT]  
 > You need a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
----
 
 ## 1. Create a Workspace  
 
@@ -25,7 +24,6 @@ This lab demonstrates how to:
 > [!NOTE]  
 > The workspace will initially appear empty until we add our components.
 
----
 
 ## 2. Set Up Real-Time Data Pipeline  
 
@@ -58,7 +56,6 @@ This lab demonstrates how to:
 > [!NOTE]  
 > This creates a live pipeline from source to storage.
 
----
 
 ## 3. Work with Real-Time Data  
 
@@ -87,7 +84,6 @@ stock
 
 ![Dashboard visualization](./Images/stock-dashboard-chart.png)  
 
----
 
 ## 4. Configure Alerts  
 
@@ -103,7 +99,6 @@ stock
 > [!WARNING]  
 > Alerts may take several minutes to appear in history depending on data changes.
 
----
 
 ## 5. Clean Up Resources  
 
@@ -117,7 +112,6 @@ stock
 > [!CAUTION]  
 > This action permanently deletes all lab resources.
 
----
 
 ## Key Learnings  
 
