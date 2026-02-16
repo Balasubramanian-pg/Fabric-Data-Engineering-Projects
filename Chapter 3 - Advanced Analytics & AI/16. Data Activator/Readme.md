@@ -14,7 +14,6 @@ Data Activator in Microsoft Fabric enables automated actions based on real-time 
 
 > **Prerequisite**: A [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) is required.  
 
----
 
 ## 1. Create a Workspace  
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com).  
@@ -27,7 +26,6 @@ Data Activator in Microsoft Fabric enables automated actions based on real-time 
 
 ![Empty workspace in Fabric](./Images/new-workspace.png)  
 
----
 
 ## 2. Scenario Setup  
 **Business Context**:  
@@ -41,7 +39,6 @@ Create a reflex that:
   - Package is destined for Redmond  
   - Contains refrigerated medicine  
 
----
 
 ## 3. Create a Reflex  
 1. From the Data Activator home screen, select **Reflex (Preview)**.  
@@ -52,7 +49,6 @@ Create a reflex that:
 
 ![Reflex home screen](./Images/data-activator-reflex-home-screen.png)  
 
----
 
 ## 4. Understand Reflex Interfaces  
 ### Design Mode  
@@ -70,7 +66,6 @@ Create a reflex that:
 
 ![Data mode interface](./Images/data-activator-data-tab.png)  
 
----
 
 ## 5. Create a Custom Object  
 1. In **Data Mode**, select the *Package In Transit* event.  
@@ -83,7 +78,6 @@ Create a reflex that:
 
 ![New object creation](./Images/data-activator-design-tab-new-object.png)  
 
----
 
 ## 6. Configure the Trigger  
 1. In Design Mode, select *Package In Transit* under *Redmond Packages*.  
@@ -115,7 +109,6 @@ Add these filters (all must be true):
 
 3. **Save** and **Start** the trigger.  
 
----
 
 ## 7. Enhance the Trigger  
 1. Add *PackageId* property:  
@@ -129,14 +122,12 @@ Add these filters (all must be true):
 
 3. **Stop** the trigger when complete.  
 
----
 
 ## 8. Clean Up Resources  
 1. Navigate to workspace contents.  
 2. Select **...** → **Workspace settings**.  
 3. Choose **Remove this workspace**.  
 
----
 
 ## Conclusion  
 You've successfully:  
