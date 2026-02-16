@@ -2,7 +2,6 @@ Identifying and resolving errors in dataflows is a critical skill for any data a
 
 Let's walk through this with a practical example, covering the common types of errors you might encounter.
 
----
 
 ### Case Study: Refreshing a "Sales Dataflow"
 
@@ -15,7 +14,6 @@ We have created a **Dataflow Gen2** in Microsoft Fabric named `DF_Sales_Analysis
 
 One morning, you come in and see that the scheduled overnight refresh has **failed**.
 
----
 
 ### Step 1: Identify That an Error Has Occurred
 
@@ -29,7 +27,6 @@ The first step is knowing where to look for failures.
 
 
 
----
 
 ### Step 2: Access the Refresh History to Find the Error Message
 
@@ -47,7 +44,6 @@ Let's say the message is: `Error: The column 'UnitPrice' of the table wasn't fou
 
 This tells us exactly what the problem is, but not necessarily *why* it happened. The error is in a query that was expecting a column named `UnitPrice`, but it couldn't find it.
 
----
 
 ### Step 3: Troubleshoot and Diagnose Inside the Dataflow Editor
 
@@ -78,7 +74,6 @@ Let's walk through a logical troubleshooting process based on our error message:
     3.  Look for a step that references `UnitPrice`. For example, you might find a "Changed Type" step that is now showing an error icon because it can't find the `UnitPrice` column to change its type to `Decimal`.
     4.  **Finding:** You find a "Renamed Columns" step where you explicitly tried to rename a column *to* `UnitPrice`, but the source column name was wrong.
 
----
 
 ### Step 4: Resolve the Error
 
@@ -91,7 +86,6 @@ Once you've identified the root cause, fixing it is usually straightforward. Bas
 5.  After fixing the step, click through the subsequent steps to ensure the errors are gone. The data preview should now load correctly at each stage.
 6.  Click **Publish** to save your changes.
 
----
 
 ### Step 5: Validate the Fix
 
@@ -100,7 +94,6 @@ Once you've identified the root cause, fixing it is usually straightforward. Bas
 3.  Monitor the refresh in the Monitoring Hub. This time, it should run successfully.
 4.  Finally, go to the output Lakehouse table (`Sales_From_Dataflow`) and query it to ensure the data looks correct.
 
----
 
 ### Other Common Dataflow Errors and How to Approach Them
 
