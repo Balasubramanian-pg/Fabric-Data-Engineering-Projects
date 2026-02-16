@@ -1,7 +1,6 @@
 # **Lab: Secure Data Access in Microsoft Fabric**  
 **Module: Secure Data Access in Microsoft Fabric**  
 
----
 
 ## **Lab Overview**  
 **Objective:**  
@@ -21,7 +20,6 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 > - A [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) account.  
 > - Two user accounts (e.g., *Workspace Admin* and *Test User*).  
 
----
 
 ## **Lab Structure**  
 1. **Set Up a Workspace** → Create a workspace with sample data.  
@@ -30,7 +28,6 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 4. **OneLake Data Access Roles** → Implement folder-level permissions.  
 5. **Clean Up** → Delete the workspace post-lab.  
 
----
 
 ## **Step 1: Set Up a Workspace**  
 **Purpose:** Create a workspace with sample data for testing security controls.  
@@ -53,7 +50,6 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 
 ![Sample lakehouse](./Images/new-sample-lakehouse.png)  
 
----
 
 ## **Step 2: Workspace Access Controls**  
 **Purpose:** Test how workspace roles (Admin, Viewer) impact user access.  
@@ -71,7 +67,6 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 
 ![Workspace Viewer view](./Images/workspace-viewer-view.png)  
 
----
 
 ## **Step 3: Item-Level Security**  
 **Purpose:** Restrict access to specific items (e.g., warehouse only).  
@@ -91,7 +86,6 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
    - ✅ **Test:** Navigate via **OneLake** → Open the warehouse → `Date` table is readable.  
    - ❌ **Test:** Attempt to open the lakehouse → Access denied.  
 
----
 
 ## **Step 4: OneLake Data Access Roles**  
 **Purpose:** Restrict lakehouse access to specific folders (Preview feature).  
@@ -117,14 +111,12 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 
 ![Restricted lakehouse view](./Images/custom-role-view.png)  
 
----
 
 ## **Step 5: Clean Up**  
 **Purpose:** Remove lab resources to avoid unnecessary costs.  
 
 1. As the **Admin**, go to **Workspace Settings** → **Remove this Workspace**.  
 
----
 
 ## **Key Takeaways**  
 1. **Workspace roles** control broad access (e.g., Viewer = read-only).  
@@ -133,6 +125,5 @@ Implement and validate multi-layered security controls in Microsoft Fabric, incl
 
 **Next Steps:** Explore [row-level security (RLS)](https://learn.microsoft.com/fabric/security/row-level-security) for dynamic data filtering.  
 
---- 
 
 **Feedback?** Rate this lab or suggest improvements [here](#).
