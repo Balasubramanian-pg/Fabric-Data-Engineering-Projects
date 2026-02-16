@@ -37,7 +37,6 @@ Welcome to this hands-on lab where you'll explore SQL Database capabilities in M
 
 In this expanded exercise, you will dive deeper into querying the **AdventureWorksLT** database in Microsoft Fabric. You will explore different SQL operations, including filtering, aggregations, joins, and subqueries to extract meaningful business insights.
 
----
 
 ## **1.1 Basic Querying: Retrieving Data**
 ### **1.1.1 Simple SELECT Statements**
@@ -59,7 +58,6 @@ FROM SalesLT.Product;
 ```
 - Returns only product names and their list prices.
 
----
 
 ## **1.2. Filtering Data with WHERE Clause**
 ### **1.2.1. Filtering by Price Range**
@@ -85,7 +83,6 @@ WHERE pc.Name = 'Mountain Bikes';
 ```
 - Returns only products in the "Mountain Bikes" category.
 
----
 
 ## **1.3. Sorting Results with ORDER BY**
 ### **1.3.1. Sorting by Price (High to Low)**
@@ -108,7 +105,6 @@ ORDER BY Name ASC;
 ```
 - Returns products in alphabetical order.
 
----
 
 ## **1.4. Aggregating Data with GROUP BY**
 ### **1.4.1. Average Price by Product Category**
@@ -136,7 +132,6 @@ ORDER BY ProductCount DESC;
 ```
 - Shows which categories have the most products.
 
----
 
 ## **1.5. Advanced Joins**
 ### **1.5.1. Retrieve Customer Orders**
@@ -171,7 +166,6 @@ WHERE soh.SalesOrderID = 71774;  -- Example order ID
 ```
 - Shows detailed line items for a specific order.
 
----
 
 ## **1.6. Subqueries for Complex Filtering**
 ### **1.6.1. Find Products Priced Above Average**
@@ -195,7 +189,6 @@ WHERE CustomerID IN (SELECT DISTINCT CustomerID FROM SalesLT.SalesOrderHeader);
 ```
 - Lists only customers who have made purchases.
 
----
 
 ## **1.7. Practical Business Insights**
 ### **1.7.1. Top 5 Most Expensive Products**
@@ -221,7 +214,6 @@ ORDER BY TotalSpent DESC;
 ```
 - Identifies high-value customers.
 
----
 
 ## **Summary of Key Learnings**
 ✅ **Basic SELECT queries** – Retrieve data from tables.  
@@ -232,7 +224,6 @@ ORDER BY TotalSpent DESC;
 ✅ **Subqueries** – Perform complex filtering.  
 ✅ **Business insights** – Extract actionable data.  
 
----
 
 ### Exercise 2: Data Integration
 
@@ -242,7 +233,6 @@ In this exercise, you will explore **data integration** techniques in Microsoft 
 - **Combine multiple sources** for deeper analysis
 - **Automate data refreshes** (optional)
 
----
 
 ## **2.1. Setting Up External Data Sources**
 Before integrating data, you need to **prepare the external dataset**. In this lab, we'll use a **Public Holidays** dataset.
@@ -274,7 +264,6 @@ VALUES
     ('United Kingdom', 'Boxing Day', '2024-12-26');
 ```
 
----
 
 ## **2.2. Enriching Sales Data with Holiday Information**
 Now, let’s **link sales orders to public holidays** to analyze seasonal trends.
@@ -325,7 +314,6 @@ JOIN SalesLT.PublicHolidays ph
 | 1002        | 2024-12-25 | Christmas Day    | United Kingdom  | 865.00  |
 | 1003        | 2024-11-28 | Thanksgiving Day | United States   | 345.00  |
 
----
 
 ## **2.3. Advanced Integration: Combining Multiple Data Sources**
 Let’s **import a CSV file** containing **discount promotions** and analyze its impact on sales.
@@ -374,7 +362,6 @@ WHERE pr.PromotionName IS NOT NULL;
 | Mountain-100 Silver| Mountain Bikes  | Summer Sale   | 15.00             | 3399.99  | 2889.99        |
 | HL Road Frame      | Road Frames     | Black Friday  | 20.00             | 1431.50  | 1145.20        |
 
----
 
 ## **2.4. Automating Data Integration (Optional)**
 Microsoft Fabric allows **scheduled refreshes** of external data.
@@ -402,7 +389,6 @@ BEGIN
 END;
 ```
 
----
 
 ## **2.5. Key Takeaways**
 ✅ **Import external datasets** into SQL Database.  
@@ -410,7 +396,6 @@ END;
 ✅ **Combine multiple sources** for deeper business insights.  
 ✅ **Automate data refreshes** to keep reports up-to-date.  
 
----
 
 ### Exercise 3: Implementing Security
 
@@ -421,7 +406,6 @@ In this expanded exercise, we'll dive deep into **data security** in Microsoft F
 - **Dynamic data masking**
 - **Auditing and compliance tracking**
 
----
 
 ## **3.1. Role-Based Access Control (RBAC)**
 RBAC restricts database access based on user roles.
@@ -457,7 +441,6 @@ EXEC sp_addrolemember 'FinanceTeam', 'jane@company.com';
 EXEC sp_addrolemember 'ReadOnlyUsers', 'guest@company.com';
 ```
 
----
 
 ## **3.2. Row-Level Security (RLS)**
 RLS restricts which rows users can see based on filters.
@@ -500,7 +483,6 @@ SELECT * FROM SalesLT.Customer; -- Only sees US customers
 REVERT;
 ```
 
----
 
 ## **3.3. Column-Level Security**
 Restrict access to sensitive columns.
@@ -535,7 +517,6 @@ SELECT EmailAddress, Phone FROM SalesLT.Customer; -- Shows masked data
 REVERT;
 ```
 
----
 
 ## **3.4. Auditing and Compliance**
 Track who accesses what data.
@@ -559,7 +540,6 @@ SELECT
 FROM sys.fn_get_audit_file('https://fabricaudit.blob.core.windows.net/logs/*', NULL, NULL);
 ```
 
----
 
 ## **3.5. Implementing a Complete Security Model**
 
@@ -593,7 +573,6 @@ BEGIN
 END;
 ```
 
----
 
 ## **3.6. Key Takeaways**
 ✅ **RBAC** - Control access by organizational roles  
@@ -602,7 +581,6 @@ END;
 ✅ **Auditing** - Track all database access for compliance  
 ✅ **Defense-in-Depth** - Combine multiple security layers  
 
----
 # **Exercise 4: Performance Tuning in Microsoft Fabric SQL Database**
 
 In this comprehensive performance tuning lab, you'll optimize your SQL database in Microsoft Fabric through:
@@ -1023,7 +1001,6 @@ In this lab, you've:
 - Implemented data security controls
 
 This demonstrates how Microsoft Fabric provides a comprehensive platform for data management and analytics.
-
 
 
 
