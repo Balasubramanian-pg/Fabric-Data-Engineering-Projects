@@ -1,8 +1,6 @@
----
 lab:
     title: 'Work with model relationships'
     module: 'Design and build tabular models'
----
 
 # Work with model relationships
 
