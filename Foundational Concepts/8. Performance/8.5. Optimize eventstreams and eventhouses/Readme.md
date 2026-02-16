@@ -2,7 +2,6 @@ Excellent topic. Optimizing Eventstreams and Eventhouses in Microsoft Fabric is 
 
 Here is a comprehensive guide to the different methods for optimizing your real-time components in Fabric, followed by a practical cheat sheet.
 
----
 
 ### The Core Goals of Real-Time Optimization
 
@@ -11,7 +10,6 @@ Here is a comprehensive guide to the different methods for optimizing your real-
 3.  **Ensure Data Quality:** Prevent data loss and handle malformed data gracefully.
 4.  **Control Costs:** Use resources efficiently to manage Fabric Capacity Unit (CU) consumption.
 
----
 
 ### The Four Pillars of Real-Time Optimization
 
@@ -24,7 +22,6 @@ Optimization efforts for Eventstreams and Eventhouses can be broken down into fo
 
 Let's explore each one.
 
----
 
 ### 1. Source and Ingestion Path Optimization
 
@@ -49,7 +46,6 @@ This is about getting data into Fabric efficiently.
     *   **Batching at the Source:** If possible, have your source application batch multiple small events into a single message (e.g., a JSON array) before sending it to the Event Hub. This is highly efficient.
     *   **Schema Consistency:** Ensure all messages follow the same schema. Inconsistent schemas lead to parsing errors downstream.
 
----
 
 ### 2. Stream Processing Logic Optimization (Eventstream Editor)
 
@@ -61,7 +57,6 @@ The Eventstream's "Event processor" allows for no-code transformations. Keep thi
     *   **Keep it Simple:** Use the Event processor for simple tasks only, like filtering out test messages or renaming a field to match a destination schema.
     *   **Push Complex Logic Downstream:** For complex transformations, joins with other datasets, or stateful operations (like calculating a running average), do not use the Event processor. Instead, send the raw or lightly cleaned data to a **KQL Database** or a **Lakehouse** and perform the complex logic there using KQL or a Spark Notebook. This separates ingestion from complex processing.
 
----
 
 ### 3. KQL Database Performance Optimization
 
@@ -98,7 +93,6 @@ This is where your real-time data lands for analytics. Optimizing it is critical
     3.  Write a KQL function that parses, cleans, and transforms the raw data.
     4.  Apply an update policy to your final table that uses the staging table as a source and the function as the transformation logic.
 
----
 
 ### 4. Overall Architectural Optimization
 
@@ -107,7 +101,6 @@ This is where your real-time data lands for analytics. Optimizing it is critical
     *   For **durable storage, historical analysis, and ML model training**, send a copy of the raw data from the Eventstream to a **Lakehouse Bronze table**. This creates a "cold path" archive.
 *   **Separate Hot and Cold Paths:** Don't try to make one destination serve all purposes. The dual-destination approach from a single Eventstream is a powerful and optimized pattern in Fabric.
 
----
 
 ### Optimization Cheat Sheet for Eventstreams and Eventhouses
 
