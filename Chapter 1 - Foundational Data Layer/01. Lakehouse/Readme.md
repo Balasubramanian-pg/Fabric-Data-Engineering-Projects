@@ -1,3 +1,5 @@
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c34af64d-9ee1-4440-bc13-045f6ee16250" />
+
 # Create a Microsoft Fabric Lakehouse
 
 ## Introduction
