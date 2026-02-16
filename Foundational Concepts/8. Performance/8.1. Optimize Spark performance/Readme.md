@@ -2,7 +2,6 @@ Optimizing Spark performance is a deep and multifaceted discipline, crucial for 
 
 Here is a comprehensive guide to the different methods for optimizing Spark performance in Fabric, complete with explanations, code examples, and a final cheat sheet.
 
----
 
 ### The Core Goals of Spark Optimization
 
@@ -11,7 +10,6 @@ Here is a comprehensive guide to the different methods for optimizing Spark perf
 3.  **Use Memory Efficiently:** Keep data in memory as much as possible and avoid "spilling" to disk.
 4.  **Reduce Data Scanned:** Read the absolute minimum amount of data from storage (OneLake).
 
----
 
 ### The Four Pillars of Spark Performance Optimization
 
@@ -24,7 +22,6 @@ Optimization can be broken down into four main areas:
 
 Let's dive into each one.
 
----
 
 ### 1. Data Layout and Format (The Foundation)
 
@@ -46,7 +43,6 @@ This is the most impactful area. Optimizing your data storage pays dividends for
     *   **Z-Ordering (`OPTIMIZE ZORDER BY`):** A data layout technique that co-locates related information within files. This allows Spark to skip reading entire data files if they don't contain the data relevant to your `WHERE` clause.
     *   **Partitioning (`partitionBy`):** Splits your data into a folder hierarchy based on a low-cardinality column (like `Year`, `Month`, `Country`). Spark can prune entire folders from the query, drastically reducing the data scanned.
 
----
 
 ### 2. Code and Transformations
 
@@ -79,7 +75,6 @@ How you write your PySpark code has a huge impact.
     *   A Python UDF forces Spark to serialize the data, send it from the JVM to a Python process, execute your Python code, and then serialize the result back to the JVM. This back-and-forth has a massive performance overhead.
 *   **Action:** Before writing a UDF, check the [Spark SQL Functions documentation](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql.html#functions). There is almost always a built-in function for what you need.
 
----
 
 ### 3. Shuffle and Partitioning
 
@@ -108,7 +103,6 @@ The **shuffle** is Spark's biggest enemy. It's the process of redistributing dat
     ```
     *Note: Spark will often do this automatically (called Adaptive Query Execution - AQE), but explicitly hinting it can guarantee the behavior.*
 
----
 
 ### 4. Caching and Resource Management
 
@@ -144,7 +138,6 @@ The **shuffle** is Spark's biggest enemy. It's the process of redistributing dat
     *   **Jobs/Stages:** Find the stage that is taking the longest. Click into it to see details.
     *   **Shuffle Read/Write:** Look for stages with a huge amount of shuffle data. This is a prime candidate for optimization (e.g., with a broadcast join).
 
----
 
 ### Spark Performance Optimization Cheat Sheet
 
