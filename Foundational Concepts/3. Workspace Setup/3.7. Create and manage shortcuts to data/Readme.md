@@ -2,7 +2,6 @@ This is a fantastic topic, as Shortcuts are one of the most powerful and fundame
 
 Here is a comprehensive guide on how to create and manage shortcuts to data in Microsoft Fabric.
 
----
 
 ### What is a Shortcut? (The Core Concept)
 
@@ -16,7 +15,6 @@ In Fabric, shortcuts let you connect to data living in other Fabric workspaces, 
 
 **The #1 Benefit:** **ZERO DATA DUPLICATION.** You can analyze data from multiple clouds and locations in place, creating a single source of truth without managing complex and costly data copy pipelines.
 
----
 
 ### Supported Shortcut Sources
 
@@ -28,7 +26,6 @@ You can create shortcuts to data stored in:
 4.  **Dataverse:** (In preview) Access your business application data from Dynamics 365 and Power Apps.
 5.  **(Coming Soon):** Google Cloud Storage and others.
 
----
 
 ### How to Create a Shortcut
 
@@ -82,7 +79,6 @@ This is the most important step.
 
 That's it! Your shortcut will now appear in your Lakehouse Explorer under the "Tables" or "Files" directory with a small link icon. You can now query it using a Spark Notebook or the SQL Analytics Endpoint as if it were a native table.
 
----
 
 ### How to Manage Shortcuts
 
@@ -105,7 +101,6 @@ Shortcuts are clearly identified in the Lakehouse Explorer by a link icon next t
 *   Right-click on the shortcut and select **Properties**.
 *   This will show you the original source path, the type of shortcut, and other metadata.
 
----
 
 ### The Crucial Concept: Permissions
 
