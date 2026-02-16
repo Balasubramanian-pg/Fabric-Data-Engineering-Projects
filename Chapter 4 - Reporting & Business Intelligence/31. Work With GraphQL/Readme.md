@@ -193,7 +193,6 @@ Based on our analysis, we can identify these natural GraphQL types:
 3. Product models group multiple product variants
 4. Size information is available for apparel products
 5. The data structure naturally maps to GraphQL types and relationships
----
 
 # **Exercise 3: Configuring a Robust GraphQL API in Microsoft Fabric**  
 
@@ -205,7 +204,6 @@ This expanded exercise will guide you through configuring a **production-ready G
 - **Performance optimization**  
 - **Query testing & validation**  
 
----
 
 ## **Task 3.1: Configure Data Sources for GraphQL**  
 
@@ -226,7 +224,6 @@ Microsoft Fabric allows connecting **multiple tables** (even across different da
    - The system **auto-detects foreign keys** (e.g., `Product.ProductCategoryID → ProductCategory.ProductCategoryID`)  
    - If relationships aren't detected automatically, manually define them in the **Schema Editor**  
 
----
 
 ## **Task 3.2: Customize the GraphQL Schema**  
 
@@ -258,7 +255,6 @@ Example: Add a `isOnSale` field to `Product` that checks if `ListPrice < Standar
    ```
    *(Note: The exact resolver syntax may vary based on Fabric’s implementation.)*  
 
----
 
 ## **Task 3.3: Secure the GraphQL API**  
 
@@ -282,7 +278,6 @@ If exposing externally, require API keys or OAuth:
 1. In **API Settings**, enable **"Require API Key"**  
 2. Generate & distribute keys to clients  
 
----
 
 ## **Task 3.4: Optimize Performance**  
 
@@ -303,7 +298,6 @@ SELECT
 FROM SalesLT.Product
 ```
 
----
 
 ## **Task 3.5: Test & Validate the API**  
 
@@ -355,7 +349,6 @@ query {
    - Adding database **indexes**  
    - Simplifying **nested queries**  
 
----
 
 ## **Key Takeaways**  
 ✅ **Multi-source GraphQL APIs** can combine data from different tables seamlessly.  
@@ -366,7 +359,6 @@ query {
 
 This **production-grade GraphQL API** is now ready for client applications!   
 
----
   
 **Next Steps**:  
 ➡️ **Exercise 4** will explore **querying this API from a client app** (React, Python, etc.).  
@@ -382,7 +374,6 @@ This expanded exercise dives deep into **querying your GraphQL API** with:
 ✔ **Error handling & debugging**  
 ✔ **Real-world client integration examples** (React, Python)  
 
----
 
 ## **Task 4.1: Mastering GraphQL Query Techniques**  
 
@@ -414,7 +405,6 @@ query {
 - `eq`, `neq`, `gt`, `lt`, `contains`, `startsWith`  
 - **Nested filters** (e.g., `category: { name: { eq: "Bikes" } }`)  
 
----
 
 ### **4.1.2 Pagination (Cursor-Based & Offset-Based)**  
 #### **Cursor-Based (Recommended for large datasets)**  
@@ -448,7 +438,6 @@ query {
 }
 ```
 
----
 
 ### **4.1.3 Nested Queries (Joins in GraphQL)**  
 Fetch **products + categories + models** in one request:  
@@ -473,7 +462,6 @@ query {
 ```
 ⚠ **Performance Tip**: Avoid **over-fetching**—only request needed fields!  
 
----
 
 ## **Task 4.2: Optimizing Query Performance**  
 
@@ -488,7 +476,6 @@ Microsoft Fabric’s **GraphQL Analytics** shows:
 2. **Add Indexes** on filtered/sorted fields (`price`, `categoryName`).  
 3. **Use `@defer`** for slow non-critical fields.  
 
----
 
 ### **4.2.2 Caching Strategies**  
 | **Cache Type**       | **Use Case**                          | **Implementation**                     |
@@ -497,7 +484,6 @@ Microsoft Fabric’s **GraphQL Analytics** shows:
 | **Persisted Queries**| Repeated complex queries              | Store hashed queries server-side       |
 | **Client-Side Cache**| Frontend apps (React/Apollo)          | Use `@client` directives               |
 
----
 
 ## **Task 4.3: Error Handling & Debugging**  
 
@@ -524,7 +510,6 @@ GraphQL returns **partial data + errors** (unlike REST):
    - `queryDepth > 10`  
    - `responseSize > 1MB`  
 
----
 
 ## **Task 4.4: Real-World Client Integrations**  
 
@@ -588,7 +573,6 @@ response = requests.post(
 print(response.json()["data"]["products"]["items"])
 ```
 
----
 
 ## **Key Takeaways**  
 ✅ **Complex queries** (filtering, sorting, pagination) are easy in GraphQL.  
@@ -596,7 +580,6 @@ print(response.json()["data"]["products"]["items"])
 ✅ **Handle errors gracefully** with structured responses.  
 ✅ **Integrate seamlessly** with frontend/backend clients.  
 
----
   
 **Next Steps**:  
 ➡️ **Explore GraphQL Subscriptions** for real-time updates.  
@@ -613,4 +596,3 @@ You've successfully:
 - Executed targeted GraphQL queries
 
 For advanced features, explore the [Microsoft Fabric GraphQL documentation](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview).
-
