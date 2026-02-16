@@ -1,7 +1,6 @@
 # **Lab: Ingest Data with Spark and Microsoft Fabric Notebooks**  
 ### **Module: Ingest Data with Spark and Microsoft Fabric Notebooks**  
 
----
 
 ## **Lab Overview**  
 **Objective:**  
@@ -18,7 +17,6 @@ Learn to ingest and optimize data in Microsoft Fabric using **Spark notebooks**,
 > **Prerequisite:**  
 > - A [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) account.  
 
----
 
 ## **Lab Structure**  
 1. **Set Up Workspace & Lakehouse** → Create a Fabric workspace and lakehouse.  
@@ -27,7 +25,6 @@ Learn to ingest and optimize data in Microsoft Fabric using **Spark notebooks**,
 4. **Query with Spark SQL** → Analyze data using SQL syntax in PySpark.  
 5. **Clean Up** → Delete the workspace post-lab.  
 
----
 
 ## **Step 1: Set Up Workspace & Lakehouse**  
 **Purpose:** Prepare a Fabric environment for data ingestion.  
@@ -47,7 +44,6 @@ Learn to ingest and optimize data in Microsoft Fabric using **Spark notebooks**,
 
 ![New lakehouse](./Images/new-lakehouse.png)  
 
----
 
 ## **Step 2: Ingest External Data**  
 **Purpose:** Load NYC taxi data from Azure Blob Storage into the lakehouse.  
@@ -85,7 +81,6 @@ Learn to ingest and optimize data in Microsoft Fabric using **Spark notebooks**,
    ```  
 2. Refresh the **Files** section to see `yellow_taxi.parquet`.  
 
----
 
 ## **Step 3: Transform & Load to Delta**  
 **Purpose:** Clean data and store it in a Delta table for optimized queries.  
@@ -118,7 +113,6 @@ display(filtered_df.limit(1))
 
 ![Transformed data output](./Images/notebook-transform-result.png)  
 
----
 
 ## **Step 4: Query with Spark SQL**  
 **Purpose:** Use SQL syntax to analyze the Delta table.  
@@ -137,7 +131,6 @@ display(results.limit(10))
 - Spark SQL integrates seamlessly with PySpark.  
 - Temporary views enable familiar SQL workflows.  
 
----
 
 ## **Step 5: Clean Up**  
 **Purpose:** Remove resources to avoid unnecessary costs.  
@@ -145,7 +138,6 @@ display(results.limit(10))
 1. Navigate to **Workspace Settings** → **Remove this Workspace**.  
 2. Confirm deletion.  
 
----
 
 ## **Key Takeaways**  
 1. **PySpark** simplifies connecting to external data (e.g., Azure Blob).  
@@ -154,6 +146,5 @@ display(results.limit(10))
 
 **Next Steps:** Explore [Delta Lake optimizations](https://learn.microsoft.com/fabric/data-engineering/delta-optimizations) for large-scale data.  
 
---- 
 
 **Feedback?** Rate this lab or suggest improvements [here](#).
