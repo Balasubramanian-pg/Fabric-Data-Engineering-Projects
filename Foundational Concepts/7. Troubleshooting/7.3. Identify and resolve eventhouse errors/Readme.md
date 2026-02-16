@@ -5,7 +5,6 @@ The term "Eventhouse" in Microsoft Fabric refers to a top-level item in the Real
 
 Therefore, troubleshooting "Eventhouse errors" means troubleshooting errors in one of these two components. Let's walk through a case study to identify and resolve common errors in both.
 
----
 
 ### Case Study: A Broken Real-Time IoT Dashboard
 
@@ -16,7 +15,6 @@ We have an Eventhouse monitoring temperature data from IoT sensors in a factory.
 
 This is our starting point. We need to follow the data flow to diagnose the problem.
 
----
 
 ### Step 1: Isolate the Point of Failure (Ingestion vs. Query)
 
@@ -39,7 +37,6 @@ The first question is: **Is data failing to get *into* the KQL Database, or is t
 
 Let's assume we are in **Scenario B**, as it's the most common and complex issue. Now we need to investigate the ingestion path.
 
----
 
 ### Step 2: Troubleshoot the Eventstream
 
@@ -71,7 +68,6 @@ The Eventstream is the first component in the chain. Errors here are often relat
     2.  Use an online JSON validator to check its structure.
     3.  **The fix is almost always in the source system.** You must work with the team managing the IoT devices to correct the firmware or application that generates the JSON payload. Fabric cannot fix structurally broken JSON on the fly in the Eventstream.
 
----
 
 ### Step 3: Troubleshoot the KQL Database Ingestion
 
