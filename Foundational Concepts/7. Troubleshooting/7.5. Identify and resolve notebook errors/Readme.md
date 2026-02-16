@@ -2,7 +2,6 @@ Notebooks are the workhorse for data engineers and data scientists in Microsoft 
 
 Let's walk through a real-world example, covering the common types of errors you'll encounter and the systematic process to resolve them.
 
----
 
 ### Case Study: A Failing Data Cleansing Notebook
 
@@ -17,7 +16,6 @@ We have a notebook named `N_Clean_Customer_Data` in a Fabric Lakehouse. Its job 
 
 You run the notebook, and it fails with an error message.
 
----
 
 ### The Troubleshooting Process
 
@@ -38,7 +36,6 @@ Py4JJavaError: An error occurred while calling o123.showString.
 *   **`org.apache.spark.sql.AnalysisException`**: This is a Spark SQL error. The "Analysis" part means Spark couldn't even figure out *how* to run your query. It's usually a problem with column names, table names, or data types *before* the job even starts processing data.
 *   **`Column 'date_of_birth' is not a member of the struct`**: This is the golden ticket. Spark is telling you, "You asked me to do something with a column named `date_of_birth`, but when I looked at the data's schema, I couldn't find it."
 
----
 
 ### Step 2: Isolate the Problematic Code
 
@@ -59,7 +56,6 @@ display(df_cleaned)
 
 The error message points to the line where we calculate the `age`. Now we know *what* failed and *where* it failed. The next step is to figure out *why*.
 
----
 
 ### Step 3: Diagnose the Root Cause (The Detective Work)
 
@@ -103,7 +99,6 @@ Sometimes the schema alone isn't enough. You might want to see the actual data.
     ```
 *   This will render a formatted table where you can visually scan the column headers and confirm the column is named `dob`.
 
----
 
 ### Step 4: Resolve the Error
 
@@ -129,7 +124,6 @@ Now that we know the exact problem, fixing it is easy. We have a few options.
 
 After applying the fix, re-run the cell (and any subsequent cells) to confirm the error is gone.
 
----
 
 ### Other Common Notebook Errors and How to Debug Them
 
