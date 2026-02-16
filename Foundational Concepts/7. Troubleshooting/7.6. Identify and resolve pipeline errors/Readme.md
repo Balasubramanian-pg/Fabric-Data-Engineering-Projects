@@ -2,7 +2,6 @@ Identifying and resolving pipeline errors is a core competency for any data engi
 
 Let's walk through this with a real-world example, covering the entire process from detection to resolution.
 
----
 
 ### Case Study: A Failing Nightly Data Warehouse Load
 
@@ -17,7 +16,6 @@ We have a Fabric Data Pipeline named `PL_Nightly_DW_Load`. Its job is to run eve
 
 One morning, you receive the failure alert email. The pipeline has failed.
 
----
 
 ### Step 1: Detect the Failure (The Alert)
 
@@ -29,7 +27,6 @@ If you don't have email alerts, your primary tool is the **Monitoring Hub**.
 2.  Filter the "Item type" to **"Data pipeline"**.
 3.  You will see `PL_Nightly_DW_Load` with a red "Failed" status.
 
----
 
 ### Step 2: Identify the Failed Activity
 
@@ -43,7 +40,6 @@ Now you need to know *which part* of the pipeline failed.
 
 
 
----
 
 ### Step 3: Analyze the Error Details of the Failed Activity
 
@@ -94,7 +90,6 @@ Let's explore a few possible error messages you might see for this `Copy_Sales_D
         *   **Option 2 (Adapt the Sink):** If nulls are acceptable, you should modify your sink table. Run an `ALTER TABLE stg_Sales ALTER COLUMN ProductID INT NULL;` command in your Warehouse to allow nulls.
         *   **Option 3 (Handle in Copy):** In the `Copy data` activity's "Mapping" tab, you can sometimes specify a default value for nulls, but altering the table is often cleaner.
 
----
 
 ### General Troubleshooting Strategy for Pipelines
 
