@@ -1,8 +1,6 @@
----
 lab:
     title: 'Generate batch predictions using a deployed model in Microsoft Fabric'
     module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
----
 
 # Generate batch predictions using a deployed model in Microsoft Fabric
 
