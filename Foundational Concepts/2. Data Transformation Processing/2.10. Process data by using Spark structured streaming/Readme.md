@@ -2,7 +2,6 @@ Processing data using Spark Structured Streaming is the most powerful and flexib
 
 Here is a comprehensive guide on how to process data using Spark Structured Streaming in a Fabric Notebook, complete with a detailed case study and code examples.
 
----
 
 ### The Core Concept: What is Spark Structured Streaming?
 
@@ -20,7 +19,6 @@ Structured Streaming is a high-level API in Apache Spark for processing real-tim
 *   For complex event processing (e.g., fraud detection) that requires tracking state across multiple events.
 *   For running machine learning models on a live data stream.
 
----
 
 ### Case Study: Real-Time E-Commerce Order Enrichment
 
@@ -49,7 +47,6 @@ This table is being populated continuously by a Fabric Eventstream.
 **Target (Silver table `Silver_Orders_Enriched`):**
 A continuously updated table with the final, enriched data.
 
----
 
 ### Step-by-Step Implementation in a Fabric Notebook
 
