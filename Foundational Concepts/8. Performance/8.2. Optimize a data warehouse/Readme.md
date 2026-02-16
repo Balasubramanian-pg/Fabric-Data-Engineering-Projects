@@ -2,13 +2,11 @@ Optimizing a data warehouse is a critical and continuous process. In Microsoft F
 
 Here is a comprehensive guide to the different methods for optimizing your Fabric Data Warehouse, followed by a handy cheat sheet.
 
----
 
 ### The Core Goal of Warehouse Optimization
 
 The primary goal is to **reduce the amount of data that needs to be read, moved, and processed** to answer a query. Faster queries lead to happier users, lower resource consumption on your Fabric capacity, and more efficient analytics.
 
----
 
 ### The Four Pillars of Data Warehouse Optimization in Fabric
 
@@ -55,7 +53,6 @@ This is the most important area. A good design from the start prevents many perf
     *   **Column Elimination:** The engine only needs to read the columns requested in the query. If a query is `SELECT SUM(SalesAmount) FROM FactSales`, it doesn't need to touch the `ProductID` or `CustomerID` columns at all.
 *   **Action:** You don't need to do anything to enable this—it's the default and is a major reason for the warehouse's performance.
 
----
 
 ### 2. Data Loading and Management
 
@@ -83,7 +80,6 @@ This is the most important area. A good design from the start prevents many perf
     UPDATE STATISTICS dbo.FactSales (SaleDate);
     ```
 
----
 
 ### 3. Query Writing Best Practices
 
@@ -109,7 +105,6 @@ This is the most important area. A good design from the start prevents many perf
     *   Look for inefficient operations like table scans on large tables where an index seek should have been used.
 *   **Action:** Analyzing query plans is an advanced skill, but it's the ultimate tool for diagnosing tough performance problems.
 
----
 
 ### 4. Result Set Caching
 
@@ -117,7 +112,6 @@ This is the most important area. A good design from the start prevents many perf
 *   **Why it's faster:** It provides sub-second response times for frequently run queries, such as those that power a popular Power BI dashboard.
 *   **Action:** This is an automatic feature. Your job is to enable it by building standardized, reusable reports and queries that multiple users will run. The more a query is reused, the more likely it is to be served from the cache.
 
----
 
 ### Optimization Cheat Sheet
 
