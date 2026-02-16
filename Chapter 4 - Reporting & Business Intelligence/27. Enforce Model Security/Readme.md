@@ -1,8 +1,6 @@
----
 lab:
     title: 'Enforce semantic model security'
     module: 'Design and build tabular models'
----
 
 # Enforce semantic model security
 
