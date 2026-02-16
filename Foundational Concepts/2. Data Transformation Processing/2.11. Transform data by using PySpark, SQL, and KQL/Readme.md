@@ -2,7 +2,6 @@ Transforming data is the heart of any analytics platform. Microsoft Fabric provi
 
 This guide will provide a comprehensive comparison and walkthrough of how to perform common data transformations using each of these languages, highlighting their strengths and ideal use cases.
 
----
 
 ### The Core Concept: A Multi-Engine Platform
 
@@ -12,7 +11,6 @@ Fabric is built on the principle of separating compute from storage. The data li
 *   **T-SQL (SQL Engine):** Operates on data in a **Data Warehouse** or via the **SQL Analytics Endpoint** of a Lakehouse. It's the standard for relational data modeling and BI.
 *   **KQL (Kusto Engine):** Operates on data in a **KQL Database**. It's purpose-built for ultra-fast querying of time-series, log, and telemetry data.
 
----
 
 ### Case Study: E-Commerce Sales Data Transformation
 
@@ -32,7 +30,6 @@ Let's use a consistent dataset to see how each language tackles the same transfo
 3.  **Filtering:** Select only the "Electronics" category.
 4.  **Aggregation:** Calculate the total sales and number of orders for each user.
 
----
 
 ### 1. Transforming Data with PySpark (in a Notebook)
 
@@ -69,7 +66,6 @@ display(df_aggregated)
 *   **Scalability:** This code will run efficiently on terabytes of data by distributing the work across the Spark cluster.
 *   **Flexibility:** It can handle complex data types (nested JSON, arrays) and allows for custom logic with Python functions (UDFs), though built-in functions are preferred for performance.
 
----
 
 ### 2. Transforming Data with T-SQL (in a Warehouse or SQL Endpoint)
 
@@ -123,7 +119,6 @@ GROUP BY
 *   **Familiarity:** It's the lingua franca of data analytics. Most data professionals know SQL.
 *   **Set-Based Operations:** It is highly optimized for set-based operations like joins and aggregations on structured data.
 
----
 
 ### 3. Transforming Data with KQL (in a KQL Database)
 
@@ -150,7 +145,6 @@ Sales_Data
 *   **Time-Series Native:** KQL has a rich library of built-in functions for time-series analysis (e.g., `ago()`, `row_window_session()`, anomaly detection) that are much more complex to implement in SQL or Spark.
 *   **Performance on Logs:** The Kusto engine is purpose-built for lightning-fast text search and pattern matching on massive volumes of semi-structured data.
 
----
 
 ### Summary Table: Choosing Your Transformation Language
 
