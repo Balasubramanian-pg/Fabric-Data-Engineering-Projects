@@ -2,7 +2,6 @@ Since the Eventstream is the gateway for all real-time data into Microsoft Fabri
 
 Let's do a deep dive into troubleshooting Eventstream errors, structured as a practical, step-by-step guide with clear examples.
 
----
 
 ### The Anatomy of an Eventstream
 
@@ -14,7 +13,6 @@ First, remember what an Eventstream does. It's a visual pipeline with three main
 
 Errors can occur at any of these three stages.
 
----
 
 ### Proactive Monitoring: The Foundation
 
@@ -25,7 +23,6 @@ Before you even have an error, the best practice is to know where to look.
 *   **Data Preview Pane:** The pane at the bottom of the editor shows a live sample of messages flowing through the selected node. This is invaluable for inspecting data content and structure.
 *   **Ingestion Stats / Runtime Stats Tabs:** These tabs provide metrics like incoming/outgoing messages and bytes, helping you see if data is flowing at all.
 
----
 
 ### Common Errors and Step-by-Step Resolutions
 
