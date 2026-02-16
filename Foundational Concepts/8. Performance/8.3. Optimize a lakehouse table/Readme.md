@@ -2,7 +2,6 @@ Of course. Optimizing a Lakehouse table is a critical skill for data engineers a
 
 The primary goal is to organize the underlying data files (Delta Parquet files) in OneLake in such a way that queries can **read less data** and **process it more efficiently**.
 
----
 
 ### The Four Pillars of Lakehouse Table Optimization
 
@@ -15,7 +14,6 @@ Optimization for a Delta Lake table in a Fabric Lakehouse revolves around four k
 
 Let's explore each method with practical examples.
 
----
 
 ### 1. File Sizing (Compaction) - The "Small File Problem"
 
@@ -52,7 +50,6 @@ delta_table.optimize()
 *   Periodically (e.g., nightly or weekly) on tables that receive frequent small updates or streaming data.
 *   After a large, one-time data ingestion job that may have created many small files.
 
----
 
 ### 2. Data Layout (Z-Ordering) - The "Data Skipping" Superpower
 
@@ -86,7 +83,6 @@ delta_table.optimize().executeZOrderBy("CustomerID", "ProductID")
 ```
 This is a more expensive operation than a simple `OPTIMIZE`, so run it less frequently, but the query performance gains can be massive.
 
----
 
 ### 3. Data Skipping (Partitioning) - The "Folder" Strategy
 
@@ -122,7 +118,6 @@ This will create a folder structure in OneLake like:
 
 Now, a query like `SELECT * FROM Gold_Sales_Partitioned WHERE Year = 2023 AND Month = 11` will **only** read the files inside that one specific folder.
 
----
 
 ### 4. Delta Lake Housekeeping (V-Order & `VACUUM`)
 
@@ -146,7 +141,6 @@ Now, a query like `SELECT * FROM Gold_Sales_Partitioned WHERE Year = 2023 AND Mo
     VACUUM Silver_Sales_Data RETAIN 24 HOURS
     ```
 
----
 
 ### Optimization Cheat Sheet for Lakehouse Tables
 
