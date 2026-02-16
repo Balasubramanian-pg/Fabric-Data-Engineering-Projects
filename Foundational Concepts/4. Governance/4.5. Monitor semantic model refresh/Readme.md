@@ -2,7 +2,6 @@ Monitoring semantic model (previously known as dataset) refreshes is a critical 
 
 Here's a comprehensive guide on how to monitor semantic model refreshes in Fabric, covering the built-in tools, advanced methods, and best practices.
 
----
 
 ### Why Monitor Semantic Model Refreshes?
 
@@ -13,7 +12,6 @@ You need to monitor refreshes to ensure:
 3.  **Performance:** The refresh completes within its expected time window and isn't getting progressively slower.
 4.  **Resource Management:** Refreshes are not overwhelming your Fabric capacity or on-premises data gateways.
 
----
 
 ### Method 1: The Built-in Refresh History (The Standard Approach)
 
@@ -45,7 +43,6 @@ This is the primary, out-of-the-box tool for monitoring a specific semantic mode
         *   `Via API`: Triggered by an external script or tool (like Power Automate).
     *   **Error Details:** If the status is `Failed`, you can click on the link in the status column to see the specific error message.
 
----
 
 ### Common Errors and How to Resolve Them
 
@@ -85,7 +82,6 @@ When a refresh fails, the error message in the Refresh History is your starting 
     5.  Fix the transformation step (e.g., correct a renamed column, add a "Replace Errors" step to handle bad data).
     6.  Publish the updated `.pbix` file back to the Fabric service.
 
----
 
 ### Method 2: Centralized Monitoring (Monitoring Hub)
 
@@ -96,7 +92,6 @@ While Refresh History is great for a single model, the **Monitoring Hub** is bet
 3.  This gives you a unified list of all refresh activities across all workspaces you have access to.
 4.  You can quickly scan for all failed refreshes in one place and then drill down into the Refresh History for each one.
 
----
 
 ### Method 3: Proactive and Advanced Monitoring (Power BI REST API)
 
