@@ -15,7 +15,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 - Workspace creation rights  
 - Lakehouse management permissions  
 
----
 ## **3. Implementation**  
 #### **3.1 Pipeline Creation**  
 1. **Objective**:  
@@ -55,7 +54,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
    - **Error Handling**:  
      - Failed runs log details in the **Output** pane for debugging.  
 
----
 
 #### **3.2 Pipeline Output & Validation**  
 1. **Expected Outcome**:  
@@ -72,7 +70,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
    - A single `Copy Data` activity is saved in the pipeline canvas.  
    - *Reusability*: The pipeline can be rerun to fetch fresh data (overwrites existing CSV).  
 
----
 
 ### **Key Technical Considerations**  
 - **Source Flexibility**:  
@@ -85,14 +82,12 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 > [!CAUTION]  
 > Avoid hardcoding URLs in production. Use **Linked Services** for secure credential management.  
 
----
 
 ### **Why This Matters**  
 - **Foundation for ETL**: Raw data ingestion is the first step in building analytics solutions.  
 - **Low-Code Approach**: The Copy Data wizard abstracts complex Spark code for simple file transfers.  
 - **Integration Ready**: Output can be consumed by downstream Spark jobs (see *Exercise 4*).  
 
----
 
 ## **4. Data Transformation**  
 #### **4.1 Create Notebook**  
@@ -134,7 +129,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
    - Refresh **Tables** in Lakehouse Explorer → Verify `sales` table exists.  
    - Preview data to confirm transformations.  
 
----
 
 #### **4.2 Modify Pipeline**  
 1. **Purpose**:  
@@ -162,7 +156,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
    - **Error Handling**:  
      - If Spark fails, attach/reattach lakehouse to notebook.  
 
----
 
 ### **Why This Matters**  
 - **End-to-End Automation**: Pipeline orchestrates ingestion → transformation without manual steps.  
@@ -172,7 +165,6 @@ Implementation of an ETL/ELT solution using Microsoft Fabric pipelines to ingest
 > [!TIP]  
 > Use **Delta Lake** for ACID transactions and time travel on ingested data.  
 
---- 
 
 ## 5. Validation  
 ### 5.1 Verify Results  
