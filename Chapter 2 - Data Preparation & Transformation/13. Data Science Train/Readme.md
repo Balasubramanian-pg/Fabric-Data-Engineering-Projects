@@ -1,8 +1,6 @@
----
 lab:
     title: 'Train and track machine learning models with MLflow in Microsoft Fabric'
     module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
----
 
 # Train and track machine learning models with MLflow in Microsoft Fabric
 
