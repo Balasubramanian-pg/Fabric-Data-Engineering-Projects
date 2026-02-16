@@ -93,7 +93,6 @@ Now, we link the staging table, the function, and the final table together with 
 **What Happens Now?**
 From this point forward, whenever a new record is ingested into `WebServerLogs_Staging`, this update policy will automatically trigger. It will run the `fn_ProcessWebServerLog` function on the new data and insert the clean, enriched result into the `WebServerLogs_Clean` table. Analysts never have to see the messy raw data.
 
----
 
 ### Step 2: Query-Time Processing with Functions and Ad-Hoc Queries
 
