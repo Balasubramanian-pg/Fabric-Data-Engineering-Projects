@@ -4,7 +4,6 @@ Deployment pipelines in Microsoft Fabric provide a controlled, automated way to 
 
 This guide provides a **step-by-step walkthrough** of setting up a deployment pipeline, assigning workspaces, creating and deploying content, and best practices for managing the process.  
 
----
 #### **License Tiers and Capabilities**
 Microsoft Fabric offers three primary license tiers with varying deployment pipeline capabilities:
 
@@ -133,7 +132,6 @@ Before pipeline setup, validate:
 > **Note:** If you need help assigning roles, refer to Microsoft’s documentation:  
 > [Roles in workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces)  
 
----
 
 ## **Step 1: Create Dedicated Workspaces**  
 Each stage of the deployment pipeline should have its own workspace to maintain separation of concerns.  
@@ -151,7 +149,6 @@ Each stage of the deployment pipeline should have its own workspace to maintain 
 > - Use naming conventions like `[TeamName]_Dev`, `[TeamName]_Test`, `[TeamName]_Prod` for clarity.  
 > - If workspace names are taken, append a unique identifier (e.g., `Development_Finance_001`).  
 
----
 ## **Step 2: Creating a Deployment Pipeline – In-Depth Guide**
 
 A deployment pipeline in Microsoft Fabric serves as the backbone of your content release strategy, ensuring controlled movement of analytics assets between environments. This section provides a comprehensive breakdown of pipeline creation, configuration options, and architectural considerations.
@@ -243,7 +240,6 @@ Common problems and solutions:
 > - **Test:** Where QA and stakeholders validate functionality.  
 > - **Production:** Where finalized content is published for end users.  
 
----
 
 ## **Step 3: Assign Workspaces to Pipeline Stages**  
 Each pipeline stage must be linked to its corresponding workspace.  
@@ -260,12 +256,10 @@ Each pipeline stage must be linked to its corresponding workspace.
 > **Validation Check:**  
 > Ensure that the correct workspaces are assigned by reviewing the pipeline overview.  
 
----
 
 ## **Step 4: Create and Deploy Content**  
 Now, you’ll create a sample lakehouse in the **Development** workspace and deploy it through the pipeline.  
 
----
 This section provides an in-depth exploration of content creation and deployment workflows in Microsoft Fabric pipelines, covering practical implementation, advanced techniques, and enterprise-grade best practices.
 
 ### **Content Creation Fundamentals**
@@ -446,7 +440,6 @@ This comprehensive content deployment methodology ensures reliable, efficient mo
 > - A **green checkmark (✔)** indicates successful synchronization between stages.  
 > - An **orange warning (⚠)** means there are pending changes to deploy.  
 
----
 
 ## **Step 5: Managing Deployments and Best Practices**  
 
@@ -639,7 +632,6 @@ graph LR
 
 This comprehensive management framework ensures deployments are executed with precision, governed with rigor, and continuously improved through measurable outcomes. The approach balances automation with human oversight, enabling both agility and control in enterprise analytics environments. 
 
----
 
 ## **Step 6: Clean Up (Optional)**  
 If this was a training exercise, clean up unused workspaces to avoid clutter.  
@@ -649,7 +641,6 @@ If this was a training exercise, clean up unused workspaces to avoid clutter.
 2. Click **Workspace settings** > **Remove this workspace**.  
 3. Confirm deletion.  
 
----
 
 ## **Final Thoughts**  
 Deployment pipelines in Microsoft Fabric bring **structure, reliability, and automation** to analytics development. By following this guide, you ensure:  
