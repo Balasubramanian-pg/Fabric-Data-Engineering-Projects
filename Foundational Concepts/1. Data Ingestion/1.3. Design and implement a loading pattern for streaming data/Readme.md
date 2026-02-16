@@ -43,7 +43,6 @@ Fabric's unified nature makes this pattern exceptionally easy to implement.
                                                                            (DirectLake Mode)
 ```
 
----
 
 ### Step-by-Step Implementation in Microsoft Fabric
 
