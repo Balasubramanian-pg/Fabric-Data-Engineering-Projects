@@ -1,7 +1,6 @@
 # **Lab: Monitor Fabric Activity in the Monitoring Hub**  
 **Module: Monitoring Fabric**  
 
----
 
 ## **Lab Overview**  
 **Objective:**  
@@ -17,7 +16,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 > **Prerequisite:**  
 > - A [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) account.  
 
----
 
 ## **Lab Structure**  
 1. **Set Up a Workspace** → Create a Fabric workspace for monitoring.  
@@ -27,7 +25,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 5. **Customize Monitoring Views** → Apply filters and column settings.  
 6. **Clean Up Resources** → Delete the workspace post-lab.  
 
----
 
 ## **Step 1: Set Up a Workspace**  
 **Purpose:** Create a dedicated workspace to organize and monitor Fabric items.  
@@ -40,7 +37,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 ![Empty workspace in Fabric](./Images/new-workspace.png)  
 
----
 
 ## **Step 2: Ingest Data with a Lakehouse & Dataflow**  
 **Purpose:** Load product data into a lakehouse and monitor the ETL process.  
@@ -65,7 +61,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 ![Dataflow in Monitoring Hub](./Images/monitor-dataflow.png)  
 
----
 
 ## **Step 3: Run & Monitor a Spark Notebook**  
 **Purpose:** Query the ingested data and monitor Spark job performance.  
@@ -84,7 +79,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 ![Notebook execution logs](./Images/monitor-notebook.png)  
 
----
 
 ## **Step 4: Analyze Historical Runs**  
 **Purpose:** Audit past executions for debugging or compliance.  
@@ -97,7 +91,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 ![Historical runs view](./Images/historical-runs.png)  
 
----
 
 ## **Step 5: Customize Monitoring Views**  
 **Purpose:** Tailor the monitoring dashboard for efficiency.  
@@ -112,7 +105,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 ![Customized monitoring view](./Images/monitor-columns.png)  
 
----
 
 ## **Step 6: Clean Up**  
 **Purpose:** Remove lab resources to avoid unnecessary costs.  
@@ -120,7 +112,6 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 1. Open **Workspace Settings** (via **…** menu).  
 2. Select **Remove this Workspace** → Confirm deletion.  
 
----
 
 ## **Key Takeaways**  
 1. The **Monitoring Hub** centralizes tracking for all Fabric activities.  
@@ -129,6 +120,5 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 
 **Next Steps:** Explore **alerting** and **Power BI metrics** for proactive monitoring.  
 
---- 
 
 **Feedback?** Rate this lab or suggest improvements [here](#).
