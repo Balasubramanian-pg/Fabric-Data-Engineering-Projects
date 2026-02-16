@@ -2,7 +2,6 @@ Identifying and resolving T-SQL errors is a fundamental skill for anyone working
 
 Let's walk through a practical guide using real-world examples, covering the common error types and a systematic approach to debugging them.
 
----
 
 ### Case Study: A Failing Stored Procedure
 
@@ -41,7 +40,6 @@ BEGIN
 END;
 ```
 
----
 
 ### The Troubleshooting Process
 
@@ -78,7 +76,6 @@ This is the most common type of error. It occurs when the SQL engine cannot even
     8.  **Re-run the `ALTER PROCEDURE`** statement to save the corrected version.
     9.  **Re-execute the Procedure:** `EXEC sp_Load_Daily_Sales_Summary @TargetDate = '2023-11-18';`. Now, it will get past this first error.
 
----
 
 ### Error Type 2: Runtime Errors (Divide by Zero)
 
@@ -127,7 +124,6 @@ These errors occur *during* execution, not at compile time. The syntax is correc
         ```
     6.  **Re-run the `ALTER PROCEDURE`** statement with the corrected code and re-execute. The procedure will now run successfully, inserting a `NULL` or `0` for the `AverageSale` on days with no sales.
 
----
 
 ### Other Common T-SQL Errors
 
