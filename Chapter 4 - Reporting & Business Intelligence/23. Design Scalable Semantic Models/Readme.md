@@ -1,8 +1,6 @@
----
 lab:
     title: 'Design scalable semantic models'
     module: 'Design scalable semantic models'
----
 
 # Design scalable semantic models
 
