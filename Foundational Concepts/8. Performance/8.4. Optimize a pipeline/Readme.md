@@ -2,7 +2,6 @@ Optimizing a data pipeline in Microsoft Fabric is crucial for reducing costs, im
 
 Here is a comprehensive guide to optimizing your Fabric Data Pipelines, complete with different methods and a practical cheat sheet.
 
----
 
 ### The Core Goals of Pipeline Optimization
 
@@ -11,7 +10,6 @@ Here is a comprehensive guide to optimizing your Fabric Data Pipelines, complete
 3.  **Increase Reliability:** Minimize the chance of failures.
 4.  **Improve Scalability:** Ensure the pipeline can handle future growth in data volume.
 
----
 
 ### The Four Pillars of Pipeline Optimization
 
@@ -24,7 +22,6 @@ Optimization efforts can be categorized into four main areas:
 
 Let's explore each pillar.
 
----
 
 ### 1. Activity-Level Tuning (The `Copy data` Activity)
 
@@ -60,7 +57,6 @@ The `Copy data` activity is often the most time-consuming and resource-intensive
     1.  In the `Copy data` activity's **"Settings"** tab, check the **"Enable staging"** box.
     2.  You must then configure a connection to a staging data store, which is typically another location in **Azure Data Lake Storage Gen2**.
 
----
 
 ### 2. Workflow Design
 
@@ -89,7 +85,6 @@ How you structure the activities in your pipeline is critical for efficiency.
     3.  Inside the `ForEach`, have your `Copy data` activity.
     4.  In the `ForEach` settings, check the **"Sequential"** box *off* and set the **"Batch count"** to your desired level of parallelism (e.g., 20).
 
----
 
 ### 3. Source and Sink Performance
 
@@ -104,14 +99,12 @@ Sometimes the pipeline is not the bottleneck; the systems it connects to are.
     *   Ensure the sink has adequate resources to handle the write load.
     *   Use the fastest loading method available (e.g., the `COPY` command via staging).
 
----
 
 ### 4. Resource Management
 
 *   **Capacity Sizing:** Ensure your Fabric capacity (e.g., F64) is appropriately sized for your workloads. If your pipelines are consistently slow and you see "throttling" in the capacity metrics app, you may need to scale up your capacity.
 *   **Scheduling:** Schedule large, intensive pipelines to run during off-peak hours to avoid competing for capacity resources with interactive user queries (like Power BI).
 
----
 
 ### Pipeline Optimization Cheat Sheet
 
