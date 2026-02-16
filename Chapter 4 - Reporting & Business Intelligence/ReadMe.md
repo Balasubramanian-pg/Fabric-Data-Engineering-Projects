@@ -75,4 +75,3 @@ No system of value survives without protection. Row-level security draws boundar
 A modern data professional must navigate multiple worlds. Relational databases carry the weight of tradition. GraphQL reflects the demands of modern, flexible services. Working with both is part of becoming competent, adaptable, and grounded.
 
 This entire process, from modeling to protection, is an attempt to transform disorder into clarity. It is a technical discipline, yes, but also a philosophical one.
-
