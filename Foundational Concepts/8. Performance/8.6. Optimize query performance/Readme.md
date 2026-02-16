@@ -2,7 +2,6 @@ Optimizing query performance is a vast and critical topic, sitting at the heart 
 
 Here is a comprehensive guide covering the different methods for optimizing query performance, explained with practical examples, followed by a summary cheat sheet.
 
----
 
 ### The Fundamental Principle of Query Optimization
 
@@ -13,7 +12,6 @@ The goal is always the same: **minimize the work the engine has to do**. This is
 3.  **Processing Less Data:** Performing calculations on the smallest possible dataset.
 4.  **Reusing Results:** Avoiding re-computation altogether through caching.
 
----
 
 ### The Four Pillars of Query Performance Optimization
 
@@ -26,7 +24,6 @@ We can break down query optimization into four key areas:
 
 Let's explore each one.
 
----
 
 ### 1. Data Model and Table Structure (The Foundation)
 
@@ -40,7 +37,6 @@ This has the single biggest impact on query performance. These techniques were c
 
 **If your queries are slow, the first place to look is always the underlying table design.**
 
----
 
 ### 2. Query Writing Techniques
 
@@ -102,7 +98,6 @@ How you write your code matters immensely.
 *   **Technique:** If you are certain there are no duplicates between your datasets, use `UNION ALL`.
 *   **Why it Works:** `UNION` has to perform a distinct operation to remove duplicate rows, which involves a costly sort and comparison of the entire dataset. `UNION ALL` simply concatenates the results, which is much faster.
 
----
 
 ### 3. Statistics and Metadata
 
@@ -114,7 +109,6 @@ How you write your code matters immensely.
     *   **T-SQL:** `UPDATE STATISTICS MyTable;`
     *   **Spark SQL:** `ANALYZE TABLE MyTable COMPUTE STATISTICS FOR ALL COLUMNS;`
 
----
 
 ### 4. Caching and Materialization
 
@@ -140,7 +134,6 @@ How you write your code matters immensely.
     ```
     Now, `SELECT * FROM vw_DailySalesSummary WHERE SaleDate = '...'` will be incredibly fast. The engine automatically keeps the view's data synchronized with the base tables.
 
----
 
 ### Query Optimization Cheat Sheet
 
