@@ -171,4 +171,3 @@ By thoroughly reviewing the data model, you will gain a comprehensive understand
 ### Conclusion
 
 Close all applications to conclude this exercise. There is no need to save the files.
-
