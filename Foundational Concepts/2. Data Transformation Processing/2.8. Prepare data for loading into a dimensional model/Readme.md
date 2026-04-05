@@ -7,7 +7,7 @@ Here is a comprehensive guide on how to prepare data for a dimensional model in 
 The end goal of this process is to create a **star schema**. A star schema consists of:
 
 *   **Fact Tables:** These tables contain the "what happened"-the quantitative measures (facts) of a business process (e.g., `SalesAmount`, `QuantitySold`). They also contain foreign keys that link to the dimension tables. Fact tables are typically long and narrow.
-*   **Dimension Tables:** These tables contain the "who, what, where, when, why"—the descriptive context (attributes) for the facts (e.g., `CustomerName`, `ProductCategory`, `StoreLocation`, `Date`). Dimension tables are typically wide and shallow.
+*   **Dimension Tables:** These tables contain the "who, what, where, when, why"-the descriptive context (attributes) for the facts (e.g., `CustomerName`, `ProductCategory`, `StoreLocation`, `Date`). Dimension tables are typically wide and shallow.
 
 This structure is highly optimized for analytical queries.
 
