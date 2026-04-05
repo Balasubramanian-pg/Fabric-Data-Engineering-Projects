@@ -208,7 +208,7 @@ This chapter focuses on **preparation and transformation** using Spark, Data Sci
 </div>
 
 **Problem:** Your analytics are slow, reactive, and stuck in spreadsheets.
-**Solution:** **Real-time insights, automated actions, and scalable AI**—without the PhD.
+**Solution:** **Real-time insights, automated actions, and scalable AI**-without the PhD.
 
 This chapter covers **advanced analytics, event-driven systems, and AI that actually ships**.
 
