@@ -344,7 +344,7 @@ This chapter covers **advanced analytics, event-driven systems, and AI that actu
 **Problem:** Dashboards are slow, confusing, or ignored. Business teams still export to Excel.
 **Solution:** **Fast, secure, and actionable** BI-built for scale, not just pretty visuals.
 
-This chapter turns raw data into **trusted, self-service insights**—without the chaos.
+This chapter turns raw data into **trusted, self-service insights**-without the chaos.
 
 ### **1. Start Here: The 5-Minute Blueprint**
 <table style="width:100%;">
