@@ -57,7 +57,7 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/04%20Ingest%20Pipeline.md">04 Ingest Pipeline.md</a></strong></td>
     <td>Build a pipeline to pull data into <strong>Bronze</strong>.</td>
-    <td>Automated, repeatable ingestion—no manual uploads.</td>
+    <td>Automated, repeatable ingestion-no manual uploads.</td>
   </tr>
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/05%20Dataflows%20Gen2.md">05 Dataflows Gen2.md</a></strong></td>
