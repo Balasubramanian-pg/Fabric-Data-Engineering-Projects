@@ -113,7 +113,7 @@ Start with **[Read Me.md](https://github.com/Balasubramanian-pg/Fabric-Data-Engi
 **Problem:** Data is messy. Models fail. Teams waste time cleaning instead of analyzing.
 **Solution:** A **repeatable, scalable** process to explore, clean, and train data-*without reinventing the wheel every time*.
 
-This chapter focuses on **preparation and transformation** using Spark, Data Science tools, and automation. No theory—just what works.
+This chapter focuses on **preparation and transformation** using Spark, Data Science tools, and automation. No theory-just what works.
 
 ### **1. Start Here: The 5-Minute Overview**
 <table style="width:100%;">
