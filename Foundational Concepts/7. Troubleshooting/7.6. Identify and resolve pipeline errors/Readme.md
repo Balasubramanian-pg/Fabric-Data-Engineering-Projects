@@ -19,7 +19,7 @@ One morning, you receive the failure alert email. The pipeline has failed.
 
 ### Step 1: Detect the Failure (The Alert)
 
-The first step is knowing something went wrong. In our case, the `Send_Failure_Email` activity worked perfectly. This is a best practice—**always build monitoring and alerting into your pipelines**.
+The first step is knowing something went wrong. In our case, the `Send_Failure_Email` activity worked perfectly. This is a best practice-**always build monitoring and alerting into your pipelines**.
 
 If you don't have email alerts, your primary tool is the **Monitoring Hub**.
 
