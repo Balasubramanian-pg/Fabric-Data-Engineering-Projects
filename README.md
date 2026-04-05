@@ -33,7 +33,7 @@ This chapter is your blueprint for constructing a **scalable, governed data plat
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/01%20Lakehouse.md">01 Lakehouse.md</a></strong></td>
     <td>Create a Lakehouse (data lake + warehouse hybrid).</td>
-    <td>Your single source of truth—scalable storage <em>and</em> SQL query power.</td>
+    <td>Your single source of truth-scalable storage <em>and</em> SQL query power.</td>
   </tr>
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%201%20-%20Foundational%20Data%20Layer/03%20Delta%20Lake.md">03 Delta Lake.md</a></strong></td>
