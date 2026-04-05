@@ -1,6 +1,6 @@
 # **A Comprehensive Guide to Deployment Pipelines in Microsoft Fabric**  
 
-Deployment pipelines in Microsoft Fabric provide a controlled, automated way to move analytics content—such as reports, datasets, and lakehouses—across different environments. This ensures that changes are properly developed, tested, and validated before reaching end users, minimizing errors and maintaining consistency.  
+Deployment pipelines in Microsoft Fabric provide a controlled, automated way to move analytics content-such as reports, datasets, and lakehouses—across different environments. This ensures that changes are properly developed, tested, and validated before reaching end users, minimizing errors and maintaining consistency.  
 
 This guide provides a **step-by-step walkthrough** of setting up a deployment pipeline, assigning workspaces, creating and deploying content, and best practices for managing the process.  
 
