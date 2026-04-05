@@ -33,7 +33,7 @@ Gain hands-on experience using the **Microsoft Fabric Monitoring Hub** to track,
 2. Navigate to **Workspaces** (left pane).  
 3. Select **New Workspace** → Name it (e.g., "MonitoringLab").  
 4. Under **Advanced**, choose a **Fabric-enabled** license (Trial/Premium).  
-5. Confirm creation—your workspace is now ready.  
+5. Confirm creation-your workspace is now ready.  
 
 ![Empty workspace in Fabric](./Images/new-workspace.png)  
 
