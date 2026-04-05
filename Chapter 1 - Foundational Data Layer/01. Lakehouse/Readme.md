@@ -310,7 +310,7 @@ Make the report dynamic with slicers (filters).
    - Configure it to allow range selection.  
 
 3. **Test Interactivity:**  
-   - Select different items in the slicer—the bar chart and table should update.  
+   - Select different items in the slicer-the bar chart and table should update.  
 
 ## **5.6 Format and Finalize the Report**  
 Improve readability and aesthetics.  
