@@ -6,7 +6,7 @@ This repository contains learning materials and code samples for Microsoft Fabri
   <h2><strong>Chapter 1: Building a Modern Data Foundation in Microsoft Fabric</strong></h2>
 </div>
 
-**Goal:** Turn raw data into a trusted, high-performance analytical asset—step by step.
+**Goal:** Turn raw data into a trusted, high-performance analytical asset-step by step.
 This chapter is your blueprint for constructing a **scalable, governed data platform** in Fabric. We’ll start with ingestion, enforce quality at every layer, and end with a warehouse ready for analytics. Each guide builds on the last, so tackle them in order.
 
 #### **1. The Big Picture**
