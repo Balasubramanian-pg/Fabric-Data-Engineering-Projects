@@ -51,7 +51,7 @@ This is the most important area. A good design from the start prevents many perf
 *   **Why it's faster for analytics:**
     *   **High Compression:** Storing similar data together (e.g., all product categories) allows for massive compression, reducing storage and I/O.
     *   **Column Elimination:** The engine only needs to read the columns requested in the query. If a query is `SELECT SUM(SalesAmount) FROM FactSales`, it doesn't need to touch the `ProductID` or `CustomerID` columns at all.
-*   **Action:** You don't need to do anything to enable this—it's the default and is a major reason for the warehouse's performance.
+*   **Action:** You don't need to do anything to enable this-it's the default and is a major reason for the warehouse's performance.
 
 
 ### 2. Data Loading and Management
