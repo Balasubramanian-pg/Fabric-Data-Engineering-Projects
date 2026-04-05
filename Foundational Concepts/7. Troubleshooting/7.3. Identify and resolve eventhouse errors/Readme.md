@@ -1,6 +1,6 @@
 The term "Eventhouse" in Microsoft Fabric refers to a top-level item in the Real-Time Intelligence workload that acts as a container for your real-time analytics components. When you create an Eventhouse, Fabric provisions two key, tightly integrated artifacts for you:
 
-1.  **An Eventstream:** This is the "front door" for your data—it handles the ingestion and routing of your real-time event streams.
+1.  **An Eventstream:** This is the "front door" for your data-it handles the ingestion and routing of your real-time event streams.
 2.  **A KQL Database:** This is the high-performance analytics engine and storage layer where your data lands and is queried.
 
 Therefore, troubleshooting "Eventhouse errors" means troubleshooting errors in one of these two components. Let's walk through a case study to identify and resolve common errors in both.
