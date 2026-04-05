@@ -511,7 +511,7 @@ This chapter turns raw data into **trusted, self-service insights**-without the 
 **Problem:** "It works on my machine" doesn’t cut it. Deployments break. Teams blame each other.
 **Solution:** **Automated, repeatable, and zero-downtime** releases-so you can sleep at night.
 
-This chapter is about **getting your work into production**—*without the fire drills*.
+This chapter is about **getting your work into production**-*without the fire drills*.
 
 ### **1. Start Here: The 5-Minute Survival Guide**
 <table style="width:100%;">
