@@ -271,7 +271,7 @@ This chapter covers **advanced analytics, event-driven systems, and AI that actu
 </table>
 
 ### **4. Query and Analyze High-Velocity Data**
-**Goal:** Ask complex questions *fast*—even on streaming data.
+**Goal:** Ask complex questions *fast*-even on streaming data.
 
 <table style="width:100%;">
   <tr>
