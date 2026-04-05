@@ -77,7 +77,7 @@ Now that you've selected the tables for your semantic model, the crucial next st
 
     > **Note**: For both of these new relationships, you will need to manually **change the relationship's default cardinality to 1:Many** within the relationship properties or dialog box that appears after dragging and dropping the columns.
 
-5.  To visually optimize your model for clarity and adherence to the star schema, drag the tables into their appropriate positions on the diagram. Arrange them so that the **Trip** fact table is centrally located at the bottom of the diagram, with the remaining tables-your dimension tables (**Date**, **Geography**, and **Weather**)—positioned intuitively around the fact table.
+5.  To visually optimize your model for clarity and adherence to the star schema, drag the tables into their appropriate positions on the diagram. Arrange them so that the **Trip** fact table is centrally located at the bottom of the diagram, with the remaining tables-your dimension tables (**Date**, **Geography**, and **Weather**)-positioned intuitively around the fact table.
 
     *Your star schema model is now successfully created. At this point, you have a solid foundation. There are numerous other modeling configurations you could apply to further enhance this model, such as adding hierarchies for drill-down capabilities, creating calculated columns or measures (DAX expressions) for advanced analytics, and setting properties like column visibility for improved user experience in reports.*
 
