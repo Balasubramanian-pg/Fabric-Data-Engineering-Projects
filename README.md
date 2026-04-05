@@ -239,7 +239,7 @@ This chapter covers **advanced analytics, event-driven systems, and AI that actu
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/10.%20Ingest%20Notebooks.md">10. Ingest Notebooks.md</a></strong></td>
     <td>Use notebooks for flexible data ingestion.</td>
-    <td>No more rigid ETL—adapt on the fly.</td>
+    <td>No more rigid ETL-adapt on the fly.</td>
   </tr>
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%203%20-%20Advanced%20Analytics%20%26%20AI/9%20Real%20Time%20Analytics%20Eventstream.md">9 Real Time Analytics Eventstream.md</a></strong></td>
