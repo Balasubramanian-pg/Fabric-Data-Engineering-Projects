@@ -33,7 +33,7 @@ The first question is: **Is data failing to get *into* the KQL Database, or is t
         | top 10 by IngestionTime() desc
         ```
     *   **Scenario A:** The query returns recent data (from the last few minutes). This means the problem is likely in the Power BI report or the query it's using.
-    *   **Scenario B:** The query returns no data, or the latest record is hours old. This tells you the problem is in the **ingestion path**—either the Eventstream or the KQL Database's ingestion process.
+    *   **Scenario B:** The query returns no data, or the latest record is hours old. This tells you the problem is in the **ingestion path**-either the Eventstream or the KQL Database's ingestion process.
 
 Let's assume we are in **Scenario B**, as it's the most common and complex issue. Now we need to investigate the ingestion path.
 
