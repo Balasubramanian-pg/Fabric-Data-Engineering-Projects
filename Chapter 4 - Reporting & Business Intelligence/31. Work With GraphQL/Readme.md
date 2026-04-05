@@ -460,7 +460,7 @@ query {
   }
 }
 ```
-⚠ **Performance Tip**: Avoid **over-fetching**—only request needed fields!  
+⚠ **Performance Tip**: Avoid **over-fetching**-only request needed fields!  
 
 
 ## **Task 4.2: Optimizing Query Performance**  
