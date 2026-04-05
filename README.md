@@ -180,7 +180,7 @@ This chapter focuses on **preparation and transformation** using Spark, Data Sci
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.3%20Data%20Science%20Train.md">8.3 Data Science Train.md</a></strong></td>
     <td>Train ML models with Fabric’s built-in tools.</td>
-    <td>From prototype to production—<em>without hand-offs</em>.</td>
+    <td>From prototype to production-<em>without hand-offs</em>.</td>
   </tr>
   <tr>
     <td><strong><a href="https://github.com/Balasubramanian-pg/Fabric-Data-Engineering-Projects/blob/main/Chapter%202%20-%20Data%20Preparation%20%26%20Transformation/8.4%20Data%20Science%20Batch.md">8.4 Data Science Batch.md</a></strong></td>
